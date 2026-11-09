@@ -4,6 +4,12 @@
 
 Print five parts, connect an ESP32, an orientation sensor and two servos, then deploy a get-up policy to the robot on your workbench.
 
+| Start here | What you will do |
+|---|---|
+| [Build from this page](#1-identify-the-board-and-gather-the-parts) | Gather parts, print, wire, calibrate and try a recovery |
+| [Illustrated training guide](docs/training.en.md) | Pair the Runner, review reference motions, use BC→PPO, replay four directions and save results |
+| [Simulation and hardware guide](docs/running.en.md) | Try web simulation, install firmware, calibrate servos and IMU, upload and run |
+
 <p align="center">
   <a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="360" alt="The red-base, white-link SelfRising robot getting back up after a fall"></a>
 </p>
@@ -81,7 +87,18 @@ Set the robot on a stable, level surface with space for both links to move. Sele
 | A servo moves backwards or binds | Select Stop, then check that axis’s direction, mechanical zero and travel |
 | The page asks you to upload a policy | Go back to Devices & Mapping, upload the current project’s policy and wait for confirmation |
 
-You can practise the fall and recovery in simulation first. To train your own policy, start with the SimReady reference project and verify the export in simulation. [Try the simulation](https://sim2sim.stackforce.cc/?example=selfrising-2axis&autoplay=0) · [Train from scratch](https://sim.stackforce.cc/?example=23)
+Follow the [web simulation and ESP32 running guide](docs/running.en.md) for firmware installation, both servo calibrations, BNO055 mounting orientation and tests after a power cycle.
+
+## 7. Train your own recovery policy
+
+1. Open the [SelfRising training entry in SimReady](https://sim.stackforce.cc/?example=23). Check the `robo1` model and its two servo joints.
+2. In **Training**, download and pair the local Runner. The website provides configuration and visualisation while your computer runs training.
+3. Review the four reference motions. Choose **Demonstration learning (BC)** or **Imitate then refine (BC → PPO)**, check the settings, then select **Start Training**.
+4. Replay each direction, save the full `.simready` and the task's deployment bundle, then check input/output support on the target runtime.
+
+![English Runner download and pairing controls from the general A1 training tutorial](docs/images/tutorial/en/04-runner.jpg)
+
+The image comes from the published general A1 tutorial. The default SelfRising from-scratch reference project uses 9 inputs, 2 outputs, a reference clock and incremental actions. The built-in author hardware policy uses its matching recovery controller. See the [complete training guide](docs/training.en.md) for settings, records, original PPO commands and deployment contracts.
 
 ## Credits and licence
 

@@ -4,6 +4,12 @@
 
 打印五个零件，接上 ESP32、姿态传感器和两只舵机，再用 StackForce 把起立策略部署到桌面上的机器人。
 
+| 从这里开始 | 你会完成什么 |
+|---|---|
+| [按首页搭建](#1-认板与备料) | 备料、打印、接线、校准和首次起立 |
+| [训练图文教程](docs/training.zh-CN.md) | 配对 Runner、参考动作、BC→PPO、四方向回放和保存训练结果 |
+| [运行图文教程](docs/running.zh-CN.md) | 网页仿真、新板固件、舵机与 IMU 校准、上传和运行 |
+
 <p align="center">
   <a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="360" alt="红色底座、白色连杆的 SelfRising 从倒伏到站直的实拍动画"></a>
 </p>
@@ -81,7 +87,18 @@
 | 舵机方向相反或接近卡住 | 点击停止，再核对对应轴的方向、机械零位和行程 |
 | 页面提示先上传策略 | 返回「设备与映射」，上传当前工程的策略并等待确认 |
 
-可以先在仿真里练习倒伏和起立，再试实物。想自己训练策略时，从 SimReady 的参考工程开始，导出后先回到仿真验证。 [在线仿真](https://sim2sim.stackforce.cc/?example=selfrising-2axis&autoplay=0) · [从零训练](https://sim.stackforce.cc/?example=23)
+完整操作见[网页仿真与 ESP32 运行教程](docs/running.zh-CN.md)，其中包含新板固件安装、两轴校准、BNO055 安装方向和再次上电后的测试。
+
+## 7. 训练自己的起立策略
+
+1. 打开 [SimReady 的 SelfRising 训练入口](https://sim.stackforce.cc/?example=23)，检查 `robo1` 模型和两个舵机关节。
+2. 在「训练」下载并配对本地 Runner。网页负责配置与显示，训练由电脑完成。
+3. 检查四方向参考动作，选择「示范学习（BC）」或「模仿后强化（BC → PPO）」，核对参数后点「开始训练」。
+4. 训练后逐方向回放，保存完整 `.simready` 和该任务提供的部署包，再检查目标运行端的输入输出支持。
+
+![中文运行器下载与配对入口，来自通用 A1 训练教程](docs/images/tutorial/zh-CN/04-runner.jpg)
+
+截图使用已发布的通用 A1 教程界面。SelfRising 的默认从零参考工程为 9 输入、2 输出，使用参考时钟与增量动作。内置作者实物策略采用其配套起立控制流程。具体参数、训练记录、原版 PPO 命令和部署对应关系见[完整训练教程](docs/training.zh-CN.md)。
 
 ## 来源与许可
 

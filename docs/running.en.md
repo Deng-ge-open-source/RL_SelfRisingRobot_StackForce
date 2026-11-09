@@ -1,0 +1,75 @@
+# Run SelfRising in simulation and on ESP32
+
+[简体中文](running.zh-CN.md) · English · [Home](../README.en.md) · [Training guide](training.en.md)
+
+For a first build, use the author recovery policy supplied by the website. Observe it in simulation, then wire, map and calibrate your hardware. **Upload policy** stores the project on the controller, **Run** starts execution and **Stop** ends outputs.
+
+## 1. Try the web simulation
+
+1. Open the [SelfRising simulation](https://sim2sim.stackforce.cc/?example=selfrising-2axis&autoplay=0). Check that the import page has loaded the two-joint model and ONNX policy.
+2. If the reproduction guide opens, select **Continue with current project**. Review joint and observation settings in **Policy Mapping**, then open **MuJoCo online simulation**.
+3. Select **Run** and check that physics actually advances. Use the page's initial-pose or reset controls to test the four fall directions.
+4. Observe recovery, return to neutral and waiting. The current author controller returns to neutral after recovery and waits for another qualifying tilt.
+5. Use **Save Project** to download a reopenable `.sim`. For local MuJoCo execution, use **Local Sim2Sim downloads** to obtain the `-mujoco.zip` bundle with its model, policy and launchers, then follow the bundled instructions.
+
+## 2. Open the hardware project and wire it
+
+Open [Sim2Real](https://sim2real.stackforce.cc/) and load **StackForce SelfRising · ESP32** from the hardware example category. Use desktop Chrome or Edge with serial access.
+
+![Complete English wiring for the original ESP32, BNO055, two MG90S servos and a separate 5 V supply](images/esp32-lolin32-lite.svg)
+
+| Part | Wiring and mounting |
+|---|---|
+| BNO055 | Fix it to the red base. SDA → GPIO19, SCL → GPIO22, 3.3 V compatible power input → 3V, GND → common ground |
+| Lower MG90S A0 | Signal → GPIO25, power → external 5 V, ground → common ground |
+| Upper MG90S A1 | Signal → GPIO26, power → external 5 V, ground → common ground |
+| Separate 5 V supply | Join its negative terminal to ESP32, BNO055 and both servo grounds |
+| ESP32 USB | Connect a USB data cable to the computer for firmware installation, uploads and debugging |
+
+## 3. Install firmware on a fresh board and connect
+
+1. In **Devices & Mapping**, open **Install firmware**. Select **Choose board and install**, then choose the ESP32's CH340 port in the browser serial picker.
+2. Wait for writing and verification to finish, then release the installer connection.
+3. Select **Connect USB** and choose the board's serial port again. The device tree should show the BNO055 and two GPIO servo channels.
+4. Check the controller's reported state. If it is already executing a saved project, select **Stop** before editing mapping and calibration.
+
+## 4. Map and calibrate both servos
+
+1. Check `servo1_joint / A0 → GPIO25` and `servo2_joint / A1 → GPIO26`.
+2. Start with A0. Open calibration, enable that servo and centre it. Align the link to the mechanical assembly and save zero.
+3. Move the joint target slightly in the joint test and check the actual direction. Reverse and save it if needed.
+4. Check that axis's usable travel, save it, then calibrate A1.
+
+The GUI's nominal servo neutral is 90°. Model joint 0 rad corresponds to the saved mechanical zero, with calibration converting between them. GPIO virtual feedback estimates angle, so also observe the physical motion.
+
+## 5. Calibrate the BNO055 mounting direction
+
+1. Select BNO055 in the device tree and open the robot IMU 3D view.
+2. Hold the robot in the model's upright pose. Adjust the sensor mounting direction relative to the base until the displayed orientation matches.
+3. Make small Roll and Pitch movements separately, then check rotation around Z.
+4. Save the mounting direction. Use the pose-zero control when establishing a display reference, then recheck the Roll/Pitch values in the observation slots.
+
+## 6. Upload, run and stop
+
+1. Select **Upload policy** and wait for the upload and validation result. If an error appears, check the model, observations and motor mapping it identifies.
+2. Open **Remote Control**, select **Run**, and check both controller feedback and physical motion.
+3. Try **Stop** once and confirm outputs end, then run again.
+4. Begin from one controlled fall. Watch both servos complete recovery and return to neutral. Repeat by direction and record the outcome.
+
+![Physical recovery demonstration with the red base and white links](images/selfrising-get-up.gif)
+
+This existing hardware demo provides a motion reference. [Full demo clip](https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4)
+
+The website reports upload and runtime results separately. Available control transports depend on the installed firmware and the device's reported capabilities. This guide uses USB throughout.
+
+## 7. Save the configuration for another test
+
+After saving servo and IMU calibration, download a `.sim` with **Save Project**. Next time, reopen it, connect the controller, check its policy, mapping and calibration feedback, then run. For power-on autostart, use the installed firmware's autostart settings and verify them with an actual power cycle.
+
+| Symptom | Check |
+|---|---|
+| Policy running but servos still | Controller state, both output mappings, external 5 V and common ground, then the author recovery controller's trigger conditions |
+| Wrong direction or neutral | That axis's direction, saved zero and physical travel in device mapping |
+| Fault after a small tilt | Read the reported reason, then check BNO055 power, connectors and live data |
+| Motion jitters | Record IMU, policy targets and estimated angles together, then inspect assembly and power to locate the source |
+| Newly trained policy will not upload | Check its complete contract and target runtime support in [training step 6](training.en.md#6-take-a-training-result-toward-hardware) |
