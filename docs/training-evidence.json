@@ -1,0 +1,121 @@
+{
+  "date": "2026-11-09",
+  "project": "SelfRising / SimReady example=23",
+  "method": "BC",
+  "initialization": "random",
+  "seed": 42,
+  "iterations": 300,
+  "environments": 1,
+  "saveInterval": 100,
+  "device": "CPU",
+  "runner": "Pinned source Runner in an isolated local environment; desktop installer not tested in this capture session",
+  "versions": {
+    "python": "3.12.1",
+    "mujoco": "3.11.0",
+    "torch": "2.11.0+cpu",
+    "onnxruntime": "1.26.0"
+  },
+  "observationNames": [
+    "roll",
+    "pitch",
+    "target:servo1_joint",
+    "target:servo2_joint",
+    "reference:phase",
+    "reference:position:servo1_joint",
+    "reference:position:servo2_joint",
+    "reference:velocity:servo1_joint",
+    "reference:velocity:servo2_joint"
+  ],
+  "actionNames": [
+    "servo1_joint",
+    "servo2_joint"
+  ],
+  "demonstrationSamples": 15699,
+  "policySha256": "b0616c9ad8124e0ff7e7e1f7bc1939ffc4730ccfb4cc2106a3829cbf8ad45cf5",
+  "evaluation": {
+    "scope": "nominal poses; actor and peripheral wrapper evaluated separately; not hardware validation",
+    "trials": [
+      {
+        "motion": "roll_pos",
+        "success": true,
+        "seconds": 2.22
+      },
+      {
+        "motion": "roll_neg",
+        "success": true,
+        "seconds": 2.22
+      },
+      {
+        "motion": "pitch_pos",
+        "success": true,
+        "seconds": 2.82
+      },
+      {
+        "motion": "pitch_neg",
+        "success": true,
+        "seconds": 2.9
+      }
+    ],
+    "peripheralTrials": [
+      {
+        "motion": "roll_pos",
+        "success": true,
+        "seconds": 2.22,
+        "retryEvents": [],
+        "lifecycle": null,
+        "scope": "one initial pose; no forced refall"
+      },
+      {
+        "motion": "roll_neg",
+        "success": true,
+        "seconds": 2.22,
+        "retryEvents": [],
+        "lifecycle": null,
+        "scope": "one initial pose; no forced refall"
+      },
+      {
+        "motion": "pitch_pos",
+        "success": true,
+        "seconds": 2.82,
+        "retryEvents": [],
+        "lifecycle": null,
+        "scope": "one initial pose; no forced refall"
+      },
+      {
+        "motion": "pitch_neg",
+        "success": true,
+        "seconds": 2.9,
+        "retryEvents": [],
+        "lifecycle": null,
+        "scope": "one initial pose; no forced refall"
+      }
+    ],
+    "passed": true,
+    "peripheralPassed": true
+  },
+  "verified": [
+    "Web Runner pairing",
+    "Start Training from website",
+    "300 BC iterations",
+    "Live policy replay",
+    "Full .simready save",
+    "Native .sim2sim export"
+  ],
+  "automaticHandoff": {
+    "passed": false,
+    "code": "POLICY_CAPABILITY_UNSUPPORTED",
+    "missingCapability": "native-policy-peripheral-control-v1"
+  },
+  "newPolicyHardwareValidation": "pending",
+  "hardwareScreenshots": "Disconnected original-author example; no firmware flashing or motor output in this capture session",
+  "screenshots": {
+    "width": 1920,
+    "height": 1080,
+    "aspectRatio": "16:9",
+    "languages": [
+      "zh-CN",
+      "en"
+    ],
+    "method": "Independent headless browser, actual production pages, no ChatGPT composer or image retouching"
+  }
+}

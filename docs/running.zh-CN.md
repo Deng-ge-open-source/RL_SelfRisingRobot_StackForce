@@ -2,19 +2,23 @@
 
 简体中文 · [English](running.en.md) · [返回首页](../README.md) · [训练教程](training.zh-CN.md)
 
-第一次搭建可以直接使用网站提供的作者起立策略。先在仿真观察，再完成实物接线、映射和校准。网页中的「上传策略」保存工程到板卡，「运行」开始执行，「停止」结束输出。
+[下载成品固件、示例工程和本地运行包](downloads.zh-CN.md)。固件源码不在本发布范围内，已有板卡校准由各自设备保存。
+
+从 SimReady 完成训练后，先在 Sim2Sim 验证本次模型。本教程的 ESP32 操作使用网站自带的作者原版 SelfRising 策略；新训练的 9 路输入参考策略尚待板端实机验收，状态见[训练教程第 6 步](training.zh-CN.md#6-接着部署到实物)。网页中的「上传策略」保存工程到板卡，「运行」开始执行，「停止」结束输出。
 
 ## 1. 在网页仿真里试一次
 
-1. 打开 [SelfRising 仿真示例](https://sim2sim.stackforce.cc/?example=selfrising-2axis&autoplay=0)。在导入页确认已载入两关节模型和 ONNX 策略。
+1. 打开[作者原版 SelfRising 在线仿真](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=mujoco&panel=simulation)。自行训练结果的交接状态见[训练教程第 5 步](training.zh-CN.md#5-进入-sim2sim)。
 2. 如果弹出复现指南，点「继续当前工程」。进入「策略映射」检查两路关节与观测配置，再进入「MuJoCo 在线仿真」。
 3. 点「运行」，观察模型是否实际开始物理步进。用页面提供的初始姿态或重置功能分别检查四个倒伏方向。
-4. 观察起立、回中和等待。当前作者流程会在完成起立后回中，并等待下一次满足触发条件的倾斜。
+4. 分方向观察起立过程，确认回到目标姿态后能持续站稳。
 5. 用右侧「保存工程」保存可重开的 `.sim`。需要在本地 MuJoCo 中运行时，在「本地 sim2sim 包下载」下载带模型、策略和启动器的 `-mujoco.zip`，按包内说明启动。
+
+![网站自带作者原版 SelfRising 的 MuJoCo 在线仿真界面](images/tutorial/zh-CN/08-sim2sim-original.png)
 
 ## 2. 准备实物工程和接线
 
-打开 [Sim2Real](https://sim2real.stackforce.cc/)，在示例选择器的实物分类里加载「强化学习不倒翁 · ESP32」。使用支持串口访问的桌面版 Chrome 或 Edge。
+使用支持串口访问的桌面版 Chrome 或 Edge 打开 [Sim2Real 的 SelfRising 示例](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=sim2real&connection=usb&panel=devices)，确认已载入作者原版策略。记录这次实物测试所用的策略版本。
 
 ![原版 ESP32、BNO055、两只 MG90S 与独立 5 V 电源的完整中文接线图](images/esp32-lolin32-lite.zh-CN.svg)
 
@@ -32,6 +36,10 @@
 2. 等待写入和校验完成。烧录结束后释放安装器连接。
 3. 点「USB 连接」，再次选择板卡串口。设备树应出现 BNO055 和两路 GPIO 舵机。
 4. 检查板卡当前回报的运行状态。若它已经在执行已保存的工程，先点「停止」再编辑映射和校准。
+
+![LOLIN32 Lite 对应 ESP32 · 4MB 固件选项，尚未执行烧录](images/tutorial/zh-CN/10-install-firmware.png)
+
+![设备与映射页面的 USB 连接入口；图中为连接前状态](images/tutorial/zh-CN/09-connect-esp32.png)
 
 ## 4. 映射并校准两只舵机
 
@@ -68,8 +76,8 @@
 
 | 现象 | 对照检查 |
 |---|---|
-| 运行但舵机未动 | 查看板卡状态、两路输出映射、独立 5 V 电源和共地；对照作者起立流程的触发条件 |
+| 运行但舵机未动 | 查看板卡状态、两路输出映射、独立 5 V 电源和共地，再核对策略的动作输入输出 |
 | 舵机反向或中位偏移 | 在设备映射中检查该轴的方向、零位和实际行程 |
 | 轻微倾斜就报故障 | 读取故障原因，核对 BNO055 供电、接头和实时数据，再处理具体错误 |
 | 运行时抖动 | 同时记录 IMU、策略目标与估算角度，检查机械装配和供电后定位抖动来源 |
-| 换了训练策略后无法上传 | 按[训练教程第 6 步](training.zh-CN.md#6-从训练结果走向实物)检查新策略的全部输入输出与运行端支持 |
+| 换了训练策略后无法上传 | 按[训练教程第 6 步](training.zh-CN.md#6-接着部署到实物)检查新策略的全部输入输出与运行端支持 |

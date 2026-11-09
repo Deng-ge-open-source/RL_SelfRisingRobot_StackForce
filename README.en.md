@@ -4,20 +4,34 @@
 
 Print five parts, connect an ESP32, an orientation sensor and two servos, then deploy a get-up policy to the robot on your workbench.
 
-| Start here | What you will do |
-|---|---|
-| [Build from this page](#1-identify-the-board-and-gather-the-parts) | Gather parts, print, wire, calibrate and try a recovery |
-| [Illustrated training guide](docs/training.en.md) | Pair the Runner, review reference motions, use BC→PPO, replay four directions and save results |
-| [Simulation and hardware guide](docs/running.en.md) | Try web simulation, install firmware, calibrate servos and IMU, upload and run |
-
 <p align="center">
   <a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="360" alt="The red-base, white-link SelfRising robot getting back up after a fall"></a>
 </p>
 
+**v0.1.0-rc.1 review release. Open hardware designs, supplied binary firmware and reproduction materials. Studio controller source is not distributed.** [Release assets](https://github.com/Deng-ge-open-source/RL_SelfRisingRobot_StackForce/releases/tag/v0.1.0-rc.1) · [Downloads and versions](docs/downloads.en.md) · [Licence scope](LICENSE.md)
+
+| Download | Contents |
+|---|---|
+| [ESP32 binary firmware](SelfRising-ESP32-Firmware.zip) | Original ESP32 · 4MB, flash images, addresses and checksums |
+| [Sim2Real example](SelfRising-ESP32.sim) | Original-author recovery policy, GPIO servo and BNO055 mappings |
+| [Local MuJoCo runtime](SelfRising-MuJoCo.zip) | The same policy, model, Python runtime and Windows/Linux launchers |
+| [STL print pack](SelfRising-90S-STL.zip) · [STEP CAD pack](SelfRising-90S-STEP.zip) | Five parts and assembled reference; [verify downloads](SHA256SUMS) |
+
+| Follow this sequence | Open the guide |
+|---|---|
+| ① Train SelfRising in SimReady | [Select the example, pair the Runner and train](docs/training.en.md) |
+| ② Verify this model in Sim2Sim | [Replay and transfer the result](docs/training.en.md#5-open-sim2sim) |
+| ③ Deploy to ESP32 in Sim2Real | [Wire, map, calibrate, upload and run](docs/running.en.md) |
+
+The hardware steps currently use the author's original policy supplied with the website. Training, playback and export of the new nine-input reference policy were tested; automatic handoff currently reports a compatibility issue. See [training step 5](docs/training.en.md#5-open-sim2sim).
+
+
+
 <p align="center">
   <a href="#1-identify-the-board-and-gather-the-parts">Start the build</a> ·
   <a href="SelfRising-90S-STL.zip">Download the print pack</a> ·
-  <a href="https://sim2sim.stackforce.cc/?example=selfrising-2axis&amp;autoplay=0">Try the simulation</a> ·
+  <a href="SelfRising-90S-STEP.zip">Download STEP CAD</a> ·
+  <a href="https://sim2real.stackforce.cc/?example=selfrising-2axis&amp;autoplay=0&amp;step=mujoco&amp;panel=simulation">Try the simulation</a> ·
   <a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4">Watch the full demo clip</a>
 </p>
 
@@ -62,11 +76,11 @@ Mount the BNO055 on the fixed red base so it moves with the base. The diagram ma
 | External regulated `+5 V` | Power input on both servos |
 | Common `GND` | ESP32, BNO055, both servos and the supply’s negative terminal |
 
-These pins match the ESP32 hardware template on the site. [Original ESP32 wiring reference](https://github.com/Deng-ge-open-source/Stack_Force_Sim2sim/blob/05eee9528c15bb03257c3b7f3654a401d8bd1ffb/apps/mujoco-online/hardware/esp32-robot-controller/original/README.md)
+These pins match the ESP32 hardware template on the site. [Firmware, wiring and installation](firmware/esp32/README.md)
 
 ## 4. Open the site and connect the board
 
-1. Open Sim2Real in desktop Chrome or Edge. Load **StackForce SelfRising · ESP32** from the example picker. [Open Sim2Real](https://sim2real.stackforce.cc/)
+1. Open the [SelfRising hardware example](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=sim2real&connection=usb&panel=devices) in desktop Chrome or Edge. You can also import the downloaded [SelfRising-ESP32.sim](SelfRising-ESP32.sim).
 2. Connect the board with a USB data cable. On a fresh board, open **Install firmware** in **Devices & Mapping**, select **Choose board and install**, then select the board’s CH340 port. Wait for the site to confirm that it wrote and verified the firmware.
 3. In **Devices & Mapping**, select **Connect USB** and choose the board’s port. Continue once the BNO055 readings and both GPIO servo channels appear. [Browser serial permissions](https://developer.chrome.com/docs/capabilities/serial)
 
@@ -96,12 +110,14 @@ Follow the [web simulation and ESP32 running guide](docs/running.en.md) for firm
 3. Review the four reference motions. Choose **Demonstration learning (BC)** or **Imitate then refine (BC → PPO)**, check the settings, then select **Start Training**.
 4. Replay each direction, save the full `.simready` and the task's deployment bundle, then check input/output support on the target runtime.
 
-![English Runner download and pairing controls from the general A1 training tutorial](docs/images/tutorial/en/04-runner.jpg)
+![SelfRising loaded in SimReady with both servo joints](docs/images/tutorial/en/01-selfrising.png)
 
-The image comes from the published general A1 tutorial. The default SelfRising from-scratch reference project uses 9 inputs, 2 outputs, a reference clock and incremental actions. The built-in author hardware policy uses its matching recovery controller. See the [complete training guide](docs/training.en.md) for settings, records, original PPO commands and deployment contracts.
+After Training → Replay training results, use Export Training Project → Simulation Validation and Hardware Deployment to hand off the model. The guides document the compatibility status observed in testing. See the [training guide](docs/training.en.md) and [hardware running guide](docs/running.en.md).
 
 ## Credits and licence
 
-The StackForce SelfRising hardware designer modified this 90S print set. The five printable designs and their matching editable Creo files are licensed under GNU GPL v3.0 (`GPL-3.0-only`). [Print files and provenance](hardware/stl/README.md) · [GPL text](hardware/stl/COPYING)
+The StackForce SelfRising hardware designer modified this 90S print set. The five printable designs and their STEP models are licensed under GNU GPL v3.0 (`GPL-3.0-only`). [Print files and provenance](hardware/stl/README.md) · [STEP CAD](hardware/step/README.md) · [GPL text](hardware/stl/COPYING)
+
+Binary firmware has a separate [binary-use permission](licenses/firmware-binary.txt); controller source remains undisclosed. Runtime scripts, models, policies and documentation have separate terms. See [LICENSE.md](LICENSE.md) and [third-party notices](THIRD-PARTY-NOTICES.md).
 
 The recovery policy comes from HomeMadeGarbage’s two-axis robot *poco*. StackForce integrates it into the general Sim2Sim and Sim2Real workflows and provides a hardware profile for the LOLIN32 Lite, BNO055 and GPIO servos. [Original project](https://github.com/homemadegarbage/SelfRisingRobot/tree/c344c2a4a1a51562247528d8aadcc0a527b6b103)

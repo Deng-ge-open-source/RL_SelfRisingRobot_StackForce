@@ -1,19 +1,28 @@
-# 教程截图来源 · Tutorial screenshot provenance
+# SelfRising 教程截图 · Screenshot provenance
 
-本目录包含 SimReady 已发布网页训练教程的原始截图，采集日期为 2026-10-03。`zh-CN/` 和 `en/` 是分别采集的中文、英文界面。文件保持原始字节，画面使用宇树 A1；训练记录属于已有历史任务。
+截图于 2026-11-09 从实际网站采集，中文、英文界面分别拍摄。全部为 **1920 × 1080、16:9 PNG**。
 
-These are original captures from SimReady's published web training tutorial, recorded on 2026-10-03. `zh-CN/` and `en/` contain separately captured Chinese and English interfaces. Files retain their original bytes and show a Unitree A1 with historical training records.
+Captures show the actual websites on 2026-11-09. Chinese and English interfaces were captured separately. Every image is a **1920 × 1080, 16:9 PNG**.
 
-| 文件 · File | 内容 · Subject |
+| 文件 · File | 页面状态 · Page state |
 |---|---|
-| `04-runner.jpg` | 下载和配对运行器 · Runner download and pairing |
-| `05-start.jpg` | 训练设置和启动入口 · Training settings and start controls |
-| `06-monitor.jpg` | 曲线与进度 · Curves and progress |
-| `07-playback.jpg` | 检查点和回放控制 · Checkpoint and playback controls |
-| `08-save.jpg` | 保存工程和策略验证 · Project save and policy validation |
+| `01-selfrising.png` | SimReady `example=23`，已载入 `robo1` · SelfRising imported |
+| `02-mapping.png` | 模板原有 2 路动作、9 路观测 · Template's two actions and nine observations |
+| `03-connect-runner.png` | 未配对时的运行器下载入口 · Runner download before pairing |
+| `03-training-ready.png` | 已配对，CPU / 1 环境 / 300 轮 / 保存间隔 100 / 种子 42 · Paired, configured training page |
+| `03-ppo-mode.png` | 实际 BC → PPO 配置入口；本轮未执行 PPO · Actual BC → PPO setting; PPO not executed in this test |
+| `05-training-complete.png` | 本次 BC 300 轮训练完成 · This run's completed BC training |
+| `06-replay.png` | 同一训练结果的实际在线回放 · Live replay of that trained result |
+| `07-handoff.png` | 选择本次训练模型交接或下载 · This run's model handoff and download controls |
+| `07-handoff-warning.png` | 实际出现的运行能力不兼容提示 · Observed runtime-capability incompatibility |
+| `08-sim2sim-original.png` | 网站自带作者原版示例的 MuJoCo 页面 · MuJoCo page for the supplied original-author example |
+| `09-connect-esp32.png` | 实物部署，板卡未连接 · Hardware deployment before controller connection |
+| `10-install-firmware.png` | 选择 ESP32 · 4MB，尚未烧录 · ESP32 · 4MB selected before flashing |
 
-来源路径为 SimReady 的 `public/help/web-training/`，英文位于其 `en/` 子目录。画面采集对象、版本和原始来源说明见该目录的 README。教程正文把通用界面截图与 SelfRising 专用参数分别说明。
+每个文件在 `zh-CN/` 与 `en/` 下各一份。采集使用经用户同意的独立后台浏览器，直接保存网页视口；不含应用边框或 ChatGPT 浮动输入框，未重绘界面、伪造板卡或替换图中机器人。网站自身尚未翻译的少量标签保留原样。
 
-The source is SimReady's `public/help/web-training/`, with English captures in its `en/` subdirectory. Its README records the capture context and date. The guides identify the general interface images and provide the SelfRising-specific settings in their text.
+Each filename has a capture under both `zh-CN/` and `en/`. An independent headless browser, approved by the user, saved the webpage viewport directly. Images exclude application chrome and the ChatGPT composer. UI, devices and robots were not fabricated or repainted. A few untranslated labels from the website remain as displayed.
 
-[SimReady](https://sim.stackforce.cc/) · [公开中文截图示例 · Published Chinese capture](https://sim.stackforce.cc/help/web-training/04-runner.jpg) · [公开英文截图示例 · Published English capture](https://sim.stackforce.cc/help/web-training/en/04-runner.jpg)
+训练、回放与导出的策略哈希一致。原版作者示例单独标明。实物截图本轮没有烧录、使能或驱动舵机。参数、软件版本和验证范围见[实测记录](../../training-evidence.json)。
+
+The trained, replayed and exported policy hashes match. The supplied original-author example is identified separately. No controller was flashed and no motors were enabled or driven for these hardware screenshots. See the [test record](../../training-evidence.json) for parameters, versions and scope.

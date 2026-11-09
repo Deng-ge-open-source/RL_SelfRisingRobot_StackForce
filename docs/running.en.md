@@ -2,19 +2,23 @@
 
 [简体中文](running.zh-CN.md) · English · [Home](../README.en.md) · [Training guide](training.en.md)
 
-For a first build, use the author recovery policy supplied by the website. Observe it in simulation, then wire, map and calibrate your hardware. **Upload policy** stores the project on the controller, **Run** starts execution and **Stop** ends outputs.
+[Download the firmware, hardware example and local runtime](downloads.en.md). Firmware source is not distributed; each controller retains its own calibration.
+
+After training in SimReady, verify that model in Sim2Sim. The ESP32 steps here use the author's original SelfRising policy supplied with the website. Board validation of the newly trained nine-input reference policy is pending; see [training step 6](training.en.md#6-continue-to-hardware). **Upload policy** stores the project on the controller, **Run** starts execution and **Stop** ends outputs.
 
 ## 1. Try the web simulation
 
-1. Open the [SelfRising simulation](https://sim2sim.stackforce.cc/?example=selfrising-2axis&autoplay=0). Check that the import page has loaded the two-joint model and ONNX policy.
+1. Open the [author's original SelfRising simulation](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=mujoco&panel=simulation). For handoff status of your own trained result, see [training step 5](training.en.md#5-open-sim2sim).
 2. If the reproduction guide opens, select **Continue with current project**. Review joint and observation settings in **Policy Mapping**, then open **MuJoCo online simulation**.
 3. Select **Run** and check that physics actually advances. Use the page's initial-pose or reset controls to test the four fall directions.
-4. Observe recovery, return to neutral and waiting. The current author controller returns to neutral after recovery and waits for another qualifying tilt.
+4. Test recovery in each direction, checking sustained stability after reaching the target pose.
 5. Use **Save Project** to download a reopenable `.sim`. For local MuJoCo execution, use **Local Sim2Sim downloads** to obtain the `-mujoco.zip` bundle with its model, policy and launchers, then follow the bundled instructions.
+
+![MuJoCo online interface for the author's original SelfRising example](images/tutorial/en/08-sim2sim-original.png)
 
 ## 2. Open the hardware project and wire it
 
-Open [Sim2Real](https://sim2real.stackforce.cc/) and load **StackForce SelfRising · ESP32** from the hardware example category. Use desktop Chrome or Edge with serial access.
+Use desktop Chrome or Edge with serial access to open the [Sim2Real SelfRising example](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=sim2real&connection=usb&panel=devices) and check that the author's original policy is loaded. Record the policy version used for this hardware test.
 
 ![Complete English wiring for the original ESP32, BNO055, two MG90S servos and a separate 5 V supply](images/esp32-lolin32-lite.svg)
 
@@ -32,6 +36,10 @@ Open [Sim2Real](https://sim2real.stackforce.cc/) and load **StackForce SelfRisin
 2. Wait for writing and verification to finish, then release the installer connection.
 3. Select **Connect USB** and choose the board's serial port again. The device tree should show the BNO055 and two GPIO servo channels.
 4. Check the controller's reported state. If it is already executing a saved project, select **Stop** before editing mapping and calibration.
+
+![ESP32 · 4MB firmware selection for LOLIN32 Lite, before any flashing](images/tutorial/en/10-install-firmware.png)
+
+![Connect USB in Devices & Mapping; the controller is disconnected in this capture](images/tutorial/en/09-connect-esp32.png)
 
 ## 4. Map and calibrate both servos
 
@@ -68,8 +76,8 @@ After saving servo and IMU calibration, download a `.sim` with **Save Project**.
 
 | Symptom | Check |
 |---|---|
-| Policy running but servos still | Controller state, both output mappings, external 5 V and common ground, then the author recovery controller's trigger conditions |
+| Policy running but servos still | Controller state, both output mappings, external 5 V and common ground, then the policy's input/output configuration |
 | Wrong direction or neutral | That axis's direction, saved zero and physical travel in device mapping |
 | Fault after a small tilt | Read the reported reason, then check BNO055 power, connectors and live data |
 | Motion jitters | Record IMU, policy targets and estimated angles together, then inspect assembly and power to locate the source |
-| Newly trained policy will not upload | Check its complete contract and target runtime support in [training step 6](training.en.md#6-take-a-training-result-toward-hardware) |
+| Newly trained policy will not upload | Check its complete contract and target runtime support in [training step 6](training.en.md#6-continue-to-hardware) |

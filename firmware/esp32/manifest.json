@@ -1,0 +1,37 @@
+{
+  "kind": "stackforce.studio-firmware.v1",
+  "schemaVersion": 1,
+  "artifactId": "studio-e1e3b0a23623fca3735a",
+  "chip": "ESP32",
+  "flashBytes": 4194304,
+  "psramBytes": 0,
+  "boardProfile": "LOLIN32 Lite / BNO055 / GPIO25-26",
+  "flashMode": "dio",
+  "flashFrequency": "40m",
+  "parts": [
+    {
+      "address": 4096,
+      "file": "1000-bootloader.bin",
+      "bytes": 24128,
+      "sha256": "6ad10af069613b92548c654cd017058dcf07797a5fa6259ae277ec93a28d9a05"
+    },
+    {
+      "address": 32768,
+      "file": "8000-partition-table.bin",
+      "bytes": 3072,
+      "sha256": "259b39ae736ffd30465a90cbb06a469214cfd414a4a68c3970958035337c7d54"
+    },
+    {
+      "address": 61440,
+      "file": "f000-ota_data_initial.bin",
+      "bytes": 8192,
+      "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f"
+    },
+    {
+      "address": 131072,
+      "file": "20000-stackforce_robot_controller.bin",
+      "bytes": 1176176,
+      "sha256": "d114414cb98d05aa34eb96482e650e80bf243ff5d54f60bb8a87923ec575aab6"
+    }
+  ]
+}

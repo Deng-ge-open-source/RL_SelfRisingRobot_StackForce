@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "status": "pass",
+  "package": "强化学习不倒翁 · 双轴自起立",
+  "model": {
+    "path": "module\\asset\\model.xml",
+    "nq": 9,
+    "nv": 8,
+    "nu": 25,
+    "nsensor": 5,
+    "reset_keyframe": "candidate_start",
+    "generated_ground": false
+  },
+  "simulation": {
+    "steps": 15000,
+    "time_start": 0.0,
+    "time_end": 14.999999999997126,
+    "qpos_delta_l2": 0.8792193642736691,
+    "initial_contact_count": 0,
+    "initial_min_contact_distance": 0.0,
+    "controlled_root_body": "foot",
+    "initial_root_world": [
+      0.0,
+      0.0,
+      0.07999999821186066
+    ],
+    "final_root_world": [
+      0.07033364415842216,
+      0.22092967263557398,
+      -0.07453078840821846
+    ],
+    "minimum_root_height": -0.08756267113941044,
+    "policy_control": true
+  },
+  "policy": {
+    "status": "configuration_validated",
+    "path": "module\\policy\\policy.onnx",
+    "inputs": [
+      {
+        "name": "obs",
+        "shape": [
+          1,
+          10
+        ],
+        "type": "tensor(float)"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "actions",
+        "shape": [
+          1,
+          10
+        ],
+        "type": "tensor(float)"
+      }
+    ],
+    "note": "The ONNX session and profile dimensions are valid. The interactive viewer executes supported profile-driven policy control by default."
+  },
+  "policy_runtime": {
+    "inference_steps": 750,
+    "legacy_angular_velocity_sensor_reads": 0,
+    "first_observation": [
+      -1.570796251296997,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "first_observation_head": [
+      -1.570796251296997,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "first_action": [
+      -0.06981316953897476,
+      -0.06981316953897476,
+      -0.07573893666267395,
+      -0.07618367671966553,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "render": null,
+  "python": "3.12.1 (tags/v3.12.1:2305ca5, Dec  7 2023, 22:03:25) [MSC v.1937 64 bit (AMD64)]",
+  "mujoco": "3.11.0",
+  "scope": "Native MuJoCo finite-state and policy-execution smoke test; not a mechanical recovery acceptance test",
+  "offscreenRendering": {
+    "passed": false,
+    "error": "Shadow framebuffer is not complete, error 0x505",
+    "modelShadowSize": 8192,
+    "interactiveViewer": "not verified in this release preparation"
+  },
+  "hardwareFlashing": "Not performed during release preparation",
+  "firmwareControllerSourceIncluded": false
+}

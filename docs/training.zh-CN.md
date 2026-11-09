@@ -1,126 +1,94 @@
-# 从训练到起立 · SelfRising
+# 用 SelfRising 跑通训练与仿真
 
-简体中文 · [English](training.en.md) · [返回首页](../README.md) · [仿真与实物运行](running.zh-CN.md)
+简体中文 · [English](training.en.md) · [首页](../README.md)
 
-在电脑里训练、回放并检查策略，再把匹配实物输入输出的工程部署到 ESP32。浏览器负责编辑和显示，本地 Runner 使用电脑的 CPU 或兼容的 NVIDIA GPU 进行训练。
+按这条顺序操作，整个过程使用同一个 SelfRising 工程。
 
-| 你想做什么 | 从这里开始 |
-|---|---|
-| 先让已装好的机器人运行 | [使用内置作者策略](running.zh-CN.md) |
-| 学习网页训练并制作自己的起身动作 | 本页第 1–6 步 |
-| 复现作者的原始 PPO 训练环境 | 本页第 7 步 |
+**SimReady 训练 → Sim2Sim 验证 → Sim2Real 部署。**
 
-**截图说明** · 本页使用 SimReady 已发布教程中的中英文独立截图，原始采集日期为 2026-10-03，画面中的机器人是宇树 A1。它们用于定位下载运行器、训练、监控、回放和保存入口。SelfRising 的设置以本页文字和当前工程为准。图中的奖励、GPU、环境数和用时属于 A1 的历史实验。[截图来源](images/tutorial/README.md)
+## 1. 选择 SelfRising
 
-## 1. 打开 SelfRising 训练工程
+打开 [SimReady](https://sim.stackforce.cc/?example=23)。在示例工程里选择「强化学习不倒翁 · Self Rising」。看到图中的机器人、`robo1` 和两个舵机关节后，点「进入策略映射」。
 
-1. 打开 [SimReady 的 SelfRising 入口](https://sim.stackforce.cc/?example=23)。确认模型为 `robo1`，关节为 `servo1_joint` 和 `servo2_joint`。若示例顺序调整，在选择器里按名称查找不倒翁。
-2. 进入「策略映射」，检查两路动作分别对应这两个关节。查看「观测映射」中的输入名称与顺序。
-3. 在「特殊观测」开启「使用参考动作」，进入「参考动作」检查四个起立片段。使用内置从零工程时，这些片段已作为教学素材提供。
-4. 查看「训练方式」。选择「示范学习（BC）」可先学会模仿参考动作。选择「模仿后强化（BC → PPO）」会先拟合示范，再按奖励继续优化。该流程需要兼容的网页和 Runner。
+![SimReady 实际载入 SelfRising，两路关节标在机器人上](images/tutorial/zh-CN/01-selfrising.png)
 
-BC 使用仿真采集到的输入与示范动作训练网络。PPO 通过与仿真环境交互、根据奖励更新策略。「参考跟踪强化学习（PPO）」也是可选方式，调整后要重新检查观测、奖励和训练配置。
+<details>
+<summary>进入映射后应该看到什么？</summary>
 
-## 2. 安装并连接本地 Runner
+首次复现保留模板配置。确认电机映射为 2/2、观测映射为 9/9；这份参考训练工程的两路动作是关节目标角增量。
 
-1. 进入顶部「训练」，在左侧「连接训练电脑」选择自己的系统，下载对应的 Runner。
-2. 安装并打开 Runner，使用其中的「连接 SimReady」完成网页配对。
-3. 回到网页，确认出现「运行器已连接」，并能看到计算资源。第一次训练还会准备本地依赖，进度可在日志中查看。
+![SelfRising 模板的两路动作与九路观测映射](images/tutorial/zh-CN/02-mapping.png)
 
-![中文运行器下载与配对入口，画面为通用 A1 教程](images/tutorial/zh-CN/04-runner.jpg)
+</details>
 
-图中选中的是 Linux。Windows 用户在左侧选择 Windows，再下载对应安装包。
+## 2. 连接训练电脑
 
-## 3. 检查动作、观测与训练设置
+点顶部「训练」。在左侧选自己的系统，下载并打开 Runner，再点 Runner 中的「连接 SimReady」。网页显示「运行器已连接」后继续。浏览器询问本机网络访问时，允许此网站连接本机运行器。
 
-打开参考动作逐段检查初始姿态、时间和两路关节目标。可以先用物理试演查看动作能否完成起立，再保存修改。物理试演执行参考目标，训练后的策略要在第 5 步单独回放。
+![SelfRising 训练页上的运行器下载与连接步骤](images/tutorial/zh-CN/03-connect-runner.png)
 
-| 设置 | SelfRising 从零参考工程的配置 |
-|---|---|
-| 四个参考片段 | `roll_pos`、`roll_neg`、`pitch_pos`、`pitch_neg` |
-| 两路动作 | 每个控制周期更新舵机目标角的增量 |
-| 关节目标范围 | 每轴 −1.55 到 +1.55 rad |
-| 每周期目标增量 | 0.08 rad |
-| 物理与策略频率 | 1000 Hz / 50 Hz |
-| 初始网络 | 随机权重，9 个输入、2 个输出，隐藏层为空 |
-| BC 优化 | 学习率 0.003，批量 768，每轮 100 次梯度更新 |
-| 初次复现设置 | 1 个采样环境，300 轮，保存间隔 100，种子 42 |
+## 3. 开始训练
 
-九个输入依次是 Roll、Pitch、两路最后发送的目标角缓存、参考进度、两路参考目标角和两路参考速度。角度使用 rad，时间使用 s。参考进度和参考目标来自软件参考时钟。
+第一次使用先沿用 SelfRising 示例的四段参考动作和「示范学习（BC）」。本次实测使用 CPU、1 个并行环境、300 轮、保存间隔 100、随机种子 42。参数在左侧，「保存间隔」和「随机种子」位于「更多参数」。点「开始训练」，等待示范采集和训练完成。
 
-选择 BC→PPO 时，还需检查 PPO 的训练步数、探索幅度和奖励项。BC 阶段拟合示范，PPO 阶段按奖励优化。以本次任务保存的配置和最终评估结果判断效果。
+![SelfRising 已配对运行器，左侧设置训练参数并点击开始训练](images/tutorial/zh-CN/03-training-ready.png)
 
-## 4. 开始训练并阅读记录
+<details>
+<summary>要做强化学习：切换到 BC → PPO</summary>
 
-1. 先用「保存工程」保存一份训练前的 `.simready` 文件。
-2. 在左侧核对计算设备、环境数、训练轮数、保存间隔和种子，然后点「开始训练」。
-3. 观察依赖准备、示范采集和优化进度。BC→PPO 任务还会显示后续 PPO 阶段。
-4. 打开底部的训练数据，在曲线、运行日志和模型文件之间切换，确认实际迭代推进且已保存检查点。
+返回「策略映射 → 参考动作」，在「训练方式」里选「模仿后强化（BC → PPO）」，再进入「训练」开始新任务。BC 先学习参考动作，PPO 再按奖励优化。修改后生成的是新训练结果，需要重新回放和验收。
 
-![中文开始训练入口，画面为 A1 历史任务](images/tutorial/zh-CN/05-start.jpg)
+本次完整运行记录覆盖默认 BC；下图展示实际的 BC → PPO 配置入口，未将它标成已完成的 PPO 训练。
 
-本例按上表设置。图中的 1500 个环境、3000 轮和 A6000 显卡属于 A1 截图。
+![SelfRising 的 BC → PPO 强化学习模式入口](images/tutorial/zh-CN/03-ppo-mode.png)
 
-![中文训练曲线和进度面板，数据来自 A1 历史任务](images/tutorial/zh-CN/06-monitor.jpg)
+</details>
 
-训练时长取决于电脑、依赖准备、采集次数和优化设置。检查记录中的实际迭代、loss、回合结果和已保存模型，再进入回放。
+## 4. 回放这次的结果
 
-## 5. 回放四个方向并保存结果
+点「播放训练效果」，选这次训练保存的 `policy.onnx`。确认左侧显示「正在播放」，分别查看左倒、右倒、前倒、后倒的起立过程。右侧「结果」可以下载评估文件。确认起立后能站稳，再点「保存工程」下载完整 `.simready`。
 
-1. 切换「播放训练效果」，选择本次实验保存的检查点。
-2. 分别测试左右侧倒、前倒和后倒。检查是否完成起立、回到目标姿态并持续站稳。
-3. 用暂停、单步和重新开始观察失败时刻。结合评估文件检查是哪一个方向或哪一项条件没有达到。
-4. 保存完整 `.simready` 工程。原生参考训练可导出配套的部署包，保留模型、ONNX、输入输出配置和训练来源记录。
+![本次第 300 轮 SelfRising 策略实际回放，右侧列出结果文件](images/tutorial/zh-CN/06-replay.png)
 
-![中文检查点选择和回放控制，画面为通用 A1 教程](images/tutorial/zh-CN/07-playback.jpg)
+## 5. 进入 Sim2Sim
 
-BC→PPO 的最终产物可能选中 BC 或 PPO，以任务的 `pipeline-summary.json` 为准。下载产物后保留 `evaluation.json`、`training-provenance.json` 和相关配置，便于比较不同次训练。
+点顶部「导出训练工程」，在页面下方找到「仿真验证与实物部署」。选择本次保存的模型，点「打开仿真验证与实物部署」。需要保留交接文件时，点旁边的「下载本地部署包」，得到 `.sim2sim`。
 
-![中文保存工程与策略验证入口，画面为通用 A1 教程](images/tutorial/zh-CN/08-save.jpg)
+![SelfRising 训练结果的仿真验证、实物部署与下载入口](images/tutorial/zh-CN/07-handoff.png)
 
-图中的 Sim2Sim 卡片来自通用 MJLab 教程。原生参考策略按该任务提供的原生回放与部署包路径操作。若目标网站报告不支持该合同，保留完整工程并查看具体缺失项。
+**当前实测状态（2026-11-09）：** 默认参考策略的训练、回放和部署包导出已通过；自动交接返回 `POLICY_CAPABILITY_UNSUPPORTED`。接收端还不支持包中要求的外层恢复控制器。保留导出的文件，当前不能把这个提示视为仿真运行成功。
 
-## 6. 从训练结果走向实物
+<details>
+<summary>兼容提示是什么样？</summary>
 
-| 策略 | 输入输出 | 部署时要对应的内容 |
-|---|---|---|
-| 网站内置作者起立策略 | 包装后的 ONNX 为 10 输入、10 输出，其中 2 路控制舵机，8 路保存状态 | 工程自带的作者起立控制配置 |
-| 本页从零参考训练策略 | 默认 9 输入、2 输出 | 参考时钟、片段选择、目标角缓存和增量动作更新 |
+![实际交接时出现的运行能力不兼容提示](images/tutorial/zh-CN/07-handoff-warning.png)
 
-为新策略部署前，先在目标运行端逐项核对全部观测来源、单位、更新周期和动作语义。九输入参考策略的板端参考时钟流程仍需专门验收。网页成功导出和仿真回放分别提供相应阶段的结果。
+</details>
 
-要先测试当前已跑通的 ESP32 例子，按[运行教程](running.zh-CN.md)加载「强化学习不倒翁 · ESP32」，完成接线、映射、校准、上传和运行。保留训练工程，便于后续适配自己训练的策略。
+## 6. 接着部署到实物
 
-## 7. 复现作者的原始 PPO 训练
+训练示例使用 9 路输入，包含软件参考时钟。这条新训练策略的 ESP32 实机验收尚未完成。
 
-作者仓库的 `RL` 目录提供 MuJoCo 环境、示范预训练、PPO 和评估脚本。先克隆并固定版本，再按该目录的依赖说明建立 Python 环境。
+现在想装机测试，可以按[实物运行教程](running.zh-CN.md)部署网站自带的作者原版策略。自己的训练工程另行保留，记录实物测试时实际使用的策略版本。
 
-```powershell
-git clone https://github.com/homemadegarbage/SelfRisingRobot.git
-cd SelfRisingRobot
-git checkout c344c2a4a1a51562247528d8aadcc0a527b6b103
-cd RL
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-```
+<details>
+<summary>想了解 BC、PPO 和导出文件</summary>
 
-先将随包的 `robo1_getup_ppo.zip` 另存一份。用 `pretrain_robo1_from_scripted.py` 从参考动作预训练时，会生成同名模型；之后用 `train_robo1.py` 进行 PPO，并将 PPO 输出写到新文件名。
+BC 学习参考动作在仿真中产生的示范。PPO 再按奖励调整策略。参考工程的观测还包括目标角缓存和软件参考时钟，部署时需要保留对应的运行配置。
 
-```powershell
-python pretrain_robo1_from_scripted.py
-python train_robo1.py --model-in robo1_getup_ppo.zip --timesteps 200000 --n-envs 6 --model-out selfrising-my-ppo
-```
+`.simready` 用来保存和继续训练，`.sim` 用来重开仿真或部署工程。ONNX 携带网络，模型、观测、动作和运行配置随工程一起交接。
 
-播放和评估参数、从随机权重开始 PPO 的用法，以及 C 头文件导出方法，见[作者 RL 说明](https://github.com/homemadegarbage/SelfRisingRobot/blob/c344c2a4a1a51562247528d8aadcc0a527b6b103/RL/README.md)。作者的 M5Atom 固件和本站 ESP32 工程各自带有配套输入输出及运行配置，迁移模型时一并核对。
+要复现作者的 Python 训练流程，查看[作者 RL 说明](https://github.com/homemadegarbage/SelfRisingRobot/blob/c344c2a4a1a51562247528d8aadcc0a527b6b103/RL/README.md)。
 
-## 遇到问题
+</details>
 
-| 现象 | 检查位置 |
-|---|---|
-| 运行器未连接 | 打开 Runner，用「连接 SimReady」配对当前网页 |
-| BC 或 BC→PPO 不可用 | 核对网页、Runner 是否支持所选原生参考训练方式 |
-| 没采集到成功示范 | 检查保存后的参考动作、初态、动力学试演和成功条件 |
-| 曲线有变化但起不来 | 选择实际保存的模型，逐方向回放并查看评估结果 |
-| 上传后动作幅度或方向错误 | 对比动作单位、增量/绝对目标、通道顺序和实物校准 |
-| 想换电脑继续训练 | 保存并重开完整 `.simready`，核对其中是否含可继续训练的检查点 |
+<details>
+<summary>本次实测记录与截图来源</summary>
+
+2026-11-09 在实际网站上操作配对、训练、回放、工程保存和部署包下载。运行器使用独立环境中的固定版本源码，本轮没有验收桌面安装器。MuJoCo 3.11.0，随机初始化，CPU，300 轮；四个标称初态均起立成功，分别为 2.22 / 2.22 / 2.82 / 2.90 秒。该结果覆盖规定仿真初态，实物表现需要另行验证。
+
+![SelfRising 本次 300 轮 BC 训练实际完成，右侧显示拟合误差曲线](images/tutorial/zh-CN/05-training-complete.png)
+
+完整参数、策略哈希及验收范围见[实测记录](training-evidence.json)，图片来源见[截图说明](images/tutorial/README.md)。
+
+</details>

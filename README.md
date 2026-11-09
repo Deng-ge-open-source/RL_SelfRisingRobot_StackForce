@@ -4,20 +4,34 @@
 
 打印五个零件，接上 ESP32、姿态传感器和两只舵机，再用 StackForce 把起立策略部署到桌面上的机器人。
 
-| 从这里开始 | 你会完成什么 |
-|---|---|
-| [按首页搭建](#1-认板与备料) | 备料、打印、接线、校准和首次起立 |
-| [训练图文教程](docs/training.zh-CN.md) | 配对 Runner、参考动作、BC→PPO、四方向回放和保存训练结果 |
-| [运行图文教程](docs/running.zh-CN.md) | 网页仿真、新板固件、舵机与 IMU 校准、上传和运行 |
-
 <p align="center">
   <a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="360" alt="红色底座、白色连杆的 SelfRising 从倒伏到站直的实拍动画"></a>
 </p>
 
+**v0.1.0-rc.1 审核版。结构件开源，提供配套成品固件、本地运行包和复现资料；Studio 控制器源码不公开。** [发布附件](https://github.com/Deng-ge-open-source/RL_SelfRisingRobot_StackForce/releases/tag/v0.1.0-rc.1) · [下载与版本说明](docs/downloads.zh-CN.md) · [分项许可](LICENSE.md)
+
+| 直接下载 | 包内内容 |
+|---|---|
+| [ESP32 成品固件](SelfRising-ESP32-Firmware.zip) | 原版 ESP32 · 4MB，烧录文件、地址和校验 |
+| [Sim2Real 示例工程](SelfRising-ESP32.sim) | 作者原版起立策略、GPIO 舵机与 BNO055 映射 |
+| [MuJoCo 本地运行包](SelfRising-MuJoCo.zip) | 同一份策略、模型、Python 运行器及 Windows/Linux 启动器 |
+| [STL 打印包](SelfRising-90S-STL.zip) · [STEP 图纸包](SelfRising-90S-STEP.zip) | 五个零件及整机参考；[校验下载](SHA256SUMS) |
+
+| 按顺序完成 | 操作入口 |
+|---|---|
+| ① 在 SimReady 训练 SelfRising | [选例子、连接 Runner、开始训练](docs/training.zh-CN.md) |
+| ② 在 Sim2Sim 验证本次模型 | [回放训练结果并交接](docs/training.zh-CN.md#5-进入-sim2sim) |
+| ③ 在 Sim2Real 部署到 ESP32 | [接线、映射、校准、上传和运行](docs/running.zh-CN.md) |
+
+实物操作目前使用网站自带的作者原版策略。新训练的 9 路输入参考策略已实测完成训练、回放和导出；自动交接目前有兼容提示，状态见[训练教程第 5 步](docs/training.zh-CN.md#5-进入-sim2sim)。
+
+
+
 <p align="center">
   <a href="#1-认板与备料">开始搭建</a> ·
   <a href="SelfRising-90S-STL.zip">下载打印包</a> ·
-  <a href="https://sim2sim.stackforce.cc/?example=selfrising-2axis&amp;autoplay=0">在线仿真</a> ·
+  <a href="SelfRising-90S-STEP.zip">下载 STEP 图纸</a> ·
+  <a href="https://sim2real.stackforce.cc/?example=selfrising-2axis&amp;autoplay=0&amp;step=mujoco&amp;panel=simulation">在线仿真</a> ·
   <a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4">观看完整实拍剪辑</a>
 </p>
 
@@ -62,11 +76,11 @@
 | 外部稳压 `+5 V` | 两只舵机的电源正极 |
 | 共地 `GND` | ESP32、BNO055、两只舵机和外部电源负极 |
 
-这些引脚与网站的 ESP32 实物模板一致。 [原版 ESP32 接线说明](https://github.com/Deng-ge-open-source/Stack_Force_Sim2sim/blob/05eee9528c15bb03257c3b7f3654a401d8bd1ffb/apps/mujoco-online/hardware/esp32-robot-controller/original/README.md)
+这些引脚与网站的 ESP32 实物模板一致。 [固件、接线与安装说明](firmware/esp32/README.md)
 
 ## 4. 打开网站并连接板卡
 
-1. 用桌面版 Chrome 或 Edge 打开 Sim2Real，在示例选择器加载 **强化学习不倒翁 · ESP32**。 [打开 Sim2Real](https://sim2real.stackforce.cc/)
+1. 用桌面版 Chrome 或 Edge 打开 [SelfRising 实物示例](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=sim2real&connection=usb&panel=devices)，也可以在导入页打开下载的 [SelfRising-ESP32.sim](SelfRising-ESP32.sim)。
 2. 用 USB 数据线连接板卡。新板卡在「设备与映射」打开「安装固件」，点「选择板卡并安装」，选择该板对应的 CH340 串口。等到网页提示固件写入并校验完成。
 3. 在「设备与映射」点「USB 连接」，选板卡串口。看到 BNO055 数据和两路 GPIO 舵机后继续。 [浏览器串口授权说明](https://developer.chrome.com/docs/capabilities/serial)
 
@@ -96,12 +110,14 @@
 3. 检查四方向参考动作，选择「示范学习（BC）」或「模仿后强化（BC → PPO）」，核对参数后点「开始训练」。
 4. 训练后逐方向回放，保存完整 `.simready` 和该任务提供的部署包，再检查目标运行端的输入输出支持。
 
-![中文运行器下载与配对入口，来自通用 A1 训练教程](docs/images/tutorial/zh-CN/04-runner.jpg)
+![SimReady 载入 SelfRising 两轴起立示例](docs/images/tutorial/zh-CN/01-selfrising.png)
 
-截图使用已发布的通用 A1 教程界面。SelfRising 的默认从零参考工程为 9 输入、2 输出，使用参考时钟与增量动作。内置作者实物策略采用其配套起立控制流程。具体参数、训练记录、原版 PPO 命令和部署对应关系见[完整训练教程](docs/training.zh-CN.md)。
+完成「训练 → 播放训练效果」后，在「导出训练工程 → 仿真验证与实物部署」交接模型。教程按实际测试结果说明当前兼容状态。具体操作见[训练教程](docs/training.zh-CN.md)和[实物运行教程](docs/running.zh-CN.md)。
 
 ## 来源与许可
 
-这套 90S 打印件由 StackForce SelfRising 实物设计者修改完成。五个打印件设计及其对应的可编辑 Creo 文件采用 GNU GPL v3.0（`GPL-3.0-only`）。 [打印件来源与许可](hardware/stl/README.md) · [GPL 正文](hardware/stl/COPYING)
+这套 90S 打印件由 StackForce SelfRising 实物设计者修改完成。五个打印件设计及其 STEP 模型采用 GNU GPL v3.0（`GPL-3.0-only`）。 [打印件来源与许可](hardware/stl/README.md) · [STEP 图纸](hardware/step/README.md) · [GPL 正文](hardware/stl/COPYING)
+
+成品固件单独采用[二进制使用许可](licenses/firmware-binary.txt)，控制器源码保留。本地运行器脚本、模型、策略与文档分别说明许可范围，见 [LICENSE.md](LICENSE.md) 和[第三方声明](THIRD-PARTY-NOTICES.md)。
 
 起身策略源于 HomeMadeGarbage 的双轴机器人 *poco*。StackForce 版本把它接入通用 Sim2Sim 和 Sim2Real 流程，并提供 LOLIN32 Lite、BNO055 和 GPIO 舵机的实物配置。[原作者项目](https://github.com/homemadegarbage/SelfRisingRobot/tree/c344c2a4a1a51562247528d8aadcc0a527b6b103)

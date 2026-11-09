@@ -1,126 +1,94 @@
-# Train SelfRising and test a recovery
+# Train and test SelfRising
 
-[简体中文](training.zh-CN.md) · English · [Home](../README.en.md) · [Simulation and hardware guide](running.en.md)
+[简体中文](training.zh-CN.md) · English · [Home](../README.en.md)
 
-Train, replay and evaluate a policy on your computer, then deploy a project whose inputs and outputs match the hardware. The browser provides editing and visualisation. The local Runner uses your CPU or a compatible NVIDIA GPU for training.
+Follow this sequence using the same SelfRising project throughout.
 
-| Your goal | Start here |
-|---|---|
-| Run the assembled robot first | [Use the built-in author policy](running.en.md) |
-| Learn the web training workflow and create a recovery | Steps 1–6 below |
-| Reproduce the author's original PPO environment | Step 7 below |
+**Train in SimReady → Verify in Sim2Sim → Deploy in Sim2Real.**
 
-**About the screenshots** · These are separate Chinese and English captures from SimReady's published tutorial, recorded on 2026-10-03. They show a Unitree A1 and locate the Runner, training, monitoring, playback and save controls. Use the SelfRising settings described here and in your current project. Rewards, GPU, environment counts and elapsed times shown in the images belong to historical A1 runs. [Image provenance](images/tutorial/README.md)
+## 1. Select SelfRising
 
-## 1. Open the SelfRising training project
+Open [SimReady](https://sim.stackforce.cc/?example=23) and select the Self Rising example. Check for the robot shown below, `robo1` and both servo joints, then select **Enter policy mapping**.
 
-1. Open the [SelfRising entry in SimReady](https://sim.stackforce.cc/?example=23). Check that the model is `robo1` with `servo1_joint` and `servo2_joint`. If the example order changes, find SelfRising by name in the picker.
-2. Open **Policy Mapping**. Check that the two action channels correspond to those joints, then inspect the input names and their order in observation mapping.
-3. Enable **Use reference motion** under special observations. Open **Reference Motions** and inspect the four recovery clips. The built-in from-scratch project includes these teaching motions.
-4. Check **Training method**. **Demonstration learning (BC)** fits the reference demonstrations. **Imitate then refine (BC → PPO)** fits them first, then optimises with rewards. This pipeline needs compatible web and Runner versions.
+![SelfRising loaded in the actual SimReady interface with both joints labelled](images/tutorial/en/01-selfrising.png)
 
-BC learns from inputs and demonstrated actions collected in simulation. PPO improves a policy by interacting with the simulated environment and using rewards. **Reference tracking (PPO)** is another option. Review observations, rewards and training settings after changing the method.
+<details>
+<summary>What should the mapping page show?</summary>
 
-## 2. Install and connect the local Runner
+Keep the template settings for the first reproduction. Check 2/2 motor mappings and 9/9 observations. This reference-training project uses two incremental joint-target actions.
 
-1. Open **Training**. Under **Connect training computer**, choose your operating system and download its Runner.
-2. Install and open the Runner, then use **Connect SimReady** to pair it with the website.
-3. Return to the website. Confirm **Runner connected** and check the detected compute resources. The first run also prepares local dependencies, with progress in the logs.
+![Two action mappings and nine observations in the SelfRising template](images/tutorial/en/02-mapping.png)
 
-![English Runner download and pairing controls in the general A1 tutorial](images/tutorial/en/04-runner.jpg)
+</details>
 
-Linux is selected in this capture. On Windows, choose Windows before downloading the installer.
+## 2. Connect the training computer
 
-## 3. Review motions, observations and training settings
+Open **Training**. Select your operating system on the left, download and open its Runner, then use **Connect SimReady** in the Runner. Continue when the website shows **Runner connected**. If the browser requests local-network access, allow the website to connect to the local Runner.
 
-Inspect each reference clip's reset pose, timing and two joint targets. Use the physics preview to check the motion, then save your changes. Physics preview executes reference targets. Replay the learned policy separately in step 5.
+![Runner download and connection steps in the actual SelfRising training page](images/tutorial/en/03-connect-runner.png)
 
-| Setting | SelfRising from-scratch reference project |
-|---|---|
-| Four clips | `roll_pos`, `roll_neg`, `pitch_pos`, `pitch_neg` |
-| Two actions | Incremental servo target updates at each control step |
-| Joint target range | −1.55 to +1.55 rad on each axis |
-| Target increment per control step | 0.08 rad |
-| Physics / policy frequency | 1000 Hz / 50 Hz |
-| Initial network | Random weights, 9 inputs, 2 outputs, no hidden layers |
-| BC optimisation | Learning rate 0.003, batch size 768, 100 updates per iteration |
-| Initial reproduction setup | 1 sampling environment, 300 iterations, save every 100, seed 42 |
+## 3. Start training
 
-The nine inputs are Roll, Pitch, the two last-commanded target caches, reference phase, two reference positions and two reference velocities, in that order. Angles use rad and time uses s. A software reference clock supplies the phase and reference targets.
+For the first run, keep the four reference clips and **Demonstration learning (BC)**. This test used CPU, one environment, 300 iterations, save interval 100 and seed 42. Find the last two settings under **More parameters**. Select **Start Training** and wait for demonstration collection and training to finish.
 
-For BC→PPO, also review PPO steps, exploration and reward terms. BC fits demonstrations, while PPO uses the configured rewards. Assess the saved task configuration and final evaluation for each run.
+![Connected SelfRising training page with task settings and Start Training](images/tutorial/en/03-training-ready.png)
 
-## 4. Start training and read the records
+<details>
+<summary>For reinforcement learning: switch to BC → PPO</summary>
 
-1. Use **Save Project** to save a pre-training `.simready` file.
-2. Check the compute device, environments, iterations, save interval and seed on the left, then select **Start Training**.
-3. Watch dependency preparation, demonstration collection and optimisation. A BC→PPO job also has a subsequent PPO stage.
-4. Open the training data panel. Switch between curves, logs and model files to check that iterations advance and checkpoints are saved.
+Return to **Policy Mapping → Reference Motions**. Under **Training method**, choose **Imitate then refine (BC → PPO)**, then start a new task in **Training**. BC first learns the reference motions; PPO then optimises using rewards. Replay and evaluate the new result afterward.
 
-![English Start Training controls showing a historical A1 experiment](images/tutorial/en/05-start.jpg)
+The complete run recorded here used default BC. The image below shows the actual BC → PPO configuration entry; it does not claim a completed PPO run.
 
-Use the table above for this example. The 1500 environments, 3000 iterations and A6000 GPU visible here belong to the A1 capture.
+![BC → PPO reinforcement-learning mode in the SelfRising project](images/tutorial/en/03-ppo-mode.png)
 
-![English training curves and progress from a historical A1 run](images/tutorial/en/06-monitor.jpg)
+</details>
 
-Elapsed time depends on the computer, dependency setup, data collection and optimisation settings. Check actual iterations, loss, episode outcomes and saved models before replaying.
+## 4. Replay this run
 
-## 5. Replay all four directions and save the result
+Open **Replay training results** and select this run's `policy.onnx`. Check that the left panel says **Playing**, then observe recovery from left, right, forward and backward falls. Download evaluation files from **Results** on the right. After checking sustained stability, use **Save Project** to download the complete `.simready` file.
 
-1. Open **Replay training results** and select a checkpoint from this experiment.
-2. Test left, right, forward and backward falls. Check recovery, return to the target pose and sustained stability.
-3. Pause, single-step or restart to inspect a failure. Read the evaluation to identify the direction or condition that failed.
-4. Save the complete `.simready` project. Native reference training can produce its corresponding deployment bundle with the model, ONNX, input/output configuration and training provenance.
+![Live replay of this run's iteration-300 SelfRising policy with its result files](images/tutorial/en/06-replay.png)
 
-![English checkpoint selection and playback controls in the general A1 tutorial](images/tutorial/en/07-playback.jpg)
+## 5. Open Sim2Sim
 
-A BC→PPO pipeline may select either BC or PPO. Check `pipeline-summary.json` for the selected stage. Keep `evaluation.json`, `training-provenance.json` and the configuration with your downloads to compare runs.
+Open **Export Training Project** at the top. Find **Simulation Validation and Hardware Deployment** near the bottom, select this run's model and choose **Open Validation and Hardware Deployment**. Use **Download Local Deployment Package** to retain the `.sim2sim` handoff file.
 
-![English Save Project and policy validation controls in the general A1 tutorial](images/tutorial/en/08-save.jpg)
+![SelfRising model selection, validation, deployment and package-download controls](images/tutorial/en/07-handoff.png)
 
-The Sim2Sim card in this image comes from the general MJLab tutorial. For a native reference policy, use the native playback and deployment bundle offered by that task. If a target site reports an unsupported contract, keep the complete project and inspect the missing capability.
+**Test status on 2026-11-09:** default-reference training, playback and package export passed. Automatic handoff returned `POLICY_CAPABILITY_UNSUPPORTED`: the receiver does not yet implement the bundle's peripheral recovery controller. Keep the exported files; this message does not confirm a running simulation.
 
-## 6. Take a training result toward hardware
+<details>
+<summary>What does the compatibility message look like?</summary>
 
-| Policy | Inputs and outputs | Required deployment configuration |
-|---|---|---|
-| Built-in author recovery policy | Wrapped ONNX has 10 inputs and 10 outputs, including 2 motor targets and 8 persistent-state channels | Author recovery controller configuration supplied with the project |
-| From-scratch reference policy described here | 9 inputs and 2 outputs by default | Reference clock, clip selection, target caches and incremental target updates |
+![Actual runtime-capability incompatibility reported during handoff](images/tutorial/en/07-handoff-warning.png)
 
-Before deploying a new policy, check every observation source, unit, update interval and action meaning on the target runtime. The nine-input reference policy still needs dedicated acceptance of its board-side reference clock. Export and simulation replay provide results for their respective stages.
+</details>
 
-To test the established ESP32 example first, follow the [running guide](running.en.md), load **StackForce SelfRising · ESP32**, then wire, map, calibrate, upload and run. Keep your training project for subsequent adaptation of your own policy.
+## 6. Continue to hardware
 
-## 7. Reproduce the author's original PPO training
+The training example uses nine inputs, including a software reference clock. ESP32 hardware validation of this newly trained policy is still pending.
 
-The author's `RL` directory provides a MuJoCo environment, demonstration pretraining, PPO and evaluation scripts. Clone the pinned version and create a Python environment with its declared dependencies.
+For hardware testing now, follow the [running guide](running.en.md) with the author's original policy supplied with the website. Keep your trained project separately and record the policy version actually used on hardware.
 
-```powershell
-git clone https://github.com/homemadegarbage/SelfRisingRobot.git
-cd SelfRisingRobot
-git checkout c344c2a4a1a51562247528d8aadcc0a527b6b103
-cd RL
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-```
+<details>
+<summary>About BC, PPO and exported files</summary>
 
-First save a separate copy of the supplied `robo1_getup_ppo.zip`. Running `pretrain_robo1_from_scripted.py` generates a model with that name. Then run `train_robo1.py` for PPO and give its output a new name.
+BC learns from demonstrations collected by executing reference motions in simulation. PPO then adjusts the policy using rewards. The reference project also observes target caches and a software reference clock, which need their matching runtime configuration on deployment.
 
-```powershell
-python pretrain_robo1_from_scripted.py
-python train_robo1.py --model-in robo1_getup_ppo.zip --timesteps 200000 --n-envs 6 --model-out selfrising-my-ppo
-```
+Use `.simready` to save and continue training and `.sim` to reopen a simulation or deployment project. ONNX carries the network. Transfer its model, observations, actions and runtime configuration with the project.
 
-For playback, evaluation, PPO from random weights and C-header export, follow the [author's RL guide](https://github.com/homemadegarbage/SelfRisingRobot/blob/c344c2a4a1a51562247528d8aadcc0a527b6b103/RL/README.md). The author's M5Atom firmware and this website's ESP32 project each have matching runtime and input/output settings to check when transferring a model.
+For the author's Python training workflow, see the [original RL guide](https://github.com/homemadegarbage/SelfRisingRobot/blob/c344c2a4a1a51562247528d8aadcc0a527b6b103/RL/README.md).
 
-## Troubleshooting
+</details>
 
-| Symptom | Where to look |
-|---|---|
-| Runner disconnected | Open the Runner and pair the current page with Connect SimReady |
-| BC or BC→PPO unavailable | Check support for the selected native reference method in both web and Runner versions |
-| No successful demonstrations collected | Inspect saved motions, reset poses, physics preview and success conditions |
-| Curves change but recovery fails | Select an actual saved model, replay each direction and read the evaluation |
-| Wrong travel or direction after upload | Compare action units, incremental/absolute targets, channel order and calibration |
-| Continue training on another computer | Save and reopen the complete `.simready` file, checking for a resumable checkpoint |
+<details>
+<summary>Test record and screenshot sources</summary>
+
+Pairing, training, live replay, project saving and package download were operated on the actual website on 2026-11-09. The Runner used pinned source in an isolated environment; its desktop installer was not tested in this session. With MuJoCo 3.11.0, random initial weights, CPU and 300 BC iterations, all four nominal starting poses recovered in 2.22 / 2.22 / 2.82 / 2.90 seconds. These results cover the specified simulated poses. Hardware performance needs separate validation.
+
+![This run's actual 300-iteration BC completion and fitting-error curve](images/tutorial/en/05-training-complete.png)
+
+See the [test record](training-evidence.json) for parameters, policy hash and scope, and [screenshot sources](images/tutorial/README.md) for capture details.
+
+</details>

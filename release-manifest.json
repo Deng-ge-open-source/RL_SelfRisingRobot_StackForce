@@ -1,0 +1,109 @@
+{
+  "releaseDate": "2026-11-09",
+  "board": {
+    "chip": "ESP32",
+    "flashBytes": 4194304,
+    "profile": "LOLIN32 Lite / BNO055 / GPIO25-26"
+  },
+  "firmware": {
+    "artifactId": "studio-e1e3b0a23623fca3735a",
+    "sourceUrl": "https://sim2real.stackforce.cc/studio-firmware/studio-e1e3b0a23623fca3735a/manifest.json",
+    "manifestSha256": "f2e5fcc3b2e794371f70323a6ab4028d8a80e6dc811d5445d2df2070ee9830e8",
+    "parts": [
+      {
+        "address": 4096,
+        "file": "1000-bootloader.bin",
+        "bytes": 24128,
+        "sha256": "6ad10af069613b92548c654cd017058dcf07797a5fa6259ae277ec93a28d9a05"
+      },
+      {
+        "address": 32768,
+        "file": "8000-partition-table.bin",
+        "bytes": 3072,
+        "sha256": "259b39ae736ffd30465a90cbb06a469214cfd414a4a68c3970958035337c7d54"
+      },
+      {
+        "address": 61440,
+        "file": "f000-ota_data_initial.bin",
+        "bytes": 8192,
+        "sha256": "7d2c7ac4888bfd75cd5f56e8d61f69595121183afc81556c876732fd3782c62f"
+      },
+      {
+        "address": 131072,
+        "file": "20000-stackforce_robot_controller.bin",
+        "bytes": 1176176,
+        "sha256": "d114414cb98d05aa34eb96482e650e80bf243ff5d54f60bb8a87923ec575aab6"
+      }
+    ]
+  },
+  "hardwareExample": {
+    "path": "SelfRising-ESP32.sim",
+    "sourceUrl": "https://sim2real.stackforce.cc/sim2real-examples/selfrising-2axis-esp32.sim",
+    "sha256": "7b981fc412cf131b01a7613c46743d4539378e3f5c3e69e66237d8a8143f42d9"
+  },
+  "policy": {
+    "sha256": "2b87ee3aee75e3198c782674af10fd34f23dfccc988591ca6ed8494d23cb4e66",
+    "observations": 10,
+    "outputs": 10,
+    "physicalOutputs": 2,
+    "stateOutputs": 8,
+    "rateHz": 50,
+    "source": "https://github.com/homemadegarbage/SelfRisingRobot/tree/c344c2a4a1a51562247528d8aadcc0a527b6b103"
+  },
+  "sourceDisclosure": {
+    "controllerSourceIncluded": false,
+    "personalNvsOrCalibrationIncluded": false
+  },
+  "validation": {
+    "binaryHashes": "pass",
+    "exampleAndRuntimePolicyMatch": "pass",
+    "newPhysicalFlashOrMotionTest": "not performed for this release",
+    "nativeMujocoExecution": {
+      "passed": true,
+      "physicsSteps": 15000,
+      "policyInferences": 750,
+      "report": "docs/release-validation.json",
+      "scope": "Native MuJoCo finite-state and policy-execution smoke test; not a mechanical recovery acceptance test"
+    },
+    "offscreenRendering": {
+      "passed": false,
+      "error": "Shadow framebuffer is not complete, error 0x505",
+      "modelShadowSize": 8192,
+      "interactiveViewer": "not verified in this release preparation"
+    }
+  },
+  "downloads": [
+    {
+      "path": "SelfRising-ESP32-Firmware.zip",
+      "bytes": 863520,
+      "sha256": "37cfc0f7371f315c5f016af6fa364f7fc387ad173965771a09b2fe2e98b7d359"
+    },
+    {
+      "path": "SelfRising-ESP32.sim",
+      "bytes": 116717,
+      "sha256": "7b981fc412cf131b01a7613c46743d4539378e3f5c3e69e66237d8a8143f42d9"
+    },
+    {
+      "path": "SelfRising-MuJoCo.zip",
+      "bytes": 112306,
+      "sha256": "71c287b698c61bfe4087894aa3993514991c12920e8f39be50ce9b76f4e712fc"
+    },
+    {
+      "path": "SelfRising-90S-STL.zip",
+      "bytes": 431423,
+      "sha256": "6673c7dc1519e0f0bc38486ab25fab72e95d03caad89b22ed81ec3e4937aecc6"
+    },
+    {
+      "path": "SelfRising-90S-STEP.zip",
+      "bytes": 329523,
+      "sha256": "c0692e46c0fff1ccd9b11dea3d45be6b851e05fcf4f4651ee0ea720412476cea"
+    }
+  ],
+  "licensing": {
+    "scopeDocument": "LICENSE.md",
+    "firmware": "licenses/firmware-binary.txt",
+    "printDesigns": "GPL-3.0-only",
+    "runtimeScripts": "licenses/runtime-MIT.txt",
+    "upstreamResources": "THIRD-PARTY-NOTICES.md"
+  }
+}

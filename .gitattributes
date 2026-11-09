@@ -1,0 +1,5 @@
+hardware/step/*.stp binary
+firmware/esp32/third-party/** -whitespace
+*.bin -text
+*.zip -text
+*.sim -text
