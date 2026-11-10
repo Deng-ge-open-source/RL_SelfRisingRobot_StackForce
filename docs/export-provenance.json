@@ -11,9 +11,15 @@
   "sim2sim": {
     "sourceArchive": "SelfRising-MuJoCo.zip",
     "sha256": "71c287b698c61bfe4087894aa3993514991c12920e8f39be50ce9b76f4e712fc",
-    "extraction": "Every original archive member is byte-identical",
+    "extraction": "Runtime scripts, model, configuration and policy are byte-identical; README and licence paths were updated for the root folder layout.",
     "extraFiles": [
       "README.md"
     ]
+  },
+  "layout": {
+    "simulationFolder": "Sim-to-Sim/",
+    "trainingFolder": "Training/",
+    "archivesInRepository": false,
+    "note": "Original export hashes above are historical provenance. Runtime, firmware, model and policy bytes were preserved; README paths were updated."
   }
 }

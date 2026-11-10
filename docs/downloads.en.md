@@ -7,13 +7,13 @@ This release supplies **hardware designs, binary firmware, a hardware example an
 <table align="center">
 <thead>
 <tr>
-<th align="center">Download</th>
+<th align="center">Files</th>
 <th align="center">Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center"><a href="../SelfRising-ESP32-Firmware.zip">ESP32 binary firmware</a></td>
+<td align="center"><a href="../firmware/esp32/">ESP32 binary firmware</a></td>
 <td align="center">Original ESP32 / 4 MB; four flash images, addresses, checksums and licence notices</td>
 </tr>
 <tr>
@@ -21,15 +21,15 @@ This release supplies **hardware designs, binary firmware, a hardware example an
 <td align="center">Import into the website, calibrate and upload; A0→GPIO25, A1→GPIO26</td>
 </tr>
 <tr>
-<td align="center"><a href="../SelfRising-MuJoCo.zip">Local MuJoCo runtime</a></td>
+<td align="center"><a href="../Sim-to-Sim/">Local Sim-to-Sim runtime</a></td>
 <td align="center">Run the same policy on a computer; model, Python runner and Windows/Linux launchers included</td>
 </tr>
 <tr>
-<td align="center"><a href="../SelfRising-90S-STL.zip">STL print pack</a></td>
+<td align="center"><a href="../hardware/stl/">STL print files</a></td>
 <td align="center">Four individual parts and assembled reference STL</td>
 </tr>
 <tr>
-<td align="center"><a href="../SelfRising-90S-STEP.zip">STEP CAD pack</a></td>
+<td align="center"><a href="../hardware/step/">STEP models</a></td>
 <td align="center">Four solid parts and complete assembly</td>
 </tr>
 <tr>
@@ -45,16 +45,20 @@ This release supplies **hardware designs, binary firmware, a hardware example an
 2. Install firmware with the website installer, connect USB and open the downloaded `.sim`. Follow the [running guide](running.en.md).
 3. Save your own servo neutral, direction, travel and IMU mounting calibration, upload the policy, then select **Run**.
 
-Keep the firmware archive for manual flashing or recovery. The website installer detects the board and handles preservation of recognised existing storage; it is the recommended reproduction path.
+Use the files under [firmware/esp32/](../firmware/esp32/) for manual flashing or recovery. The website installer detects the board and handles preservation of recognised existing storage; it is the recommended reproduction path.
 
 ## Run local simulation
 
-Extract the complete `SelfRising-MuJoCo.zip` archive, preserving the relative locations of `module/`, `sim2sim/` and `manifest.json`.
+Open [Sim-to-Sim/](../Sim-to-Sim/) at the repository root. It contains the model, policy, configuration and launchers. Keep its directory layout intact and run the following commands from that folder.
 
 - Windows: double-click `sim2sim/run_mujoco.cmd`.
-- Linux: run `bash sim2sim/run_mujoco.sh` from the extracted package.
+- Linux: run `bash sim2sim/run_mujoco.sh` from the Sim-to-Sim folder.
 
 The first launch creates an isolated Python environment and downloads dependencies. Later launches reuse it. Local simulation runs on the computer; hardware inference runs on the ESP32.
+
+## Training project
+
+[Training/](../Training/) contains the website-exported project, reference motions, configuration and tutorial result. Its README describes how to open it and identifies the actual training engine.
 
 ## Check the version
 

@@ -18,25 +18,27 @@ Print parts 01-04 in millimetres at 100% scale. The assembled reference contains
 <tr>
 <td align="center">1</td>
 <td align="center">底座 / Base</td>
-<td align="center">01-base.stl</td>
+<td align="center"><a href="01-base.stl">01-base.stl</a></td>
 </tr>
 <tr>
 <td align="center">2</td>
 <td align="center">底盖 / Bottom cover</td>
-<td align="center">02-bottom-cover.stl</td>
+<td align="center"><a href="02-bottom-cover.stl">02-bottom-cover.stl</a></td>
 </tr>
 <tr>
 <td align="center">3</td>
 <td align="center">中间连杆 / Middle link</td>
-<td align="center">03-middle-link.stl</td>
+<td align="center"><a href="03-middle-link.stl">03-middle-link.stl</a></td>
 </tr>
 <tr>
 <td align="center">4</td>
 <td align="center">上部连杆 / Upper link</td>
-<td align="center">04-upper-link.stl</td>
+<td align="center"><a href="04-upper-link.stl">04-upper-link.stl</a></td>
 </tr>
 </tbody>
 </table>
 
 打印设计采用 GPL-3.0-only，见 COPYING。外购舵机参考几何保留原有来源说明。
 The modified printable designs use GPL-3.0-only; see COPYING. Purchased servo reference geometry retains its original provenance.
+
+[查看整机装配参考 / Open assembled reference](SelfRising-90S-assembled.stl)

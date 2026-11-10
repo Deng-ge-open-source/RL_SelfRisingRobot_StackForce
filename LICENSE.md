@@ -21,7 +21,7 @@ This repository distributes hardware designs, local runtime scripts, binary firm
 <td align="center"><a href="licenses/firmware-binary.txt">固件二进制使用许可</a> / Binary-use permission.</td>
 </tr>
 <tr>
-<td align="center"><code>SelfRising-MuJoCo.zip</code> 中 StackForce 编写的 Python 运行器及启动脚本</td>
+<td align="center"><code>Sim-to-Sim/</code> 中 StackForce 编写的 Python 运行器及启动脚本</td>
 <td align="center"><a href="licenses/runtime-MIT.txt">MIT</a>。通过依赖安装器另行取得的库遵循各自许可 / MIT for StackForce-authored runtime and launcher scripts; installed dependencies retain their licences.</td>
 </tr>
 <tr>

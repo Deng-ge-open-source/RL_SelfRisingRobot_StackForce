@@ -96,7 +96,7 @@ The integrated base keeps components together, supports battery power and wirele
 
 ### 2. Print four parts and assemble
 
-[Download the STL package](SelfRising-90S-STL.zip) and print in millimetres at 100% scale. [STEP models](SelfRising-90S-STEP.zip) are available for modifications.
+[Open the STL print files](hardware/stl/) and print in millimetres at 100% scale. [STEP models](hardware/step/) are available for modifications.
 
 <p align="center"><img src="docs/images/print-parts-en.svg" width="860" alt="Four numbered printable parts"></p>
 
@@ -272,7 +272,7 @@ The hardware project includes the policy and default mappings: **A0 → GPIO25 �
 
 ### 7. Train your own SelfRising reinforcement learning policy with SimReady
 
-[View the exported training project](projects/simready-training/) · [Download the local Sim2Sim runtime](SelfRising-MuJoCo.zip) · [Browse the extracted runtime](projects/sim2sim/)
+[Browse the training project](Training/) · [Open the local Sim-to-Sim runtime](Sim-to-Sim/)
 
 Once the supplied policy works on your robot, try training your own get-up policy. **[StackForce SimReady](https://sim.stackforce.cc/?example=23)** is an online reinforcement learning tool I developed. Import a 3D robot model, configure its observations, actions and training settings in the website, then export reinforcement learning projects for **MJLab**, **[Isaac Lab (built on Isaac Sim)](https://isaac-sim.github.io/IsaacLab/main/index.html)** or **Isaac Gym**.
 

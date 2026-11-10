@@ -96,7 +96,7 @@
 
 ### 2. 打印四个零件，组装不倒翁
 
-[下载 STL 打印文件](SelfRising-90S-STL.zip)，以毫米为单位、100% 比例打印。需要修改结构时，可以下载 [STEP 模型](SelfRising-90S-STEP.zip)。
+[查看 STL 打印文件](hardware/stl/)，以毫米为单位、100% 比例打印。需要修改结构时，可以下载 [STEP 模型](hardware/step/)。
 
 <p align="center"><img src="docs/images/print-parts-zh-CN.svg" width="860" alt="打印件编号：1底座、2底盖、3中间连杆、4上部连杆"></p>
 
@@ -272,7 +272,7 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 ### 7. 用 SimReady 训练自己的不倒翁强化学习策略
 
-[查看已导出的训练工程](projects/simready-training/) · [下载 Sim2Sim 本地运行包](SelfRising-MuJoCo.zip) · [查看本地运行工程文件夹](projects/sim2sim/)
+[查看训练工程](Training/) · [查看 Sim-to-Sim 本地运行工程](Sim-to-Sim/)
 
 配套策略跑通后，你也可以试着训练自己的起立策略。**[StackForce SimReady](https://sim.stackforce.cc/?example=23)** 是我开发的一款在线强化学习训练工具：导入机器人的三维模型，在网页里配置好观测、动作和训练参数，就能导出 **MJLab**、**[Isaac Lab（基于 Isaac Sim）](https://isaac-sim.github.io/IsaacLab/main/index.html)** 和 **Isaac Gym** 的强化学习工程。
 

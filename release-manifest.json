@@ -73,29 +73,35 @@
   },
   "downloads": [
     {
-      "path": "SelfRising-ESP32-Firmware.zip",
-      "bytes": 863486,
-      "sha256": "ef7979ead10a1d17f1aa628bb4ad754a369dd912399561721cda5b8d1a6d0a9c"
+      "path": "firmware/esp32/",
+      "kind": "directory",
+      "checksums": "SHA256SUMS"
     },
     {
       "path": "SelfRising-ESP32.sim",
+      "kind": "file",
       "bytes": 116717,
       "sha256": "7b981fc412cf131b01a7613c46743d4539378e3f5c3e69e66237d8a8143f42d9"
     },
     {
-      "path": "SelfRising-MuJoCo.zip",
-      "bytes": 112306,
-      "sha256": "71c287b698c61bfe4087894aa3993514991c12920e8f39be50ce9b76f4e712fc"
+      "path": "Sim-to-Sim/",
+      "kind": "directory",
+      "checksums": "SHA256SUMS"
     },
     {
-      "path": "SelfRising-90S-STL.zip",
-      "bytes": 519241,
-      "sha256": "61b5c688e0e1a872f846908039ada0739f1d247bc5953333b4bae92c293677ac"
+      "path": "Training/",
+      "kind": "directory",
+      "checksums": "SHA256SUMS"
     },
     {
-      "path": "SelfRising-90S-STEP.zip",
-      "bytes": 519486,
-      "sha256": "a7d4ffada5e6406045a34c142546a8a64052a4d7a9b2f03fd47769d7a0cb2a4f"
+      "path": "hardware/stl/",
+      "kind": "directory",
+      "checksums": "SHA256SUMS"
+    },
+    {
+      "path": "hardware/step/",
+      "kind": "directory",
+      "checksums": "SHA256SUMS"
     }
   ],
   "licensing": {

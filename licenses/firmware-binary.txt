@@ -2,7 +2,7 @@ StackForce firmware binary-use permission
 Copyright (c) 2026 StackForce contributors
 
 This notice applies to the StackForce-authored portions of the firmware
-binaries under firmware/esp32/ and in SelfRising-ESP32-Firmware.zip.
+binaries under firmware/esp32/.
 
 Permission is granted, free of charge, to download, store, copy, redistribute,
 flash and run these firmware binaries on compatible hardware. Keep this notice,
@@ -22,7 +22,7 @@ LIABLE FOR CLAIMS, DAMAGES OR OTHER LIABILITY ARISING FROM THE FIRMWARE OR ITS U
 
 中文说明
 
-本许可适用于 firmware/esp32/ 和固件 ZIP 中由 StackForce 编写的固件部分。
+本许可适用于 firmware/esp32/ 中由 StackForce 编写的固件部分。
 允许免费下载、保存、复制、分发、烧录和在兼容硬件上运行固件。再次分发时保留
 本说明、版本信息和第三方许可声明。
 用户可通过提供的接口进行校准、修改配置和上传策略。第三方组件保留其各自许可。

@@ -7,13 +7,13 @@
 <table align="center">
 <thead>
 <tr>
-<th align="center">下载</th>
+<th align="center">文件位置</th>
 <th align="center">用途</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center"><a href="../SelfRising-ESP32-Firmware.zip">ESP32 成品固件</a></td>
+<td align="center"><a href="../firmware/esp32/">ESP32 成品固件</a></td>
 <td align="center">原版 ESP32 / 4 MB，包含四个烧录文件、地址、校验与许可说明</td>
 </tr>
 <tr>
@@ -21,15 +21,15 @@
 <td align="center">在网站导入，校准后上传策略；A0→GPIO25、A1→GPIO26</td>
 </tr>
 <tr>
-<td align="center"><a href="../SelfRising-MuJoCo.zip">MuJoCo 本地运行包</a></td>
+<td align="center"><a href="../Sim-to-Sim/">Sim-to-Sim 本地运行工程</a></td>
 <td align="center">在电脑上运行同一份策略，含模型、Python 运行器和 Windows/Linux 启动脚本</td>
 </tr>
 <tr>
-<td align="center"><a href="../SelfRising-90S-STL.zip">STL 打印包</a></td>
+<td align="center"><a href="../hardware/stl/">STL 打印文件</a></td>
 <td align="center">四个分件与整机参考 STL</td>
 </tr>
 <tr>
-<td align="center"><a href="../SelfRising-90S-STEP.zip">STEP 图纸包</a></td>
+<td align="center"><a href="../hardware/step/">STEP 三维图</a></td>
 <td align="center">四个可编辑实体与整机装配 STEP</td>
 </tr>
 <tr>
@@ -45,16 +45,20 @@
 2. 用网页安装器安装固件，再连接 USB，打开下载的 `.sim`。详细步骤见[运行教程](running.zh-CN.md)。
 3. 保存自己的两轴零位、方向、行程和 BNO055 安装方向，上传策略，再点「运行」。
 
-固件压缩包适合留存或用其他工具烧录。网页安装器提供板型识别与已有存储的保留流程，建议首次复现沿用网页操作。
+固件文件位于 [firmware/esp32/](../firmware/esp32/)，可用于手动烧录。网页安装器提供板型识别与已有存储的保留流程，建议首次复现沿用网页操作。
 
 ## 在本地仿真
 
-完整解压 `SelfRising-MuJoCo.zip`，保留 `module/`、`sim2sim/` 和 `manifest.json` 的相对位置。
+打开仓库根目录的 [Sim-to-Sim/](../Sim-to-Sim/)，其中已包含模型、策略、配置和启动脚本。保留目录结构，在该文件夹内执行下面的操作。
 
 - Windows：双击 `sim2sim/run_mujoco.cmd`。
 - Linux：在包目录运行 `bash sim2sim/run_mujoco.sh`。
 
 首次启动会建立独立 Python 环境并安装依赖，需要网络；后续复用该环境。本地仿真程序运行在电脑上，实物推理运行在 ESP32 上。
+
+## 训练工程
+
+[Training/](../Training/) 中提供网站导出的训练工程、参考动作、配置和教程训练结果；打开方式和实际训练引擎见该目录说明。
 
 ## 版本核对
 

@@ -4,4 +4,5 @@ firmware/esp32/third-party/** -whitespace
 *.zip -text
 *.sim -text
 *.simready -text
-projects/** -text -whitespace
+Sim-to-Sim/** -text -whitespace
+Training/** -text -whitespace

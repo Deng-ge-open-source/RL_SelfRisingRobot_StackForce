@@ -12,7 +12,7 @@ After training in SimReady, verify that model in Sim2Sim. The ESP32 steps here u
 2. If the reproduction guide opens, select **Continue with current project**. Review joint and observation settings in **Policy Mapping**, then open **MuJoCo online simulation**.
 3. Select **Run** and check that physics actually advances. Use the page's initial-pose or reset controls to test the four fall directions.
 4. Test recovery in each direction, checking sustained stability after reaching the target pose.
-5. Use **Save Project** to download a reopenable `.sim`. For local MuJoCo execution, use **Local Sim2Sim downloads** to obtain the `-mujoco.zip` bundle with its model, policy and launchers, then follow the bundled instructions.
+5. Use **Save Project** to download a reopenable `.sim`. For local MuJoCo execution, open this repository’s [Sim-to-Sim/](../Sim-to-Sim/) folder and follow its launcher instructions.
 
 ![MuJoCo online interface for the author's original SelfRising example](images/tutorial/en/08-sim2sim-original.png)
 

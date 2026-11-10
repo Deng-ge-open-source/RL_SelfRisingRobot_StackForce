@@ -3,7 +3,7 @@ MIT License
 Copyright (c) 2026 StackForce contributors
 
 Applies only to the StackForce-authored local MuJoCo Python runtime and
-Windows/Linux launcher scripts supplied in SelfRising-MuJoCo.zip.
+Windows/Linux launcher scripts under Sim-to-Sim/sim2sim/.
 Robot geometry, neural weights and third-party dependencies are excluded from
 this grant and retain their respective rights and notices.
 
