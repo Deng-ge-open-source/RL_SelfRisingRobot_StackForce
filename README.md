@@ -24,7 +24,7 @@
 4. [接线和供电](#step-4)
 5. [校准舵机，装好 BNO055](#step-5)
 6. [上传策略，让它站起来](#step-6)
-7. [用 SimReady 训练自己的策略](#step-7)
+7. [用 SimReady 训练自己的不倒翁强化学习策略](#step-7)
 
 <table align="center">
 <thead>
@@ -270,7 +270,7 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 <a id="step-7"></a>
 
-### 7. 用 SimReady 训练自己的策略
+### 7. 用 SimReady 训练自己的不倒翁强化学习策略
 
 配套策略跑通后，你也可以试着训练自己的起立策略。**[StackForce SimReady](https://sim.stackforce.cc/?example=23)** 是我开发的一款在线强化学习训练工具：导入机器人的三维模型，在网页里配置好观测、动作和训练参数，就能导出 **MJLab**、**[Isaac Lab（基于 Isaac Sim）](https://isaac-sim.github.io/IsaacLab/main/index.html)** 和 **Isaac Gym** 的强化学习工程。
 

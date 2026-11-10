@@ -22,7 +22,7 @@ These seven steps take you through assembly, wiring and calibration, then run th
 4. [Wire and power the robot](#step-4)
 5. [Calibrate the servos and mount the BNO055](#step-5)
 6. [Upload and run the policy](#step-6)
-7. [Train your own policy with SimReady](#step-7)
+7. [Train your own SelfRising reinforcement learning policy with SimReady](#step-7)
 
 <table align="center">
 <thead>
@@ -270,7 +270,7 @@ The hardware project includes the policy and default mappings: **A0 â†’ GPIO25 â
 
 <a id="step-7"></a>
 
-### 7. Train your own policy with SimReady
+### 7. Train your own SelfRising reinforcement learning policy with SimReady
 
 Once the supplied policy works on your robot, try training your own get-up policy. **[StackForce SimReady](https://sim.stackforce.cc/?example=23)** is an online reinforcement learning tool I developed. Import a 3D robot model, configure its observations, actions and training settings in the website, then export reinforcement learning projects for **MJLab**, **[Isaac Lab (built on Isaac Sim)](https://isaac-sim.github.io/IsaacLab/main/index.html)** or **Isaac Gym**.
 
