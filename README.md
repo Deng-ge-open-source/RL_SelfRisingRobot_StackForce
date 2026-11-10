@@ -274,7 +274,7 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 配套策略跑通后，你也可以试着训练自己的起立策略。**[StackForce SimReady](https://sim.stackforce.cc/?example=23)** 是我开发的一款在线强化学习训练工具：导入机器人的三维模型，在网页里配置好观测、动作和训练参数，就能导出 **MJLab**、**[Isaac Lab（基于 Isaac Sim）](https://isaac-sim.github.io/IsaacLab/main/index.html)** 和 **Isaac Gym** 的强化学习工程。
 
-你也可以通过网页设置参考动作、启动训练，由自己的电脑完成计算。训练结束后，既可以导出训练好的策略，也可以下载包含模型、训练代码和配置的完整工程，在本地研究训练流程、修改代码，继续训练和开发。
+除了导出强化学习工程，SimReady 还支持在网页中进行强化学习训练。你可以通过网页设置参考动作、调整训练参数并启动训练，训练完成后直接导出策略，用于后续的仿真验证和实物部署。
 
 第一次使用，可以先看 **[SimReady 基础使用视频（B 站）](https://www.bilibili.com/video/BV1kVRzBEE2g/)**。
 

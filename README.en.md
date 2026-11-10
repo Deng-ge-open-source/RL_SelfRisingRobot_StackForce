@@ -274,7 +274,7 @@ The hardware project includes the policy and default mappings: **A0 â†’ GPIO25 â
 
 Once the supplied policy works on your robot, try training your own get-up policy. **[StackForce SimReady](https://sim.stackforce.cc/?example=23)** is an online reinforcement learning tool I developed. Import a 3D robot model, configure its observations, actions and training settings in the website, then export reinforcement learning projects for **MJLab**, **[Isaac Lab (built on Isaac Sim)](https://isaac-sim.github.io/IsaacLab/main/index.html)** or **Isaac Gym**.
 
-You can also set reference motions and start training through the website, with your own computer performing the computation. After training, export the trained policy or download a complete project containing the model, training code and configuration to study the workflow locally, modify the code, or continue training and development.
+Beyond exporting reinforcement learning projects, SimReady also lets you run reinforcement learning training through the website. Set reference motions, adjust training parameters and start training in the web interface, then export the trained policy for simulation validation and hardware deployment.
 
 Start with the **[SimReady introductory video on Bilibili](https://www.bilibili.com/video/BV1kVRzBEE2g/)** (Chinese).
 
