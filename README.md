@@ -272,7 +272,9 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 ### 7. 用 SimReady 训练自己的策略
 
-成功部署配套策略后，想自己训练一份起立策略，也是完全可以的。我们提供了 **[StackForce SimReady](https://sim.stackforce.cc/?example=23)**，可以在网页中设置模型、参考动作和训练参数，再用自己的电脑完成训练。
+配套策略跑通后，你也可以用 **[StackForce SimReady](https://sim.stackforce.cc/?example=23)** 训练自己的起立策略。在网页中设置好模型、参考动作和训练参数，再连接自己的电脑完成训练。
+
+SimReady 底层支持 **MJLab**。训练完成后，还可以导出包含训练代码和配置的工程，方便你在本地阅读代码、学习训练流程，或者继续修改和开发。
 
 第一次使用，可以先看 **[SimReady 基础使用视频（B 站）](https://www.bilibili.com/video/BV1kVRzBEE2g/)**。
 
