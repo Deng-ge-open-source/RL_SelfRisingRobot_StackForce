@@ -1,0 +1,8 @@
+{
+  "format": "onnx",
+  "files": [
+    "module/policy/policy.onnx"
+  ],
+  "observationDim": 10,
+  "actionDim": 10
+}

@@ -2,7 +2,7 @@
 
 [简体中文](running.zh-CN.md) · English · [Home](../README.en.md) · [Training guide](training.en.md)
 
-[Download the firmware, hardware example and local runtime](downloads.en.md). Firmware source is not distributed; each controller retains its own calibration.
+[Download the firmware, hardware example and local runtime](downloads.en.md). Each controller retains its own calibration.
 
 After training in SimReady, verify that model in Sim2Sim. The ESP32 steps here use the author's original SelfRising policy supplied with the website. Board validation of the newly trained nine-input reference policy is pending; see [training step 6](training.en.md#6-continue-to-hardware). **Upload policy** stores the project on the controller, **Run** starts execution and **Stop** ends outputs.
 

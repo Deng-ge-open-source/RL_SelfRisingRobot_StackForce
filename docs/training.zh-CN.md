@@ -48,7 +48,7 @@
 
 点「播放训练效果」，选这次训练保存的 `policy.onnx`。确认左侧显示「正在播放」，分别查看左倒、右倒、前倒、后倒的起立过程。右侧「结果」可以下载评估文件。确认起立后能站稳，再点「保存工程」下载完整 `.simready`。
 
-![本次第 300 轮 SelfRising 策略实际回放，右侧列出结果文件](images/tutorial/zh-CN/06-replay.png)
+![本次第 300 轮 SelfRising 策略实际回放，右侧列出结果文件](images/tutorial/zh-CN/06-replay.gif)
 
 ## 5. 进入 Sim2Sim
 

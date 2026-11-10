@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-10",
+  "source": "SimReady example=23, saved completed tutorial training run",
+  "jobId": "fa7dfe7648e6426887e2607753e4ede7",
+  "checkpoint": "policy.onnx",
+  "policySha256": "b0616c9ad8124e0ff7e7e1f7bc1939ffc4730ccfb4cc2106a3829cbf8ad45cf5",
+  "recording": "Actual native MuJoCo policy replay inside the SimReady website; no new training and no generated robot motion. Frame timestamps preserve elapsed capture time.",
+  "englishLabels": "Residual UI labels translated in an isolated capture page only; no application source or simulation state changed.",
+  "assets": [
+    {
+      "language": "zh-CN",
+      "file": "docs/images/tutorial/zh-CN/06-replay.gif",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "frames": 192,
+      "durationMs": 23885,
+      "bytes": 819423,
+      "sha256": "c3482a5658434be93da629dead1a848c5c2f35ee808268965fb129fbd02fae0e"
+    },
+    {
+      "language": "en",
+      "file": "docs/images/tutorial/en/06-replay.gif",
+      "dimensions": [
+        1280,
+        720
+      ],
+      "frames": 192,
+      "durationMs": 23785,
+      "bytes": 814994,
+      "sha256": "8ae1f3737676abb9b78623b65b25dacc42585f22605f7d222f57c0d29563e2a9"
+    }
+  ]
+}

@@ -9,8 +9,6 @@ flash and run these firmware binaries on compatible hardware. Keep this notice,
 the firmware version information and all included third-party licence notices
 with redistributed copies.
 
-The Studio controller source code is not included. This notice does not grant
-a licence to undisclosed source code and does not promise source availability.
 Calibration, configuration and policy upload through the provided interfaces
 are part of the intended use of the firmware.
 
@@ -26,6 +24,6 @@ LIABLE FOR CLAIMS, DAMAGES OR OTHER LIABILITY ARISING FROM THE FIRMWARE OR ITS U
 
 本许可适用于 firmware/esp32/ 和固件 ZIP 中由 StackForce 编写的固件部分。
 允许免费下载、保存、复制、分发、烧录和在兼容硬件上运行固件。再次分发时保留
-本说明、版本信息和第三方许可声明。Studio 控制器源码不在发布范围内。
+本说明、版本信息和第三方许可声明。
 用户可通过提供的接口进行校准、修改配置和上传策略。第三方组件保留其各自许可。
 固件按现状提供，不附带适用性或性能保证。

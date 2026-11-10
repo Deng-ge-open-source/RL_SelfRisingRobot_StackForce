@@ -2,7 +2,7 @@
 
 [简体中文](downloads.zh-CN.md) · English · [Home](../README.en.md)
 
-This release supplies **hardware designs, binary firmware, a hardware example and a local simulation runtime**. Studio controller source is not distributed. The hardware example uses the website-adapted original-author recovery policy.
+This release supplies **hardware designs, binary firmware, a hardware example and a local simulation runtime**. The hardware example uses the website-adapted original-author recovery policy.
 
 <table align="center">
 <thead>

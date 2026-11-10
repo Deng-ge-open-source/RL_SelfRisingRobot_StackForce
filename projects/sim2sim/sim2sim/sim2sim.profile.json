@@ -1,0 +1,1215 @@
+{
+  "schemaVersion": "0.1",
+  "kind": "stackforce.sim2sim.profile",
+  "id": "selfrising-2axis-sim2sim",
+  "browserJobId": "sim-80e46ff065f9",
+  "mappingMode": "manual",
+  "name": "强化学习不倒翁 · 双轴自起立",
+  "source": "example",
+  "exampleId": "selfrising-2axis",
+  "createdBy": "mujoco_online_gui",
+  "model": {
+    "format": "mjcf",
+    "rootPath": "model.xml",
+    "browserUrl": "/_sim2sim_examples/selfrising-2axis/asset/model.xml",
+    "assetBaseUri": "/_sim2sim_examples/selfrising-2axis/asset/"
+  },
+  "policy": {
+    "label": "HomeMadeGarbage original get-up",
+    "format": "onnx",
+    "browserUrl": "/selfrising-2axis/policy/policy.onnx",
+    "bundlePath": "module/policy/policy.onnx",
+    "inputName": "obs",
+    "outputName": "actions",
+    "observationDim": 10,
+    "actionDim": 10,
+    "inputShapes": null,
+    "outputShapes": null
+  },
+  "assembly": {
+    "schemaVersion": "0.1",
+    "kind": "stackforce.robot_assembly",
+    "source": "example",
+    "projectId": "selfrising-2axis",
+    "assetBaseUri": "/_sim2sim_examples/selfrising-2axis/asset/",
+    "robotRootPath": "model.xml",
+    "runtimeRootPath": "model.xml",
+    "generatedRootPath": "stackforce_auto_scene.xml",
+    "entryStrategy": "direct_model",
+    "sceneTemplate": "model_only",
+    "requiresUserSceneSelection": false,
+    "notes": [
+      "Example packages are exposed through the same RobotAssembly shape as user imports.",
+      "This example can be loaded directly from the robot model root."
+    ]
+  },
+  "observation": {
+    "inputName": "obs",
+    "dim": 10,
+    "groups": [
+      {
+        "id": "author_attitude",
+        "label": "Body roll / pitch",
+        "span": "[0:2]",
+        "dim": 2,
+        "source": "calibrated body Euler",
+        "sourceType": "base_orientation",
+        "targetMode": "manual",
+        "requirements": []
+      },
+      {
+        "id": "author_state",
+        "label": "Original get-up controller state",
+        "span": "[2:10]",
+        "dim": 8,
+        "source": "previous controller state",
+        "sourceType": "previous_action",
+        "targetMode": "manual",
+        "requirements": []
+      }
+    ],
+    "assignments": {
+      "obs:0:1": "derived:base_euler:Roll",
+      "obs:1:2": "derived:base_euler:Pitch",
+      "obs:2:3": "history:previous_action:action2",
+      "obs:3:4": "history:previous_action:action3",
+      "obs:4:5": "history:previous_action:action4",
+      "obs:5:6": "history:previous_action:action5",
+      "obs:6:7": "history:previous_action:action6",
+      "obs:7:8": "history:previous_action:action7",
+      "obs:8:9": "history:previous_action:action8",
+      "obs:9:10": "history:previous_action:action9"
+    },
+    "transforms": {},
+    "removedAssignments": {}
+  },
+  "action": {
+    "outputName": "actions",
+    "dim": 10,
+    "groups": [
+      {
+        "id": "physical_00",
+        "index": 0,
+        "label": "action[0] servo1_joint",
+        "action": "action[0]",
+        "span": "[0:1]",
+        "dim": 1,
+        "source": "position offset relative configured initial pose",
+        "actuator": "servo1_pos",
+        "target": "servo1_pos",
+        "targetType": "actuator",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "position target",
+        "scale": "position offset * 1",
+        "control": {
+          "mode": "pd",
+          "kp": 0.5,
+          "kd": 0.04,
+          "scale": 1,
+          "offset": 0,
+          "sign": 1,
+          "initialAngle": 0,
+          "limit": 1.5707963705062866,
+          "actuatorDynamics": {
+            "type": "capped_position",
+            "effortLimit": 0.490333
+          }
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "servo1_pos"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "physical_01",
+        "index": 1,
+        "label": "action[1] servo2_joint",
+        "action": "action[1]",
+        "span": "[1:2]",
+        "dim": 1,
+        "source": "position offset relative configured initial pose",
+        "actuator": "servo2_pos",
+        "target": "servo2_pos",
+        "targetType": "actuator",
+        "targetMode": "named",
+        "joint": "servo2_joint",
+        "mode": "position target",
+        "scale": "position offset * 1",
+        "control": {
+          "mode": "pd",
+          "kp": 0.5,
+          "kd": 0.04,
+          "scale": 1,
+          "offset": 0,
+          "sign": 1,
+          "initialAngle": 0,
+          "limit": 1.5707963705062866,
+          "actuatorDynamics": {
+            "type": "capped_position",
+            "effortLimit": 0.490333
+          }
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "servo2_pos"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "feedback_000",
+        "index": 2,
+        "label": "last target A0",
+        "action": "action[2]",
+        "span": "[2:3]",
+        "dim": 1,
+        "source": "persistent controller state; zero transmission",
+        "actuator": "state_000",
+        "target": "state_000",
+        "targetType": "custom",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "controller_state_feedback",
+        "scale": "state * 1",
+        "control": {
+          "mode": "torque",
+          "kp": 0,
+          "kd": 0,
+          "scale": 1,
+          "offset": 0,
+          "limit": 10000000,
+          "sign": 1,
+          "initialAngle": 0
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "state_000"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "feedback_001",
+        "index": 3,
+        "label": "last target A1",
+        "action": "action[3]",
+        "span": "[3:4]",
+        "dim": 1,
+        "source": "persistent controller state; zero transmission",
+        "actuator": "state_001",
+        "target": "state_001",
+        "targetType": "custom",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "controller_state_feedback",
+        "scale": "state * 1",
+        "control": {
+          "mode": "torque",
+          "kp": 0,
+          "kd": 0,
+          "scale": 1,
+          "offset": 0,
+          "limit": 10000000,
+          "sign": 1,
+          "initialAngle": 0
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "state_001"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "feedback_002",
+        "index": 4,
+        "label": "get-up active",
+        "action": "action[4]",
+        "span": "[4:5]",
+        "dim": 1,
+        "source": "persistent controller state; zero transmission",
+        "actuator": "state_002",
+        "target": "state_002",
+        "targetType": "custom",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "controller_state_feedback",
+        "scale": "state * 1",
+        "control": {
+          "mode": "torque",
+          "kp": 0,
+          "kd": 0,
+          "scale": 1,
+          "offset": 0,
+          "limit": 10000000,
+          "sign": 1,
+          "initialAngle": 0
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "state_002"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "feedback_003",
+        "index": 5,
+        "label": "get-up elapsed ticks",
+        "action": "action[5]",
+        "span": "[5:6]",
+        "dim": 1,
+        "source": "persistent controller state; zero transmission",
+        "actuator": "state_003",
+        "target": "state_003",
+        "targetType": "custom",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "controller_state_feedback",
+        "scale": "state * 1",
+        "control": {
+          "mode": "torque",
+          "kp": 0,
+          "kd": 0,
+          "scale": 1,
+          "offset": 0,
+          "limit": 10000000,
+          "sign": 1,
+          "initialAngle": 0
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "state_003"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "feedback_004",
+        "index": 6,
+        "label": "upright ticks",
+        "action": "action[6]",
+        "span": "[6:7]",
+        "dim": 1,
+        "source": "persistent controller state; zero transmission",
+        "actuator": "state_004",
+        "target": "state_004",
+        "targetType": "custom",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "controller_state_feedback",
+        "scale": "state * 1",
+        "control": {
+          "mode": "torque",
+          "kp": 0,
+          "kd": 0,
+          "scale": 1,
+          "offset": 0,
+          "limit": 10000000,
+          "sign": 1,
+          "initialAngle": 0
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "state_004"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "feedback_005",
+        "index": 7,
+        "label": "fall ticks",
+        "action": "action[7]",
+        "span": "[7:8]",
+        "dim": 1,
+        "source": "persistent controller state; zero transmission",
+        "actuator": "state_005",
+        "target": "state_005",
+        "targetType": "custom",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "controller_state_feedback",
+        "scale": "state * 1",
+        "control": {
+          "mode": "torque",
+          "kp": 0,
+          "kd": 0,
+          "scale": 1,
+          "offset": 0,
+          "limit": 10000000,
+          "sign": 1,
+          "initialAngle": 0
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "state_005"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "feedback_006",
+        "index": 8,
+        "label": "cooldown ticks",
+        "action": "action[8]",
+        "span": "[8:9]",
+        "dim": 1,
+        "source": "persistent controller state; zero transmission",
+        "actuator": "state_006",
+        "target": "state_006",
+        "targetType": "custom",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "controller_state_feedback",
+        "scale": "state * 1",
+        "control": {
+          "mode": "torque",
+          "kp": 0,
+          "kd": 0,
+          "scale": 1,
+          "offset": 0,
+          "limit": 10000000,
+          "sign": 1,
+          "initialAngle": 0
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "state_006"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "feedback_007",
+        "index": 9,
+        "label": "initialized",
+        "action": "action[9]",
+        "span": "[9:10]",
+        "dim": 1,
+        "source": "persistent controller state; zero transmission",
+        "actuator": "state_007",
+        "target": "state_007",
+        "targetType": "custom",
+        "targetMode": "named",
+        "joint": "servo1_joint",
+        "mode": "controller_state_feedback",
+        "scale": "state * 1",
+        "control": {
+          "mode": "torque",
+          "kp": 0,
+          "kd": 0,
+          "scale": 1,
+          "offset": 0,
+          "limit": 10000000,
+          "sign": 1,
+          "initialAngle": 0
+        },
+        "requirements": [
+          {
+            "kind": "actuator",
+            "names": [
+              "state_007"
+            ]
+          }
+        ]
+      }
+    ],
+    "jointAssignments": {
+      "physical_00": "actuator-0",
+      "physical_01": "actuator-1",
+      "feedback_000": "actuator-2",
+      "feedback_001": "actuator-3",
+      "feedback_002": "actuator-4",
+      "feedback_003": "actuator-5",
+      "feedback_004": "actuator-6",
+      "feedback_005": "actuator-7",
+      "feedback_006": "actuator-8",
+      "feedback_007": "actuator-9"
+    },
+    "removedJointAssignments": {},
+    "control": {
+      "physical_00": {
+        "mode": "pd",
+        "kp": 0.5,
+        "kd": 0.04,
+        "scale": 1,
+        "offset": 0,
+        "sign": 1,
+        "initialAngle": 0,
+        "limit": 1.5707963705062866,
+        "actuatorDynamics": {
+          "type": "capped_position",
+          "effortLimit": 0.490333
+        }
+      },
+      "physical_01": {
+        "mode": "pd",
+        "kp": 0.5,
+        "kd": 0.04,
+        "scale": 1,
+        "offset": 0,
+        "sign": 1,
+        "initialAngle": 0,
+        "limit": 1.5707963705062866,
+        "actuatorDynamics": {
+          "type": "capped_position",
+          "effortLimit": 0.490333
+        }
+      },
+      "feedback_000": {
+        "mode": "torque",
+        "kp": 0,
+        "kd": 0,
+        "scale": 1,
+        "offset": 0,
+        "limit": 10000000,
+        "sign": 1,
+        "initialAngle": 0
+      },
+      "feedback_001": {
+        "mode": "torque",
+        "kp": 0,
+        "kd": 0,
+        "scale": 1,
+        "offset": 0,
+        "limit": 10000000,
+        "sign": 1,
+        "initialAngle": 0
+      },
+      "feedback_002": {
+        "mode": "torque",
+        "kp": 0,
+        "kd": 0,
+        "scale": 1,
+        "offset": 0,
+        "limit": 10000000,
+        "sign": 1,
+        "initialAngle": 0
+      },
+      "feedback_003": {
+        "mode": "torque",
+        "kp": 0,
+        "kd": 0,
+        "scale": 1,
+        "offset": 0,
+        "limit": 10000000,
+        "sign": 1,
+        "initialAngle": 0
+      },
+      "feedback_004": {
+        "mode": "torque",
+        "kp": 0,
+        "kd": 0,
+        "scale": 1,
+        "offset": 0,
+        "limit": 10000000,
+        "sign": 1,
+        "initialAngle": 0
+      },
+      "feedback_005": {
+        "mode": "torque",
+        "kp": 0,
+        "kd": 0,
+        "scale": 1,
+        "offset": 0,
+        "limit": 10000000,
+        "sign": 1,
+        "initialAngle": 0
+      },
+      "feedback_006": {
+        "mode": "torque",
+        "kp": 0,
+        "kd": 0,
+        "scale": 1,
+        "offset": 0,
+        "limit": 10000000,
+        "sign": 1,
+        "initialAngle": 0
+      },
+      "feedback_007": {
+        "mode": "torque",
+        "kp": 0,
+        "kd": 0,
+        "scale": 1,
+        "offset": 0,
+        "limit": 10000000,
+        "sign": 1,
+        "initialAngle": 0
+      }
+    }
+  },
+  "runtime": {
+    "engine": "generic_runtime",
+    "family": "generic_runtime",
+    "projectId": "selfrising-2axis",
+    "controllerHint": "GenericPolicyRuntimeController",
+    "timing": {
+      "simDt": 0.001,
+      "controlDt": 0.02,
+      "decimation": 20,
+      "frequencyHz": 50
+    },
+    "command": {
+      "enabled": true,
+      "components": [
+        "vx",
+        "vy",
+        "yaw_rate"
+      ],
+      "defaults": [
+        0,
+        0,
+        0
+      ],
+      "limits": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "control": {
+        "exposeToControl": false,
+        "deadzone": 0.08,
+        "releaseBehavior": "zero",
+        "initial": [
+          0,
+          0,
+          0
+        ],
+        "axisSigns": {
+          "vx": 1,
+          "vy": 1,
+          "yaw": 1
+        },
+        "presets": {
+          "walk": [
+            0,
+            0,
+            0
+          ],
+          "stop": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "pose": {
+      "resetKeyframe": "candidate_start",
+      "defaultKeyframe": "candidate_start",
+      "rootOffset": [
+        0,
+        0,
+        0.07999999821186066
+      ],
+      "jointPositions": {
+        "servo1_joint": 0,
+        "servo2_joint": 0
+      },
+      "groundPreset": "simready-grid",
+      "rootZMode": "absolute",
+      "sourceGroundZ": 0
+    },
+    "state": {
+      "phaseClock": false,
+      "previousAction": true,
+      "actionHistory": false,
+      "motorTargetCache": false,
+      "virtualServoState": false,
+      "footContact": false,
+      "referenceMotion": false,
+      "actuatorNet": false,
+      "extraOnnxInput": false,
+      "normalization": false
+    },
+    "adapters": {
+      "version": 1,
+      "adapters": [
+        {
+          "id": "command",
+          "type": "command",
+          "enabled": true,
+          "params": {
+            "dim": 3,
+            "components": "vx, vy, yaw_rate",
+            "defaultValue": "0,0,0",
+            "initialValue": "0,0,0",
+            "min": "0,0,0",
+            "max": "0,0,0",
+            "exposeToControl": false,
+            "deadzone": 0.08,
+            "releaseBehavior": "zero",
+            "forwardSign": 1,
+            "strafeSign": 1,
+            "turnSign": 1,
+            "walkPreset": "0,0,0",
+            "stopPreset": "0,0,0",
+            "normalize": false,
+            "idleActionMode": "policy"
+          },
+          "outputs": [
+            {
+              "target": "internal",
+              "start": 0,
+              "length": 3
+            }
+          ]
+        },
+        {
+          "id": "previous_action",
+          "type": "previous_action",
+          "enabled": false,
+          "params": {
+            "actionDim": 10,
+            "initial": "zero",
+            "useClipped": false,
+            "useScaled": false
+          },
+          "outputs": [
+            {
+              "target": "internal",
+              "start": 0,
+              "length": 10
+            }
+          ]
+        },
+        {
+          "id": "policy_io",
+          "type": "policy_io",
+          "enabled": false,
+          "params": {
+            "clipActions": false,
+            "actionClip": 1,
+            "observationSampling": "current_sample",
+            "jointFeedbackDecimals": -1
+          },
+          "outputs": [
+            {
+              "target": "internal",
+              "start": 0,
+              "length": 0
+            }
+          ]
+        },
+        {
+          "id": "command_sequence",
+          "type": "command_sequence",
+          "enabled": false,
+          "params": {
+            "dim": 1,
+            "keyframes": "[{\"time\":0,\"values\":[0]}]",
+            "interpolation": "step",
+            "playback": "hold"
+          },
+          "outputs": [
+            {
+              "target": "observation",
+              "start": 0,
+              "length": 1
+            }
+          ]
+        },
+        {
+          "id": "phase_clock",
+          "type": "phase_clock",
+          "enabled": false,
+          "params": {
+            "dim": 4,
+            "format": "cos_sin_4",
+            "clockMode": "fixed_period_steps",
+            "period": 27,
+            "update": "policy_step",
+            "initialPhase": 0,
+            "reset": "zero",
+            "referenceLinearSpeed": 1,
+            "referenceYawSpeed": 1,
+            "translationFrequencyScale": 1,
+            "yawFrequencyScale": 1,
+            "minimumPeriodSeconds": 0.5,
+            "maximumPeriodSeconds": 1,
+            "baseFrequencyHz": 1.25,
+            "frequencyGainHzPerCommand": 0.3333333333333333,
+            "maximumCommandMagnitude": 1.5,
+            "idleCommandThreshold": 0.0001
+          },
+          "outputs": [
+            {
+              "target": "observation",
+              "start": 0,
+              "length": 4
+            }
+          ]
+        },
+        {
+          "id": "action_history",
+          "type": "action_history",
+          "enabled": true,
+          "params": {
+            "actionDim": 10,
+            "frames": 1,
+            "delaySteps": 1,
+            "order": "old_to_new",
+            "initialize": "zero",
+            "includeCurrent": false,
+            "useClipped": false,
+            "useScaled": false
+          },
+          "outputs": [
+            {
+              "target": "internal",
+              "start": 0,
+              "length": 10
+            }
+          ]
+        },
+        {
+          "id": "signal_history",
+          "type": "signal_history",
+          "enabled": false,
+          "params": {
+            "sourceId": "",
+            "sourceDim": 1,
+            "frames": 2,
+            "order": "new_to_old",
+            "initialize": "zero",
+            "includeCurrent": true,
+            "scale": 1,
+            "componentScale": "",
+            "bias": 0,
+            "componentBias": "",
+            "clip": "-inf, inf"
+          },
+          "outputs": [
+            {
+              "target": "observation",
+              "start": 0,
+              "length": 2
+            }
+          ]
+        },
+        {
+          "id": "motor_target_cache",
+          "type": "motor_target_cache",
+          "enabled": false,
+          "params": {
+            "actionDim": 0,
+            "actionScale": 0.5,
+            "maxVelocity": 0,
+            "initialDelaySteps": 0
+          },
+          "outputs": [
+            {
+              "target": "observation",
+              "start": 0,
+              "length": 0
+            }
+          ]
+        },
+        {
+          "id": "virtual_servo_state",
+          "type": "virtual_servo_state",
+          "enabled": false,
+          "params": {
+            "actionDim": 0,
+            "targetSource": "previous_position_target",
+            "kp": 35,
+            "kd": 1.2,
+            "inertia": 1,
+            "controlDt": 0.02,
+            "integrationUpdate": "simulation_step",
+            "targetSample": "current_target",
+            "actionSmoothing": 0.35,
+            "actionClip": 1,
+            "jointDamping": 0,
+            "jointArmature": 0,
+            "resetPosition": "policy_zero",
+            "clampPosition": true,
+            "zeroFirstPolicyInput": true
+          },
+          "outputs": [
+            {
+              "target": "internal",
+              "start": 0,
+              "length": 0
+            }
+          ]
+        },
+        {
+          "id": "foot_contact",
+          "type": "foot_contact",
+          "enabled": false,
+          "params": {
+            "footGeoms": "",
+            "edgeSource": "virtual_phase",
+            "dutyFactor": 0.5,
+            "phaseOffsets": "0, 0.5",
+            "virtualValue": "0, 0",
+            "hardwareEndpointIds": "",
+            "staleTimeoutMs": 250
+          },
+          "outputs": [
+            {
+              "target": "observation",
+              "start": 0,
+              "length": 2
+            }
+          ]
+        },
+        {
+          "id": "reference_motion",
+          "type": "reference_motion",
+          "enabled": false,
+          "params": {
+            "dim": 0,
+            "timestepSource": "time_step",
+            "maxTimeStep": 0,
+            "anchorBody": "",
+            "bodyNames": "",
+            "defaultJointPos": "",
+            "actionOutput": "actions",
+            "jointPosOutput": "joint_pos",
+            "jointVelOutput": "joint_vel",
+            "bodyQuatOutput": "body_quat_w",
+            "bodyPosOutput": "body_pos_w",
+            "bodyLinVelOutput": "body_lin_vel_w",
+            "bodyAngVelOutput": "body_ang_vel_w"
+          },
+          "outputs": [
+            {
+              "target": "observation",
+              "start": 0,
+              "length": 0
+            }
+          ]
+        },
+        {
+          "id": "actuator_net",
+          "type": "actuator_net",
+          "enabled": false,
+          "params": {
+            "url": "",
+            "inputName": "input",
+            "outputName": "output",
+            "actionDim": 0,
+            "inputWidth": 6,
+            "controlTarget": "ctrl",
+            "mode": "target_error_history",
+            "defaultJointPos": "",
+            "policyDefaultJointPos": "",
+            "policyToModelOrder": "",
+            "modelToPolicyOrder": "",
+            "initialRootHeight": 0,
+            "actionScale": 1,
+            "hipScaleReduction": 1,
+            "hipIndices": "",
+            "lagSteps": 0,
+            "torqueLimit": 0
+          },
+          "outputs": [
+            {
+              "target": "internal",
+              "start": 0,
+              "length": 0
+            }
+          ]
+        },
+        {
+          "id": "extra_onnx_input",
+          "type": "extra_onnx_input",
+          "enabled": false,
+          "params": {
+            "inputName": "time_step",
+            "dim": 1,
+            "source": "time_step",
+            "dtype": "float32",
+            "update": "policy_step"
+          },
+          "outputs": [
+            {
+              "target": "onnx_input",
+              "start": 0,
+              "length": 1,
+              "inputName": "time_step"
+            }
+          ]
+        },
+        {
+          "id": "constant_zero",
+          "type": "constant_zero",
+          "enabled": false,
+          "params": {
+            "value": 0
+          },
+          "outputs": [
+            {
+              "target": "internal",
+              "start": 0,
+              "length": 1
+            }
+          ]
+        },
+        {
+          "id": "normalization_scale",
+          "type": "normalization_scale",
+          "enabled": false,
+          "params": {
+            "length": 0,
+            "meanSource": "none",
+            "stdSource": "none",
+            "clip": "-inf, inf",
+            "epsilon": 0.000001
+          },
+          "outputs": [
+            {
+              "target": "internal",
+              "start": 0,
+              "length": 0
+            }
+          ]
+        }
+      ]
+    },
+    "notes": [
+      "Original HomeMadeGarbage neural weights and sampled get-up controller; 50 Hz.",
+      "Returns to neutral after getting upright; a sustained large tilt retriggers recovery.",
+      "BNO055 calibrated body roll/pitch is used on hardware; author M5Atom sensor filtering is not copied.",
+      "Eight controller-state outputs remain internal; only two channels drive motors."
+    ],
+    "perturbation": {
+      "strengthN": 1
+    },
+    "exportInference": {
+      "source": "server",
+      "family": "server_inferred_generic_policy"
+    }
+  },
+  "validation": {
+    "level": "pass",
+    "errors": [],
+    "warnings": []
+  },
+  "preview": {
+    "pose": "neutral",
+    "background": "white"
+  },
+  "sim2real": {
+    "schemaVersion": "1.0",
+    "kind": "stackforce.sim2real.project-profile",
+    "actuator": {
+      "deviceFamilyId": "pca9685:esp32:0x40",
+      "parameterMode": "preserve",
+      "bindings": [
+        {
+          "id": "actuator:0",
+          "kind": "actuator",
+          "policySlot": 0,
+          "semanticName": "servo1_joint",
+          "simEntity": "servo1_joint",
+          "hardwareEndpointId": "pca9685:esp32:0x40:ch1",
+          "actuatorCalibration": {
+            "direction": 1,
+            "zeroOffsetRad": 0,
+            "commandScale": 1,
+            "softMinRad": -3.141592653589793,
+            "softMaxRad": 3.141592653589793,
+            "pulseMinUs": 500,
+            "pulseCenterUs": 1520,
+            "pulseMaxUs": 2500,
+            "aligned": false
+          },
+          "transportConfig": {
+            "busSpeedRaw": 0,
+            "busAccelerationRaw": 0,
+            "hardwareP": 32,
+            "hardwareD": 0,
+            "hardwareI": 0,
+            "hardwareMaxAcceleration": 0,
+            "hardwareTorqueLimitRaw": 1000
+          },
+          "runEnabled": false
+        },
+        {
+          "id": "actuator:1",
+          "kind": "actuator",
+          "policySlot": 1,
+          "semanticName": "servo2_joint",
+          "simEntity": "servo2_joint",
+          "hardwareEndpointId": "pca9685:esp32:0x40:ch2",
+          "actuatorCalibration": {
+            "direction": 1,
+            "zeroOffsetRad": 0,
+            "commandScale": 1,
+            "softMinRad": -3.141592653589793,
+            "softMaxRad": 3.141592653589793,
+            "pulseMinUs": 500,
+            "pulseCenterUs": 1520,
+            "pulseMaxUs": 2500,
+            "aligned": false
+          },
+          "transportConfig": {
+            "busSpeedRaw": 0,
+            "busAccelerationRaw": 0,
+            "hardwareP": 32,
+            "hardwareD": 0,
+            "hardwareI": 0,
+            "hardwareMaxAcceleration": 0,
+            "hardwareTorqueLimitRaw": 1000
+          },
+          "runEnabled": false
+        }
+      ]
+    },
+    "sensor": {
+      "endpointId": "bno055:esp32:0x29:imu",
+      "bindings": [
+        {
+          "id": "sensor:base_imu",
+          "kind": "imu",
+          "policySlot": null,
+          "semanticName": "base_imu",
+          "simEntity": "imu_lin_vel",
+          "hardwareEndpointId": "bno055:esp32:0x29:imu",
+          "imuCalibration": {
+            "bodyFromSensorWxyz": [
+              1,
+              0,
+              0,
+              0
+            ],
+            "worldAlignmentWxyz": [
+              1,
+              0,
+              0,
+              0
+            ],
+            "gyroBiasRadS": [
+              0,
+              0,
+              0
+            ],
+            "accelBiasMs2": [
+              0,
+              0,
+              0
+            ],
+            "timeOffsetMs": 0
+          },
+          "virtualOrientationWxyz": [
+            1,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "feedback": {
+      "enabled": true,
+      "devices": {
+        "hardware": false,
+        "virtual": true
+      },
+      "source": "virtual",
+      "routes": {
+        "actuator:0": {
+          "endpointId": null
+        },
+        "actuator:1": {
+          "endpointId": null
+        }
+      },
+      "virtualControls": {
+        "actuator:0": {
+          "kp": 1050.6890972134377,
+          "kd": 64.82866949779049,
+          "inertia": 1
+        },
+        "actuator:1": {
+          "kp": 1050.6890972134377,
+          "kd": 64.82866949779049,
+          "inertia": 1
+        }
+      }
+    },
+    "loops": {
+      "pwmHz": 50,
+      "webTelemetryHz": 20
+    },
+    "deviceConfigs": {
+      "pca9685": {
+        "pulseMinUs": 500,
+        "pulseCenterUs": 1520,
+        "pulseMaxUs": 2500,
+        "angleMinDeg": -135,
+        "angleMaxDeg": 135
+      },
+      "sts3215": {
+        "busSpeedRaw": 0,
+        "busAccelerationRaw": 0,
+        "hardwareP": 32,
+        "hardwareD": 0,
+        "hardwareI": 0,
+        "hardwareMaxAcceleration": 0,
+        "hardwareTorqueLimitRaw": 1000
+      }
+    },
+    "extensions": {
+      "stackforce.joint-coordinate-rebase.v1": {
+        "version": 1,
+        "jointShiftsRad": {},
+        "calibration": "mjcf-q-zero",
+        "policyCoordinates": "preserved"
+      },
+      "stackforce.observation-routing.v1": {
+        "schemaVersion": 1,
+        "sources": {
+          "imu": "edge",
+          "joints": "edge",
+          "contacts": "edge"
+        },
+        "staleTimeoutMs": 250
+      },
+      "stackforce.physical-observation-mapping.v1": {
+        "schemaVersion": 1,
+        "slots": {}
+      },
+      "stackforce.author-policy-provenance.v1": {
+        "repository": "https://github.com/homemadegarbage/SelfRisingRobot",
+        "commit": "c344c2a4a1a51562247528d8aadcc0a527b6b103",
+        "headerSha256": "53832697be6668fe07bc80038ddde23af88b54d964e1d5affcb879104f998cf2",
+        "role": "Original neural weights and sampled get-up controller"
+      }
+    }
+  }
+}

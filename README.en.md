@@ -272,6 +272,8 @@ The hardware project includes the policy and default mappings: **A0 → GPIO25 �
 
 ### 7. Train your own SelfRising reinforcement learning policy with SimReady
 
+[View the exported training project](projects/simready-training/) · [Download the local Sim2Sim runtime](SelfRising-MuJoCo.zip) · [Browse the extracted runtime](projects/sim2sim/)
+
 Once the supplied policy works on your robot, try training your own get-up policy. **[StackForce SimReady](https://sim.stackforce.cc/?example=23)** is an online reinforcement learning tool I developed. Import a 3D robot model, configure its observations, actions and training settings in the website, then export reinforcement learning projects for **MJLab**, **[Isaac Lab (built on Isaac Sim)](https://isaac-sim.github.io/IsaacLab/main/index.html)** or **Isaac Gym**.
 
 Beyond exporting reinforcement learning projects, SimReady also lets you run reinforcement learning training through the website. Set reference motions, adjust training parameters and start training in the web interface, then export the trained policy for simulation validation and hardware deployment.
@@ -302,7 +304,7 @@ Open Training, start and connect the local runner, review the settings and selec
 
 Select Play Training Result on the training page and choose this job's model. Check recovery from all four directions.
 
-<p align="center"><img src="docs/images/tutorial/en/06-replay.svg" width="860" alt="Actual SelfRising interface"></p>
+<p align="center"><img src="docs/images/tutorial/en/06-replay.gif" width="860" alt="Actual SelfRising interface"></p>
 
 #### 5. Export the policy, training code and deployment project
 

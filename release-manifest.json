@@ -51,7 +51,6 @@
     "source": "https://github.com/homemadegarbage/SelfRisingRobot/tree/c344c2a4a1a51562247528d8aadcc0a527b6b103"
   },
   "sourceDisclosure": {
-    "controllerSourceIncluded": false,
     "personalNvsOrCalibrationIncluded": false
   },
   "validation": {
@@ -75,8 +74,8 @@
   "downloads": [
     {
       "path": "SelfRising-ESP32-Firmware.zip",
-      "bytes": 863520,
-      "sha256": "37cfc0f7371f315c5f016af6fa364f7fc387ad173965771a09b2fe2e98b7d359"
+      "bytes": 863486,
+      "sha256": "ef7979ead10a1d17f1aa628bb4ad754a369dd912399561721cda5b8d1a6d0a9c"
     },
     {
       "path": "SelfRising-ESP32.sim",

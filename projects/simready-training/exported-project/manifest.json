@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1",
+  "bundle_type": "stackforce.simready.mjlab.project",
+  "mjlab_version": "1.6.0",
+  "package_name": "stackforce_mjlab_self_rising_reference_v1",
+  "task_id": "Mjlab-Reference-_self_rising_reference_v1",
+  "model": "src/stackforce_mjlab_self_rising_reference_v1/assets/robo1.xml",
+  "training_engine": "native_mujoco_bc_v1",
+  "required_capabilities": [
+    "referenceLearningV1"
+  ],
+  "source_format": "mjcf",
+  "observation_dim": 9,
+  "action_dim": 2,
+  "action_joints": [
+    "servo1_joint",
+    "servo2_joint"
+  ],
+  "backend_runnable": true,
+  "sim_dt": 0.001,
+  "decimation": 20,
+  "policy_dt": 0.02,
+  "runner_settings": {
+    "backend": "cpu",
+    "gpuId": 0,
+    "numEnvs": 1,
+    "iterations": 300,
+    "saveInterval": 100,
+    "seed": 42
+  },
+  "terrain_presets": [
+    "plane"
+  ],
+  "training_terrain_preset": "plane",
+  "playback_terrain": "plane"
+}

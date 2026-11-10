@@ -1,0 +1,5 @@
+{
+  "schema_version": "1.0",
+  "status": "pending",
+  "reason": "Run sim2sim/run_mujoco.py on the local MuJoCo machine to populate this report."
+}

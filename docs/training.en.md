@@ -48,7 +48,7 @@ The complete run recorded here used default BC. The image below shows the actual
 
 Open **Replay training results** and select this run's `policy.onnx`. Check that the left panel says **Playing**, then observe recovery from left, right, forward and backward falls. Download evaluation files from **Results** on the right. After checking sustained stability, use **Save Project** to download the complete `.simready` file.
 
-![Live replay of this run's iteration-300 SelfRising policy with its result files](images/tutorial/en/06-replay.svg)
+![Live replay of this run's iteration-300 SelfRising policy with its result files](images/tutorial/en/06-replay.gif)
 
 ## 5. Open Sim2Sim
 

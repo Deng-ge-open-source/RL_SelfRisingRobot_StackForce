@@ -77,3 +77,7 @@ The trained, replayed and exported policy hashes match. The supplied original-au
 English tutorial figures now use `.svg` versions where the website had untranslated labels. Only the example name, AI API label, motion-fit label and package-download message were translated. Robot poses, numerical settings, recorded results and failure messages are unchanged. The original unedited PNG captures are retained in the `v0.1.0-rc.1` tag. The English calibration figure is a labelled vector illustration of the controls with example values, not a claim of a new live hardware connection. The English import figure crops out an unrelated utility dock. All tutorial canvases remain 16:9.
 
 英文教程对网页残留中文的图使用了 SVG 英文标注版，仅翻译文字，模型姿态、参数、测试结果与错误状态不变。未经修改的原始 PNG 仍保存在 `v0.1.0-rc.1`。英文校准图为控件与示例值的矢量说明图，不代表新连接的实机状态；英文导入图裁去无关的悬浮工具。教程画布继续使用 16:9。
+
+## 2026-11-10 animated replay
+
+`zh-CN/06-replay.gif` and `en/06-replay.gif` replace the static replay image in the tutorials. Both are 16:9 recordings of the same completed iteration-300 tutorial policy, played in the actual SimReady interface. The original still images remain for provenance. See [capture metadata](replay-capture.json). No new training or hardware operation was performed.

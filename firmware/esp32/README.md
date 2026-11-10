@@ -2,7 +2,7 @@
 
 简体中文 · English below
 
-适用本项目的 **LOLIN32 Lite / 原版 ESP32 / 4 MiB Flash / BNO055 / GPIO25、26**。ESP32-S3 使用不同固件。本目录只发布可烧录文件，Studio 控制器源码保留。
+适用本项目的 **LOLIN32 Lite / 原版 ESP32 / 4 MiB Flash / BNO055 / GPIO25、26**。ESP32-S3 使用不同固件。本目录提供可烧录的固件文件。
 
 ## 推荐安装方式
 
@@ -54,7 +54,7 @@ Flash：DIO / 40 MHz / 4 MB。`manifest.json` 提供板型、文件大小与 SHA
 
 ## English
 
-Target: **LOLIN32 Lite, original ESP32, 4 MiB Flash, BNO055 and GPIO25/26**. ESP32-S3 uses a different image. Only flashable binaries are distributed here; Studio controller source is not included.
+Target: **LOLIN32 Lite, original ESP32, 4 MiB Flash, BNO055 and GPIO25/26**. ESP32-S3 uses a different image. This directory provides flashable firmware binaries.
 
 Use the linked SelfRising hardware example in desktop Chrome/Edge. Open **Devices & mapping → Install firmware**, let the installer detect the board or select **ESP32 · 4MB**, choose the USB serial port and wait for verification. Connect USB afterward, open this release's `.sim` example, check A0→GPIO25 and A1→GPIO26, calibrate both servos and the IMU, then upload the policy and use **Run**.
 

@@ -272,6 +272,8 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 ### 7. 用 SimReady 训练自己的不倒翁强化学习策略
 
+[查看已导出的训练工程](projects/simready-training/) · [下载 Sim2Sim 本地运行包](SelfRising-MuJoCo.zip) · [查看本地运行工程文件夹](projects/sim2sim/)
+
 配套策略跑通后，你也可以试着训练自己的起立策略。**[StackForce SimReady](https://sim.stackforce.cc/?example=23)** 是我开发的一款在线强化学习训练工具：导入机器人的三维模型，在网页里配置好观测、动作和训练参数，就能导出 **MJLab**、**[Isaac Lab（基于 Isaac Sim）](https://isaac-sim.github.io/IsaacLab/main/index.html)** 和 **Isaac Gym** 的强化学习工程。
 
 除了导出强化学习工程，SimReady 还支持在网页中进行强化学习训练。你可以通过网页设置参考动作、调整训练参数并启动训练，训练完成后直接导出策略，用于后续的仿真验证和实物部署。
@@ -302,7 +304,7 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 训练结束后，在训练页点击“播放训练效果”，选择这次保存的模型，分别检查四个方向的起立效果。
 
-<p align="center"><img src="docs/images/tutorial/zh-CN/06-replay.png" width="860" alt="SelfRising 操作页面"></p>
+<p align="center"><img src="docs/images/tutorial/zh-CN/06-replay.gif" width="860" alt="SelfRising 操作页面"></p>
 
 #### ⑤ 导出策略、训练代码和部署工程
 

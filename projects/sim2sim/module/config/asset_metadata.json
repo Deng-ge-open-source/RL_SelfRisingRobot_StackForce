@@ -1,0 +1,5 @@
+{
+  "format": "mjcf",
+  "root": "module/asset/model.xml",
+  "fileCount": 8
+}

@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0",
+  "bundle_type": "stackforce_sim2sim_project_bundle",
+  "compatibility_level": "sim2sim_ready",
+  "bundle_id": "selfrising-2axis_browser_export",
+  "name": "强化学习不倒翁 · 双轴自起立",
+  "producer": {
+    "name": "StackForce Sim2Sim Export Service",
+    "recipe_schema": "2.0"
+  },
+  "created_at": "2026-11-09T19:03:01.331Z",
+  "created_at_utc": "2026-11-09T19:03:01.331Z",
+  "project": {
+    "name": "强化学习不倒翁 · 双轴自起立",
+    "profile_id": "selfrising-2axis",
+    "browser_job_id": "sim-80e46ff065f9"
+  },
+  "source": {
+    "kind": "builtin-sim2sim",
+    "file_count": 9,
+    "bytes": 204341
+  },
+  "module": {
+    "root": "module",
+    "asset_root": "module/asset/model.xml",
+    "policy": "module/policy/policy.onnx",
+    "sim2sim_profile": "module/config/sim2sim.profile.json",
+    "obs_action": "module/config/obs_action.yaml"
+  },
+  "policy": {
+    "format": "onnx",
+    "path": "module/policy/policy.onnx",
+    "obs_dim": 10,
+    "action_dim": 10
+  },
+  "asset": {
+    "format": "mjcf",
+    "root": "module/asset/model.xml",
+    "files": [
+      "module/asset/assets/meshes/ATOM.stl",
+      "module/asset/assets/meshes/arm1.stl",
+      "module/asset/assets/meshes/arm2.stl",
+      "module/asset/assets/meshes/foot.stl",
+      "module/asset/assets/meshes/servo1.stl",
+      "module/asset/assets/meshes/servo2.stl",
+      "module/asset/model.xml"
+    ]
+  },
+  "validation": {
+    "structural": {
+      "level": "pass",
+      "errors": [],
+      "warnings": []
+    },
+    "semantic": {
+      "level": "pass",
+      "errors": [],
+      "warnings": []
+    },
+    "compatibility": {
+      "level": "pass",
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "integrity": {
+    "algorithm": "SHA-256",
+    "merkle": "binary-pair-v1",
+    "merkleRoot": "44cac2c744a7dcbebaf8b81857aa1cbc485b5d01b1154746690bc7468c3ae126",
+    "files": [
+      {
+        "path": "module/asset/assets/meshes/ATOM.stl",
+        "size": 19484,
+        "sha256": "6b9185d259ae7654695a65f14d739f2d54207e715ca83bab9323cc0cfeb0e3f0"
+      },
+      {
+        "path": "module/asset/assets/meshes/arm1.stl",
+        "size": 53784,
+        "sha256": "dcadb4a176268511037b1fe4a485a6fc4d33ea642c03e28d29c5fc9671112856"
+      },
+      {
+        "path": "module/asset/assets/meshes/arm2.stl",
+        "size": 16984,
+        "sha256": "c709a9f1b0fd8f3e8fd3c81738e40e6f5fe9b63082596eef107f0e2820091596"
+      },
+      {
+        "path": "module/asset/assets/meshes/foot.stl",
+        "size": 34884,
+        "sha256": "383a63b3fc26bdb427d420b6372e9dcb70ec9ca96bbb800c626b9969a996c0a2"
+      },
+      {
+        "path": "module/asset/assets/meshes/servo1.stl",
+        "size": 12384,
+        "sha256": "5a31670f20a5ba75709a9bfde85f32013213859ae3a7082e5c4305826c90de06"
+      },
+      {
+        "path": "module/asset/assets/meshes/servo2.stl",
+        "size": 12384,
+        "sha256": "c8a5c2df38979e7f46e5a6c500e8c28d6e4c266e0f5d86d3ecc54266b5eff798"
+      },
+      {
+        "path": "module/asset/model.xml",
+        "size": 8980,
+        "sha256": "93d8a581b7800846ad84d821fc539fd90729b6d8116c3bcdf4d11c184e7fbb5a"
+      },
+      {
+        "path": "module/policy/policy.onnx",
+        "size": 22106,
+        "sha256": "2b87ee3aee75e3198c782674af10fd34f23dfccc988591ca6ed8494d23cb4e66"
+      },
+      {
+        "path": "module/config/sim2sim.profile.json",
+        "size": 31184,
+        "sha256": "dbfd1ac447030cbec61d7dfd78c7a0d701643012697766e89a9f8e93d5b4e00f"
+      },
+      {
+        "path": "sim2sim/sim2sim.profile.json",
+        "size": 31184,
+        "sha256": "dbfd1ac447030cbec61d7dfd78c7a0d701643012697766e89a9f8e93d5b4e00f"
+      },
+      {
+        "path": "module/config/obs_action.yaml",
+        "size": 304,
+        "sha256": "62349fecfa22d4997bbe5fb94a1b40d02874a4d7741e694a8ccf40a8ff5b25e5"
+      },
+      {
+        "path": "module/README.md",
+        "size": 191,
+        "sha256": "8227f6645b3d5adf6d51d80af13c4b5e8b25a3afe0b4515198b61217b7f8d282"
+      },
+      {
+        "path": "module/validation_report.json",
+        "size": 292,
+        "sha256": "616f8c1911cee704a3a07e8870e47066cb30e4d76ef66f49fc82d8c28b2eefa9"
+      },
+      {
+        "path": "module/config/asset_metadata.json",
+        "size": 77,
+        "sha256": "5fba55d14b5021854f3acef6009713340438f3a03e79c55739febc5381425ee3"
+      },
+      {
+        "path": "module/config/policy_metadata.json",
+        "size": 116,
+        "sha256": "b7abe809012c7592f4971dd0c165dad48d509474e9dc1da46ee3bc8572f5f611"
+      },
+      {
+        "path": "module/tests/README.md",
+        "size": 90,
+        "sha256": "321b52fc599640a45156a2f093d44953b76f68b7c119684165261a0149bcf1ee"
+      },
+      {
+        "path": "sim2sim/run_settings.yaml",
+        "size": 104,
+        "sha256": "728f30a0ed12cb9d1692474e79cbfee4171b79691e654ab145506842fc91dc5c"
+      },
+      {
+        "path": "sim2sim/requirements.txt",
+        "size": 57,
+        "sha256": "ad4b39243448c102c6b7817aa24ba53b712bf9c06e0788c1ea64e95933783ae0"
+      },
+      {
+        "path": "sim2sim/run_mujoco.py",
+        "size": 134043,
+        "sha256": "f1708115376dbfe8900a1d6eea2b6b90a2d688f9e6751368fffa2e768b5f8e47"
+      },
+      {
+        "path": "sim2sim/run_mujoco.ps1",
+        "size": 6056,
+        "sha256": "e10752bad9281f7f53d779c3acac0dec86e2d986488073600e4330a73c434fbe"
+      },
+      {
+        "path": "sim2sim/run_mujoco.cmd",
+        "size": 313,
+        "sha256": "409e97b202b4137bd3277a0b3d461a298a756134710a240af0a158ae50df2af6"
+      },
+      {
+        "path": "sim2sim/run_mujoco.sh",
+        "size": 3853,
+        "sha256": "59b867dbd79cef4192bce251b56bfc4afa5ad391b7ef314fd236986352a641b0"
+      },
+      {
+        "path": "sim2sim/Readme_zh.md",
+        "size": 2147,
+        "sha256": "53b8febf36ee2f918a41831f3cb5e5cf2d343a76db988d3b6c3727aadbde7a1a"
+      },
+      {
+        "path": "sim2sim/Readme_en.md",
+        "size": 2337,
+        "sha256": "553244363e401913fdb2a6595137f0bd9886040d275abdeaff50fd772fc8f58a"
+      },
+      {
+        "path": "sim2sim/README.md",
+        "size": 1593,
+        "sha256": "5bab22e3b17011cee99351445dfad6b5ceff1c46e72047e03e1fd721730169f1"
+      },
+      {
+        "path": "sim2sim/sim2sim_report.json",
+        "size": 147,
+        "sha256": "bf4f7c22eed60fa7e6570b3bec5dc6b935e1d5c826a5f2f4595033a40da6750c"
+      },
+      {
+        "path": "sim2sim/expected_trace.json",
+        "size": 76,
+        "sha256": "7cfde3ae625837bee335cfec4369f33ae8be91faad2131abe1ba0166349748cd"
+      },
+      {
+        "path": "docs/export_summary.md",
+        "size": 182,
+        "sha256": "9a15ce38297eee4d4589a1313d8239c6302c18e91eb3ef097078e39e857c7493"
+      },
+      {
+        "path": "docs/known_limits.md",
+        "size": 235,
+        "sha256": "710d24dfb21a965ffdb4b085170388695867dfd4cb9cc53514504cd569a832d9"
+      }
+    ]
+  },
+  "signature": {
+    "algorithm": "Ed25519",
+    "keyId": "ed25519:6d917acc73bd6afd41084e04",
+    "publicKeySpki": "MCowBQYDK2VwAyEAXL1WZO0mtTb09ZoJ9BxWBRPZJGZsrcPkXj0xGKmknyc=",
+    "value": "WFJJmnZ3zfe1ScCiMee+JndoQEUnGi02+Y3JP/z+r5zhsCr5ge9IkSUJpKITPI9iUSgLELNJZ1oEu1E54i90Cw=="
+  }
+}

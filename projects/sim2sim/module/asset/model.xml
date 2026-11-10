@@ -1,0 +1,86 @@
+<mujoco model="mjlab scene">
+  <compiler angle="radian" meshdir="assets" />
+  <option timestep="0.001" integrator="implicitfast" iterations="10" ls_iterations="20" ccd_iterations="50" />
+  <size nkey="1" />
+  <visual>
+    <global azimuth="135" elevation="-25" offwidth="1920" offheight="1080" />
+    <quality shadowsize="8192" />
+    <headlight ambient="0.3 0.3 0.3" diffuse="0.6 0.6 0.6" specular="0 0 0" />
+    <scale forcewidth="0.25" contactwidth="0.4" contactheight="0.15" framelength="5" framewidth="0.3" />
+    <rgba haze="0.15 0.25 0.35 1" force="1 0 0 1" />
+  </visual>
+  <statistic meansize="0.03" extent="2" />
+  <default>
+    <default class="contract_main">
+      <joint limited="true" range="-1.5708 1.5708" />
+      <general ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-1 1" biastype="affine" gainprm="0.5" biasprm="0 -0.5 -0.04" />
+    </default>
+  </default>
+  <asset>
+    <texture name="__mjv_skybox" type="skybox" builtin="gradient" rgb1="0.18 0.30 0.42" rgb2="0.82 0.88 0.92" width="128" height="768"/>
+    <texture name="__mjv_ground_texture" type="2d" builtin="checker" rgb1="0.8627450980392157 0.8862745098039215 0.8980392156862745" rgb2="0.8627450980392157 0.8862745098039215 0.8980392156862745" width="256" height="256"/>
+    <material name="__mjv_ground_material" texture="__mjv_ground_texture" texrepeat="40 40" texuniform="true" reflectance="0.04"/>
+    <texture type="2d" colorspace="auto" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300" />
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="4 4" reflectance="0.2" />
+    <mesh name="ATOM" file="meshes/ATOM.stl" />
+    <mesh name="foot" file="meshes/foot.stl" />
+    <mesh name="servo1" file="meshes/servo1.stl" />
+    <mesh name="arm1" file="meshes/arm1.stl" />
+    <mesh name="servo2" file="meshes/servo2.stl" />
+    <mesh name="arm2" file="meshes/arm2.stl" />
+  </asset>
+  <worldbody>
+    <light name="sun" pos="0 0 1.5" dir="0 0 -1" type="directional" />
+    <body name="terrain">
+      <geom name="terrain" size="0 0 0.01" type="plane" material="__mjv_ground_material"  rgba="0.8627450980392157 0.8862745098039215 0.8980392156862745 1"/>
+    </body>
+    <camera name="front" pos="0.22 -0.45 0.2" quat="0.815583 0.57864 0 0" />
+    <light name="light1" pos="1 0 0" dir="0 0 -1" type="directional" />
+    <body name="foot">
+      <inertial pos="0.079759 -0.079713 0.078911" quat="0.473034 0.460735 -0.536226 0.525761" mass="0.017628" diaginertia="1.12096e-05 7.76256e-06 5.90779e-06" />
+      <joint name="floating_base_joint" type="free" range="-1.5708 1.5708" />
+      <geom type="mesh" rgba="1 0.45 0.45 1" mesh="foot" />
+      <geom name="foot_collision" size="0.02131 0.031 0.03748" pos="0.00829 0.00365 -0.00155" type="box" contype="0" conaffinity="0" rgba="1 0.45 0.45 0" />
+      <site name="stackforce_foot_0" pos="0 0 0" rgba="0 0 0 0" />
+      <site name="stackforce_imu" pos="0 0 0" rgba="0 0 0 0" />
+      <body name="ATOM">
+        <inertial pos="0.0781 -0.10035 0.084206" mass="0.007" diaginertia="4.34538e-07 4.34538e-07 6.40468e-07" />
+        <geom type="mesh" rgba="1 1 1 1" mesh="ATOM" />
+        <geom name="atom_collision" size="0.007 0.0118 0.0118" type="box" contype="0" conaffinity="0" rgba="1 1 1 0" />
+      </body>
+      <body name="servo1">
+        <inertial pos="0.081005 -0.079 0.094111" quat="0.694295 -0.133997 -0.133997 0.694295" mass="0.011" diaginertia="1.01173e-06 6.61633e-07 6.09967e-07" />
+        <geom type="mesh" mesh="servo1" />
+        <geom name="servo1_collision" size="0.006 0.0157 0.0167" pos="0 -0.00028 0.00036" type="box" contype="0" conaffinity="0" rgba="0.5 0.5 0.5 0" />
+      </body>
+      <body name="arm1">
+        <inertial pos="0.077944 -0.07521 0.12069" quat="0.707034 -0.0462823 0.141311 0.691369" mass="0.011444" diaginertia="4.17898e-06 2.73893e-06 2.20035e-06" />
+        <joint name="servo1_joint" pos="0.0607 -0.079 0.099606" axis="1 0 0" limited="true" range="-1.5708 1.5708" armature="0.0001" damping="0.02" />
+        <geom type="mesh" rgba="1 0.45 0.45 1" mesh="arm1" />
+        <geom name="arm1_collision" size="0.01366 0.02253 0.03257" pos="0.00053 3e-05 0.00274" type="box" contype="0" conaffinity="0" rgba="1 0.45 0.45 0" />
+        <body name="servo2">
+          <inertial pos="0.0781 -0.076095 0.139111" quat="0.981881 0.1895 0 0" mass="0.011" diaginertia="1.01173e-06 6.61633e-07 6.09967e-07" />
+          <geom type="mesh" mesh="servo2" />
+          <geom name="servo2_collision" size="0.006 0.0157 0.0167" pos="0 0.00028 0.00036" type="box" contype="0" conaffinity="0" rgba="0.5 0.5 0.5 0" />
+          <body name="arm2">
+            <inertial pos="0.0781 -0.079112 0.189317" quat="0.999994 -0.00351373 -9.35094e-07 3.28568e-09" mass="0.021622" diaginertia="1.94171e-05 1.76714e-05 2.30722e-06" />
+            <joint name="servo2_joint" pos="0.0781 -0.0964 0.144606" axis="0 1 0" limited="true" range="-1.5708 1.5708" armature="0.0001" damping="0.02" />
+            <geom type="mesh" rgba="1 0.45 0.45 1" mesh="arm2" />
+            <geom name="arm2_collision" size="0.00625 0.0225 0.05202" pos="0 -0.0004 0.00975" type="box" contype="0" conaffinity="0" rgba="1 0.45 0.45 0" />
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <position name="servo1_pos" joint="servo1_joint" kp="5.0" kv="0.1" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-0.490333 0.490333" />
+    <position name="servo2_pos" joint="servo2_joint" kp="5.0" kv="0.1" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-0.490333 0.490333" />
+  <position name="state_000" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_001" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_002" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_003" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_004" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_005" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_006" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_007" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_008" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_009" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_010" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_011" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_012" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_013" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_014" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_015" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_016" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_017" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_018" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_019" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_020" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_021" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /><position name="state_022" joint="servo1_joint" gear="0" kp="0" kv="0" ctrllimited="false" forcelimited="false" /></actuator>
+  <sensor>
+    <velocimeter site="stackforce_imu" name="imu_lin_vel" />
+    <gyro site="stackforce_imu" name="imu_ang_vel" />
+    <subtreeangmom body="foot" name="root_angmom" />
+    <contact body1="foot" body2="terrain" reduce="netforce" name="feet_ground_contact_foot_found" />
+    <contact body1="foot" body2="terrain" data="force" reduce="netforce" name="feet_ground_contact_foot_force" />
+  </sensor>
+  <keyframe><key name="candidate_start" qpos="-0.0 0.0 0.07999999821186066 0.7071067690849304 -0.7071067690849304 0.0 0.0 0.0 0.0" ctrl="0.0 0.0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" /></keyframe></mujoco>

@@ -3,3 +3,5 @@ firmware/esp32/third-party/** -whitespace
 *.bin -text
 *.zip -text
 *.sim -text
+*.simready -text
+projects/** -text -whitespace

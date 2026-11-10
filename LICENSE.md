@@ -18,7 +18,7 @@ This repository distributes hardware designs, local runtime scripts, binary firm
 </tr>
 <tr>
 <td align="center"><code>firmware/esp32/</code> 的 StackForce 固件二进制</td>
-<td align="center"><a href="licenses/firmware-binary.txt">固件二进制使用许可</a>，不提供 Studio 控制器源码 / Binary-use permission; Studio controller source is not distributed.</td>
+<td align="center"><a href="licenses/firmware-binary.txt">固件二进制使用许可</a> / Binary-use permission.</td>
 </tr>
 <tr>
 <td align="center"><code>SelfRising-MuJoCo.zip</code> 中 StackForce 编写的 Python 运行器及启动脚本</td>

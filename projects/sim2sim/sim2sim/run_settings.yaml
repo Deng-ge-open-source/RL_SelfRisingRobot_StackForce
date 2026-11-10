@@ -1,0 +1,3 @@
+engine: "generic_runtime"
+model: "module/asset/model.xml"
+profile: "module/config/sim2sim.profile.json"

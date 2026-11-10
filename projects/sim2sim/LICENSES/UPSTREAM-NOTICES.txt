@@ -1,0 +1,10 @@
+SelfRising local runtime resources
+Original robot and neural weights: HomeMadeGarbage / SelfRisingRobot (poco).
+https://github.com/homemadegarbage/SelfRisingRobot/tree/c344c2a4a1a51562247528d8aadcc0a527b6b103
+The supplied network is adapted by StackForce to its sampled get-up controller.
+No new GPL or MIT licence is asserted over upstream geometry or neural weights.
+The MIT grant in this directory applies only to StackForce-authored runtime
+and launcher scripts. Installed libraries retain their own licences.
+Additional provenance and licence scope:
+https://github.com/Deng-ge-open-source/RL_SelfRisingRobot_StackForce/blob/main/THIRD-PARTY-NOTICES.md
+https://github.com/Deng-ge-open-source/RL_SelfRisingRobot_StackForce/blob/main/LICENSE.md

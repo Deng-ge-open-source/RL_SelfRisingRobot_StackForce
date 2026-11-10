@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-11-09T19:03:01.331Z",
+  "structural": {
+    "level": "pass",
+    "errors": [],
+    "warnings": []
+  },
+  "semantic": {
+    "level": "pass",
+    "errors": [],
+    "warnings": []
+  },
+  "compatibility": {
+    "level": "pass",
+    "errors": [],
+    "warnings": []
+  }
+}

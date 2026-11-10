@@ -14,15 +14,15 @@ The original model and neural weights come from the pinned HomeMadeGarbage proje
 
 At release time no repository-wide upstream licence was identified that authorises relicensing these resources. Attribution and provenance are retained. This release does not claim ownership of, or grant a new GPL/MIT licence over, the upstream model, weights or policy. Check upstream permissions for further use.
 
-实物 `.sim` 包中的 `provenance/policy_network.h` 是原作者网络参数出处文件，不是 StackForce Studio 控制器固件源码。本站适配示例按下载时的字节保留；本地运行包的原有内容不变，新增许可说明。校验值见 [SHA256SUMS](SHA256SUMS)。
+实物 `.sim` 包中的 `provenance/policy_network.h` 是原作者网络参数出处文件。本站适配示例按下载时的字节保留；本地运行包的原有内容不变，新增许可说明。校验值见 [SHA256SUMS](SHA256SUMS)。
 
-The `.sim` example's `provenance/policy_network.h` records the author's network parameters; it is not the StackForce Studio controller firmware source. The hardware example is retained byte-for-byte. Existing runtime contents are unchanged and licence notices were added. See [SHA256SUMS](SHA256SUMS).
+The `.sim` example's `provenance/policy_network.h` records the author's network parameters. The hardware example is retained byte-for-byte. Existing runtime contents are unchanged and licence notices were added. See [SHA256SUMS](SHA256SUMS).
 
 ## 固件组件 · Firmware components
 
-原版 ESP32 目标基于 ESP-IDF 6.0 系列。Espressif 原创组件主要采用 Apache-2.0，其他组件包含 MIT/BSD 等声明。随固件提供对应通知及许可证文本，见 [firmware/esp32/third-party](firmware/esp32/third-party)。固件二进制下载不包含 ESP-IDF、cJSON 或 Studio 的源码树。
+原版 ESP32 目标基于 ESP-IDF 6.0 系列。Espressif 原创组件主要采用 Apache-2.0，其他组件包含 MIT/BSD 等声明。随固件提供对应通知及许可证文本，见 [firmware/esp32/third-party](firmware/esp32/third-party)。
 
-The original ESP32 target uses ESP-IDF 6.0. Espressif-authored components primarily use Apache-2.0; other components retain MIT/BSD and other notices. Licence texts accompany the firmware under the linked directory. The binary download does not contain the ESP-IDF, cJSON or Studio source trees.
+The original ESP32 target uses ESP-IDF 6.0. Espressif-authored components primarily use Apache-2.0; other components retain MIT/BSD and other notices. Licence texts accompany the firmware under the linked directory.
 
 参考 / References: [ESP-IDF v6.0.1 copyrights](https://github.com/espressif/esp-idf/blob/v6.0.1/docs/en/COPYRIGHT.rst), [cJSON](https://github.com/DaveGamble/cJSON).
 

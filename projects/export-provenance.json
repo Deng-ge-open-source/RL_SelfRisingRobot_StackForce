@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-10",
+  "training": {
+    "source": "https://sim.stackforce.cc/?example=23",
+    "operation": "Export Training Project / MJLab",
+    "zipSha256": "fae285a1164192f113929a20acc5d308dd234057923456d35689f99a48854a57",
+    "actualEngine": "native_mujoco_bc_v1",
+    "independentMjlabPpoValidated": false,
+    "newTrainingRun": false
+  },
+  "sim2sim": {
+    "sourceArchive": "SelfRising-MuJoCo.zip",
+    "sha256": "71c287b698c61bfe4087894aa3993514991c12920e8f39be50ce9b76f4e712fc",
+    "extraction": "Every original archive member is byte-identical",
+    "extraFiles": [
+      "README.md"
+    ]
+  }
+}

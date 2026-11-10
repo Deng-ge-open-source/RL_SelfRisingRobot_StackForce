@@ -1,0 +1,10 @@
+schema_version: "1.0"
+kind: stackforce.obs_action_mapping
+project_id: "selfrising-2axis-sim2sim"
+observation_dim: 10
+action_dim: 10
+policy_input: "obs"
+policy_output: "actions"
+inference_source: server
+inference_family: "server_inferred_generic_policy"
+profile_path: "module/config/sim2sim.profile.json"
