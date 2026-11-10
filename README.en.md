@@ -2,8 +2,6 @@
 
 [简体中文](README.md) · English
 
-**Community: Dengge Open-Source Reinforcement Learning QQ Group 8 · 1056677085**
-
 This electronic self-righting robot uses a reinforcement learning policy to stand up after being pushed over. Build one with an ESP32, a BNO055 and two MG90S servos, with a DIY materials budget <img src="docs/images/budget-en.svg" width="120" height="24" alt="under £12" align="middle">.
 
 Start with the motion policy ([ONNX file](policy/selfrising-get-up.onnx)) provided here and follow the [tutorial](#step-1) to try it on hardware. Then follow the [tutorial](#step-1) to train your own policy with reinforcement learning or imitation learning.
