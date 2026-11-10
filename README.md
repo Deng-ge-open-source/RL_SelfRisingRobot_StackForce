@@ -26,7 +26,18 @@
 6. [上传策略，让它站起来](#step-6)
 7. [用 SimReady 训练自己的策略](#step-7)
 
-<p align="center"><img src="docs/images/kit-get-up.gif" width="300" alt="套件版不倒翁真实起立演示"></p>
+<table align="center">
+<thead>
+<tr><th align="center">红色底座 · DIY 款</th><th align="center">黑色底座 · 套件款</th></tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="260" alt="红色底座 · DIY 款" /></a></td>
+<td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4"><img src="docs/images/kit-get-up.gif" width="260" alt="黑色底座 · 套件款" /></a></td>
+</tr>
+<tr><td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4">观看红色款视频</a></td><td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4">观看黑色款视频</a></td></tr>
+</tbody>
+</table>
 
 <a id="step-1"></a>
 
@@ -38,14 +49,40 @@
 
 打印结构件、采购电子元件，再按下面的教程完成组装、烧录、接线和调试。打印文件、配套工程和运动策略都在本仓库中提供。
 
-| 物料 | 数量与用途 |
-| --- | --- |
-| 原版 ESP32 开发板 | 1 块；接线图以 LOLIN32 Lite 为例 |
-| BNO055 姿态传感器 | 1 块 |
-| MG90S 舵机 | 2 只，分别驱动上下关节 |
-| 独立稳压 5 V 电源 | 给舵机供电，并与 ESP32 共地 |
-| USB 数据线、连接线、螺丝和舵盘 | 1 套 |
-| 四个打印零件 | 下载文件后自行打印 |
+<table align="center">
+<thead>
+<tr>
+<th align="center">物料</th>
+<th align="center">数量与用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">原版 ESP32 开发板</td>
+<td align="center">1 块；接线图以 LOLIN32 Lite 为例</td>
+</tr>
+<tr>
+<td align="center">BNO055 姿态传感器</td>
+<td align="center">1 块</td>
+</tr>
+<tr>
+<td align="center">MG90S 舵机</td>
+<td align="center">2 只，分别驱动上下关节</td>
+</tr>
+<tr>
+<td align="center">独立稳压 5 V 电源</td>
+<td align="center">给舵机供电，并与 ESP32 共地</td>
+</tr>
+<tr>
+<td align="center">USB 数据线、连接线、螺丝和舵盘</td>
+<td align="center">1 套</td>
+</tr>
+<tr>
+<td align="center">四个打印零件</td>
+<td align="center">下载文件后自行打印</td>
+</tr>
+</tbody>
+</table>
 
 #### 配套套件：更紧凑，支持电池供电、无线遥控和上电运行策略
 
@@ -76,10 +113,27 @@
 
 #### 两只舵机的编号
 
-| 舵机所在位置 | 策略编号 | DIY 接线的信号脚 |
-| --- | --- | --- |
-| 底座上的下方舵机 | **A0** | **GPIO25** |
-| 中间连杆上的上方舵机 | **A1** | **GPIO26** |
+<table align="center">
+<thead>
+<tr>
+<th align="center">舵机所在位置</th>
+<th align="center">策略编号</th>
+<th align="center">DIY 接线的信号脚</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">底座上的下方舵机</td>
+<td align="center"><strong>A0</strong></td>
+<td align="center"><strong>GPIO25</strong></td>
+</tr>
+<tr>
+<td align="center">中间连杆上的上方舵机</td>
+<td align="center"><strong>A1</strong></td>
+<td align="center"><strong>GPIO26</strong></td>
+</tr>
+</tbody>
+</table>
 
 A0、A1 是策略的两路动作编号，不是 ESP32 上印着的引脚名。后面的接线、映射和校准都用这两个编号：看到 A0 就找下方舵机，看到 A1 就找上方舵机。
 
@@ -111,14 +165,40 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 <p align="center"><img src="docs/images/esp32-lolin32-lite.zh-CN.svg" width="860" alt="自行DIY完整接线图：ESP32、BNO055、两只MG90S与独立5V电源"></p>
 
-| 接口 | 连接位置 |
-| --- | --- |
-| ESP32 GPIO19 / GPIO22 | BNO055 SDA / SCL |
-| ESP32 3V3 / GND | BNO055 的 3.3 V 兼容供电端 / GND |
-| ESP32 GPIO25 | 下方舵机 A0 的信号线 |
-| ESP32 GPIO26 | 上方舵机 A1 的信号线 |
-| 外部 +5 V | 两只舵机的电源正极 |
-| 共地 GND | ESP32、BNO055、两只舵机和外部电源负极 |
+<table align="center">
+<thead>
+<tr>
+<th align="center">接口</th>
+<th align="center">连接位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">ESP32 GPIO19 / GPIO22</td>
+<td align="center">BNO055 SDA / SCL</td>
+</tr>
+<tr>
+<td align="center">ESP32 3V3 / GND</td>
+<td align="center">BNO055 的 3.3 V 兼容供电端 / GND</td>
+</tr>
+<tr>
+<td align="center">ESP32 GPIO25</td>
+<td align="center">下方舵机 A0 的信号线</td>
+</tr>
+<tr>
+<td align="center">ESP32 GPIO26</td>
+<td align="center">上方舵机 A1 的信号线</td>
+</tr>
+<tr>
+<td align="center">外部 +5 V</td>
+<td align="center">两只舵机的电源正极</td>
+</tr>
+<tr>
+<td align="center">共地 GND</td>
+<td align="center">ESP32、BNO055、两只舵机和外部电源负极</td>
+</tr>
+</tbody>
+</table>
 
 接好后通电，回到网站点击“USB 连接”，检查设备树里是否能看到 BNO055 和两路 GPIO 舵机。套件用户按客服提供的接线教程完成插接。
 
@@ -141,10 +221,24 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 <p align="center"><img src="docs/images/bno-mount-zh-CN.svg" width="860" alt="套件插接与DIY三维底座上的BNO055位置，两列对照"></p>
 
-| 配套套件 | 自行 DIY |
-| --- | --- |
-| 将 BNO055 插入预留接口，按套件组装教程固定。 | 将 BNO055 固定在三维图标出的底座位置，按第四步连接 3.3 V、GND、SDA、SCL。 |
-| 不让模块和接头松动，传感器跟随底座一起运动。 | 模块不能装到上方活动杆上；它需要跟随底座一起运动。 |
+<table align="center">
+<thead>
+<tr>
+<th align="center">配套套件</th>
+<th align="center">自行 DIY</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">将 BNO055 插入预留接口，按套件组装教程固定。</td>
+<td align="center">将 BNO055 固定在三维图标出的底座位置，按第四步连接 3.3 V、GND、SDA、SCL。</td>
+</tr>
+<tr>
+<td align="center">不让模块和接头松动，传感器跟随底座一起运动。</td>
+<td align="center">模块不能装到上方活动杆上；它需要跟随底座一起运动。</td>
+</tr>
+</tbody>
+</table>
 
 装好后，在网页设备树中点击 **BNO055**，对照实物检查三维姿态。如果安装朝向与示例不同，在这里调整安装方向并保存。
 
@@ -160,9 +254,19 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 2. 进入“遥控操作”，点击“运行”，确认顶部回报“运行中”。
 3. 在桌面上给连杆留出活动空间，试着推倒一次，观察它重新起立。需要结束时点击“停止”。
 
-<p align="center"><img src="docs/images/kit-get-up.gif" width="380" alt="上传策略后，不倒翁被推倒并自行起立的真实GIF演示"></p>
+<table align="center">
+<thead>
+<tr><th align="center">红色底座 · DIY 款</th><th align="center">黑色底座 · 套件款</th></tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="260" alt="红色底座 · DIY 款" /></a></td>
+<td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4"><img src="docs/images/kit-get-up.gif" width="260" alt="黑色底座 · 套件款" /></a></td>
+</tr>
+<tr><td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4">观看红色款视频</a></td><td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4">观看黑色款视频</a></td></tr>
+</tbody>
+</table>
 
-**[点击观看完整实物起立演示](https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4)**
 
 <a id="step-7"></a>
 
@@ -202,12 +306,32 @@ DIY 使用图中的 **LOLIN32 Lite / 原版 ESP32**。用 USB 数据线把开发
 
 进入“导出训练工程”，按需要保存以下内容：
 
-| 要保存什么 | 用来做什么 |
-| --- | --- |
-| 训练好的 ONNX 策略 | 保存控制模型，供后续验证和部署 |
-| 完整 SimReady 工程 | 保留模型、动作与配置，方便继续修改 |
-| 本地训练工程包 | 下载网站生成的训练代码和环境、启动说明，在本地继续开发 |
-| 本地部署包 | 保存策略、模型和运行配置，交给 Sim2Sim / Sim2Real |
+<table align="center">
+<thead>
+<tr>
+<th align="center">要保存什么</th>
+<th align="center">用来做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">训练好的 ONNX 策略</td>
+<td align="center">保存控制模型，供后续验证和部署</td>
+</tr>
+<tr>
+<td align="center">完整 SimReady 工程</td>
+<td align="center">保留模型、动作与配置，方便继续修改</td>
+</tr>
+<tr>
+<td align="center">本地训练工程包</td>
+<td align="center">下载网站生成的训练代码和环境、启动说明，在本地继续开发</td>
+</tr>
+<tr>
+<td align="center">本地部署包</td>
+<td align="center">保存策略、模型和运行配置，交给 Sim2Sim / Sim2Real</td>
+</tr>
+</tbody>
+</table>
 
 <p align="center"><img src="docs/images/tutorial/zh-CN/07-handoff.png" width="860" alt="SelfRising 操作页面"></p>
 

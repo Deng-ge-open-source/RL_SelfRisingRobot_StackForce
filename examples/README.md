@@ -4,13 +4,36 @@
 
 [下载 SelfRising-ESP32.sim](../SelfRising-ESP32.sim)，在 [Sim2Real](https://sim2real.stackforce.cc/) 的导入页打开，或用网页右侧「打开工程」载入。工程采用当前网站适配的作者原版策略，与本发布的本地 MuJoCo 包使用同一份 ONNX。
 
-| 项目 | 配置 |
-|---|---|
-| 下方舵机 / A0 | `servo1_joint` → GPIO25 |
-| 上方舵机 / A1 | `servo2_joint` → GPIO26 |
-| BNO055 | SDA→GPIO19，SCL→GPIO22；模块地址模板为 0x29 |
-| 策略 | 50 Hz，10 输入 / 10 输出；2 路电机、8 路控制器状态 |
-| 个人校准 | 不随模板提供；读取并保存自己的舵机中位、方向、行程与 IMU 安装方向 |
+<table align="center">
+<thead>
+<tr>
+<th align="center">项目</th>
+<th align="center">配置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">下方舵机 / A0</td>
+<td align="center"><code>servo1_joint</code> → GPIO25</td>
+</tr>
+<tr>
+<td align="center">上方舵机 / A1</td>
+<td align="center"><code>servo2_joint</code> → GPIO26</td>
+</tr>
+<tr>
+<td align="center">BNO055</td>
+<td align="center">SDA→GPIO19，SCL→GPIO22；模块地址模板为 0x29</td>
+</tr>
+<tr>
+<td align="center">策略</td>
+<td align="center">50 Hz，10 输入 / 10 输出；2 路电机、8 路控制器状态</td>
+</tr>
+<tr>
+<td align="center">个人校准</td>
+<td align="center">不随模板提供；读取并保存自己的舵机中位、方向、行程与 IMU 安装方向</td>
+</tr>
+</tbody>
+</table>
 
 该工程不是 SimReady 本轮新训练的 9 输入参考策略。新训练路线的兼容状态见 [训练教程](../docs/training.zh-CN.md)。此处导入工程不会代替校准，也不表示已经给板卡上传或开始输出。
 

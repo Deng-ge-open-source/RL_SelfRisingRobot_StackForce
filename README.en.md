@@ -26,7 +26,18 @@ These seven steps take you through assembly, wiring and calibration, then run th
 6. [Upload and run the policy](#step-6)
 7. [Train your own policy with SimReady](#step-7)
 
-<p align="center"><img src="docs/images/kit-get-up.gif" width="300" alt="Actual recovery demonstration of the kit version"></p>
+<table align="center">
+<thead>
+<tr><th align="center">Red base · DIY version</th><th align="center">Black base · Kit version</th></tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="260" alt="Red base · DIY version" /></a></td>
+<td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4"><img src="docs/images/kit-get-up.gif" width="260" alt="Black base · Kit version" /></a></td>
+</tr>
+<tr><td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4">Watch the red version</a></td><td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4">Watch the black version</a></td></tr>
+</tbody>
+</table>
 
 <a id="step-1"></a>
 
@@ -40,14 +51,40 @@ GBP figures are approximate conversions of the prices in China, excluding shippi
 
 Print the structure, source the electronics, then assemble, install firmware, wire and calibrate using the steps below. Printable models, a matching project and the motion policy are provided in this repository.
 
-| Part | Quantity / purpose |
-| --- | --- |
-| Original ESP32 development board | 1; LOLIN32 Lite is shown in the wiring diagram |
-| BNO055 orientation sensor | 1 |
-| MG90S servo | 2, for the lower and upper joints |
-| Separate regulated 5 V supply | For servos, with common ground to ESP32 |
-| USB data cable, wires, screws and horns | One set |
-| Four printed parts | Print from the supplied files |
+<table align="center">
+<thead>
+<tr>
+<th align="center">Part</th>
+<th align="center">Quantity / purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Original ESP32 development board</td>
+<td align="center">1; LOLIN32 Lite is shown in the wiring diagram</td>
+</tr>
+<tr>
+<td align="center">BNO055 orientation sensor</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">MG90S servo</td>
+<td align="center">2, for the lower and upper joints</td>
+</tr>
+<tr>
+<td align="center">Separate regulated 5 V supply</td>
+<td align="center">For servos, with common ground to ESP32</td>
+</tr>
+<tr>
+<td align="center">USB data cable, wires, screws and horns</td>
+<td align="center">One set</td>
+</tr>
+<tr>
+<td align="center">Four printed parts</td>
+<td align="center">Print from the supplied files</td>
+</tr>
+</tbody>
+</table>
 
 #### Kit: compact, battery-powered, with wireless control and power-on operation
 
@@ -78,10 +115,27 @@ Print **1 Base, 2 Bottom cover, 3 Middle link and 4 Upper link**. Use the assemb
 
 #### Servo action labels
 
-| Servo location | Policy action | DIY signal pin |
-| --- | --- | --- |
-| Lower servo on the base | **A0** | **GPIO25** |
-| Upper servo on the middle link | **A1** | **GPIO26** |
+<table align="center">
+<thead>
+<tr>
+<th align="center">Servo location</th>
+<th align="center">Policy action</th>
+<th align="center">DIY signal pin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Lower servo on the base</td>
+<td align="center"><strong>A0</strong></td>
+<td align="center"><strong>GPIO25</strong></td>
+</tr>
+<tr>
+<td align="center">Upper servo on the middle link</td>
+<td align="center"><strong>A1</strong></td>
+<td align="center"><strong>GPIO26</strong></td>
+</tr>
+</tbody>
+</table>
 
 A0 and A1 are policy action labels, not pin labels printed on the ESP32. Wiring, mapping and calibration use A0 for the lower servo and A1 for the upper servo.
 
@@ -113,14 +167,40 @@ Disconnect power while wiring. Connect the BNO055 to ESP32, power the servos fro
 
 <p align="center"><img src="docs/images/esp32-lolin32-lite.svg" width="860" alt="Complete DIY wiring diagram"></p>
 
-| Connection | Destination |
-| --- | --- |
-| GPIO19 / GPIO22 | BNO055 SDA / SCL |
-| ESP32 3V3 / GND | BNO055 3.3 V-compatible power input / GND |
-| GPIO25 | Lower servo A0 signal |
-| GPIO26 | Upper servo A1 signal |
-| External +5 V | Both servo positive power leads |
-| Common GND | ESP32, BNO055, servos and supply negative |
+<table align="center">
+<thead>
+<tr>
+<th align="center">Connection</th>
+<th align="center">Destination</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">GPIO19 / GPIO22</td>
+<td align="center">BNO055 SDA / SCL</td>
+</tr>
+<tr>
+<td align="center">ESP32 3V3 / GND</td>
+<td align="center">BNO055 3.3 V-compatible power input / GND</td>
+</tr>
+<tr>
+<td align="center">GPIO25</td>
+<td align="center">Lower servo A0 signal</td>
+</tr>
+<tr>
+<td align="center">GPIO26</td>
+<td align="center">Upper servo A1 signal</td>
+</tr>
+<tr>
+<td align="center">External +5 V</td>
+<td align="center">Both servo positive power leads</td>
+</tr>
+<tr>
+<td align="center">Common GND</td>
+<td align="center">ESP32, BNO055, servos and supply negative</td>
+</tr>
+</tbody>
+</table>
 
 Power up, select USB Connect and check for BNO055 data and two GPIO servo outputs. Kit users can follow the wiring instructions supplied by the seller.
 
@@ -143,10 +223,24 @@ In Sim2Real Devices & Mapping, start with lower **A0**, then repeat for upper **
 
 <p align="center"><img src="docs/images/bno-mount-en.svg" width="860" alt="Kit connection and BNO055 position on the DIY CAD base, side by side"></p>
 
-| Matching kit | Full DIY |
-| --- | --- |
-| Plug the BNO055 into the dedicated connector and fix it as shown in the kit guide. | Fix the BNO055 at the base location shown in the 3D view. Wire 3.3 V, GND, SDA and SCL as in step 4. |
-| Secure the module and connector so the sensor moves with the base. | Keep the sensor on the base, rather than the moving upper link. |
+<table align="center">
+<thead>
+<tr>
+<th align="center">Matching kit</th>
+<th align="center">Full DIY</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Plug the BNO055 into the dedicated connector and fix it as shown in the kit guide.</td>
+<td align="center">Fix the BNO055 at the base location shown in the 3D view. Wire 3.3 V, GND, SDA and SCL as in step 4.</td>
+</tr>
+<tr>
+<td align="center">Secure the module and connector so the sensor moves with the base.</td>
+<td align="center">Keep the sensor on the base, rather than the moving upper link.</td>
+</tr>
+</tbody>
+</table>
 
 Select **BNO055** in the device tree and compare the 3D pose with the real robot. If its mounting orientation differs, adjust and save it there.
 
@@ -162,9 +256,19 @@ The hardware project includes the policy and default mappings: **A0 → GPIO25 �
 2. Open Remote Control, select Run and check the Running state reported by the board.
 3. Leave room for the links and try a controlled fall. Select Stop when finished.
 
-<p align="center"><img src="docs/images/kit-get-up.gif" width="380" alt="Actual hardware recovery after policy deployment"></p>
+<table align="center">
+<thead>
+<tr><th align="center">Red base · DIY version</th><th align="center">Black base · Kit version</th></tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="260" alt="Red base · DIY version" /></a></td>
+<td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4"><img src="docs/images/kit-get-up.gif" width="260" alt="Black base · Kit version" /></a></td>
+</tr>
+<tr><td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4">Watch the red version</a></td><td align="center"><a href="https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4">Watch the black version</a></td></tr>
+</tbody>
+</table>
 
-**[Watch the complete hardware get-up video](https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4)**
 
 <a id="step-7"></a>
 
@@ -204,12 +308,32 @@ Select Play Training Result on the training page and choose this job's model. Ch
 
 Open Export Training Project and save the outputs you need.
 
-| Output | Purpose |
-| --- | --- |
-| Trained ONNX policy | Control model for validation and deployment |
-| Complete SimReady project | Model, reference motions and configuration for further editing |
-| Local training project | Generated training code, environment and launch instructions |
-| Local deployment package | Policy, model and runtime configuration for Sim2Sim / Sim2Real |
+<table align="center">
+<thead>
+<tr>
+<th align="center">Output</th>
+<th align="center">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Trained ONNX policy</td>
+<td align="center">Control model for validation and deployment</td>
+</tr>
+<tr>
+<td align="center">Complete SimReady project</td>
+<td align="center">Model, reference motions and configuration for further editing</td>
+</tr>
+<tr>
+<td align="center">Local training project</td>
+<td align="center">Generated training code, environment and launch instructions</td>
+</tr>
+<tr>
+<td align="center">Local deployment package</td>
+<td align="center">Policy, model and runtime configuration for Sim2Sim / Sim2Real</td>
+</tr>
+</tbody>
+</table>
 
 <p align="center"><img src="docs/images/tutorial/en/07-handoff.svg" width="860" alt="Actual SelfRising interface"></p>
 

@@ -4,14 +4,40 @@
 
 本发布提供 **结构件＋成品固件＋实物示例＋本地仿真运行包**。Studio 控制器源码不在发布范围内。实物例子采用网站适配的作者原版起立策略。
 
-| 下载 | 用途 |
-|---|---|
-| [ESP32 成品固件](../SelfRising-ESP32-Firmware.zip) | 原版 ESP32 / 4 MB，包含四个烧录文件、地址、校验与许可说明 |
-| [Sim2Real 示例工程](../SelfRising-ESP32.sim) | 在网站导入，校准后上传策略；A0→GPIO25、A1→GPIO26 |
-| [MuJoCo 本地运行包](../SelfRising-MuJoCo.zip) | 在电脑上运行同一份策略，含模型、Python 运行器和 Windows/Linux 启动脚本 |
-| [STL 打印包](../SelfRising-90S-STL.zip) | 四个分件与整机参考 STL |
-| [STEP 图纸包](../SelfRising-90S-STEP.zip) | 四个可编辑实体与整机装配 STEP |
-| [SHA-256 校验值](../SHA256SUMS) | 核对上述下载 |
+<table align="center">
+<thead>
+<tr>
+<th align="center">下载</th>
+<th align="center">用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="../SelfRising-ESP32-Firmware.zip">ESP32 成品固件</a></td>
+<td align="center">原版 ESP32 / 4 MB，包含四个烧录文件、地址、校验与许可说明</td>
+</tr>
+<tr>
+<td align="center"><a href="../SelfRising-ESP32.sim">Sim2Real 示例工程</a></td>
+<td align="center">在网站导入，校准后上传策略；A0→GPIO25、A1→GPIO26</td>
+</tr>
+<tr>
+<td align="center"><a href="../SelfRising-MuJoCo.zip">MuJoCo 本地运行包</a></td>
+<td align="center">在电脑上运行同一份策略，含模型、Python 运行器和 Windows/Linux 启动脚本</td>
+</tr>
+<tr>
+<td align="center"><a href="../SelfRising-90S-STL.zip">STL 打印包</a></td>
+<td align="center">四个分件与整机参考 STL</td>
+</tr>
+<tr>
+<td align="center"><a href="../SelfRising-90S-STEP.zip">STEP 图纸包</a></td>
+<td align="center">四个可编辑实体与整机装配 STEP</td>
+</tr>
+<tr>
+<td align="center"><a href="../SHA256SUMS">SHA-256 校验值</a></td>
+<td align="center">核对上述下载</td>
+</tr>
+</tbody>
+</table>
 
 ## 先测试实物
 

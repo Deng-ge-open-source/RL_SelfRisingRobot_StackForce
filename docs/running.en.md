@@ -22,13 +22,36 @@ Use desktop Chrome or Edge with serial access to open the [Sim2Real SelfRising e
 
 ![Complete English wiring for the original ESP32, BNO055, two MG90S servos and a separate 5 V supply](images/esp32-lolin32-lite.svg)
 
-| Part | Wiring and mounting |
-|---|---|
-| BNO055 | Fix it to the red base. SDA → GPIO19, SCL → GPIO22, 3.3 V compatible power input → 3V, GND → common ground |
-| Lower MG90S A0 | Signal → GPIO25, power → external 5 V, ground → common ground |
-| Upper MG90S A1 | Signal → GPIO26, power → external 5 V, ground → common ground |
-| Separate 5 V supply | Join its negative terminal to ESP32, BNO055 and both servo grounds |
-| ESP32 USB | Connect a USB data cable to the computer for firmware installation, uploads and debugging |
+<table align="center">
+<thead>
+<tr>
+<th align="center">Part</th>
+<th align="center">Wiring and mounting</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">BNO055</td>
+<td align="center">Fix it to the red base. SDA → GPIO19, SCL → GPIO22, 3.3 V compatible power input → 3V, GND → common ground</td>
+</tr>
+<tr>
+<td align="center">Lower MG90S A0</td>
+<td align="center">Signal → GPIO25, power → external 5 V, ground → common ground</td>
+</tr>
+<tr>
+<td align="center">Upper MG90S A1</td>
+<td align="center">Signal → GPIO26, power → external 5 V, ground → common ground</td>
+</tr>
+<tr>
+<td align="center">Separate 5 V supply</td>
+<td align="center">Join its negative terminal to ESP32, BNO055 and both servo grounds</td>
+</tr>
+<tr>
+<td align="center">ESP32 USB</td>
+<td align="center">Connect a USB data cable to the computer for firmware installation, uploads and debugging</td>
+</tr>
+</tbody>
+</table>
 
 ## 3. Install firmware on a fresh board and connect
 
@@ -74,10 +97,33 @@ The website reports upload and runtime results separately. Available control tra
 
 After saving servo and IMU calibration, download a `.sim` with **Save Project**. Next time, reopen it, connect the controller, check its policy, mapping and calibration feedback, then run. For power-on autostart, use the installed firmware's autostart settings and verify them with an actual power cycle.
 
-| Symptom | Check |
-|---|---|
-| Policy running but servos still | Controller state, both output mappings, external 5 V and common ground, then the policy's input/output configuration |
-| Wrong direction or neutral | That axis's direction, saved zero and physical travel in device mapping |
-| Fault after a small tilt | Read the reported reason, then check BNO055 power, connectors and live data |
-| Motion jitters | Record IMU, policy targets and estimated angles together, then inspect assembly and power to locate the source |
-| Newly trained policy will not upload | Check its complete contract and target runtime support in [training step 6](training.en.md#6-continue-to-hardware) |
+<table align="center">
+<thead>
+<tr>
+<th align="center">Symptom</th>
+<th align="center">Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Policy running but servos still</td>
+<td align="center">Controller state, both output mappings, external 5 V and common ground, then the policy's input/output configuration</td>
+</tr>
+<tr>
+<td align="center">Wrong direction or neutral</td>
+<td align="center">That axis's direction, saved zero and physical travel in device mapping</td>
+</tr>
+<tr>
+<td align="center">Fault after a small tilt</td>
+<td align="center">Read the reported reason, then check BNO055 power, connectors and live data</td>
+</tr>
+<tr>
+<td align="center">Motion jitters</td>
+<td align="center">Record IMU, policy targets and estimated angles together, then inspect assembly and power to locate the source</td>
+</tr>
+<tr>
+<td align="center">Newly trained policy will not upload</td>
+<td align="center">Check its complete contract and target runtime support in <a href="training.en.md#6-continue-to-hardware">training step 6</a></td>
+</tr>
+</tbody>
+</table>

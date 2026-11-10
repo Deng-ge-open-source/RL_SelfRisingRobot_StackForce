@@ -4,20 +4,64 @@
 
 Captures show the actual websites on 2026-11-09. Chinese and English interfaces were captured separately. Every image is a **1920 × 1080, 16:9 PNG**.
 
-| 文件 · File | 页面状态 · Page state |
-|---|---|
-| `01-selfrising.png` | SimReady `example=23`，已载入 `robo1` · SelfRising imported |
-| `02-mapping.png` | 模板原有 2 路动作、9 路观测 · Template's two actions and nine observations |
-| `03-connect-runner.png` | 未配对时的运行器下载入口 · Runner download before pairing |
-| `03-training-ready.png` | 已配对，CPU / 1 环境 / 300 轮 / 保存间隔 100 / 种子 42 · Paired, configured training page |
-| `03-ppo-mode.png` | 实际 BC → PPO 配置入口；本轮未执行 PPO · Actual BC → PPO setting; PPO not executed in this test |
-| `05-training-complete.png` | 本次 BC 300 轮训练完成 · This run's completed BC training |
-| `06-replay.png` | 同一训练结果的实际在线回放 · Live replay of that trained result |
-| `07-handoff.png` | 选择本次训练模型交接或下载 · This run's model handoff and download controls |
-| `07-handoff-warning.png` | 实际出现的运行能力不兼容提示 · Observed runtime-capability incompatibility |
-| `08-sim2sim-original.png` | 网站自带作者原版示例的 MuJoCo 页面 · MuJoCo page for the supplied original-author example |
-| `09-connect-esp32.png` | 实物部署，板卡未连接 · Hardware deployment before controller connection |
-| `10-install-firmware.png` | 选择 ESP32 · 4MB，尚未烧录 · ESP32 · 4MB selected before flashing |
+<table align="center">
+<thead>
+<tr>
+<th align="center">文件 · File</th>
+<th align="center">页面状态 · Page state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>01-selfrising.png</code></td>
+<td align="center">SimReady <code>example=23</code>，已载入 <code>robo1</code> · SelfRising imported</td>
+</tr>
+<tr>
+<td align="center"><code>02-mapping.png</code></td>
+<td align="center">模板原有 2 路动作、9 路观测 · Template's two actions and nine observations</td>
+</tr>
+<tr>
+<td align="center"><code>03-connect-runner.png</code></td>
+<td align="center">未配对时的运行器下载入口 · Runner download before pairing</td>
+</tr>
+<tr>
+<td align="center"><code>03-training-ready.png</code></td>
+<td align="center">已配对，CPU / 1 环境 / 300 轮 / 保存间隔 100 / 种子 42 · Paired, configured training page</td>
+</tr>
+<tr>
+<td align="center"><code>03-ppo-mode.png</code></td>
+<td align="center">实际 BC → PPO 配置入口；本轮未执行 PPO · Actual BC → PPO setting; PPO not executed in this test</td>
+</tr>
+<tr>
+<td align="center"><code>05-training-complete.png</code></td>
+<td align="center">本次 BC 300 轮训练完成 · This run's completed BC training</td>
+</tr>
+<tr>
+<td align="center"><code>06-replay.png</code></td>
+<td align="center">同一训练结果的实际在线回放 · Live replay of that trained result</td>
+</tr>
+<tr>
+<td align="center"><code>07-handoff.png</code></td>
+<td align="center">选择本次训练模型交接或下载 · This run's model handoff and download controls</td>
+</tr>
+<tr>
+<td align="center"><code>07-handoff-warning.png</code></td>
+<td align="center">实际出现的运行能力不兼容提示 · Observed runtime-capability incompatibility</td>
+</tr>
+<tr>
+<td align="center"><code>08-sim2sim-original.png</code></td>
+<td align="center">网站自带作者原版示例的 MuJoCo 页面 · MuJoCo page for the supplied original-author example</td>
+</tr>
+<tr>
+<td align="center"><code>09-connect-esp32.png</code></td>
+<td align="center">实物部署，板卡未连接 · Hardware deployment before controller connection</td>
+</tr>
+<tr>
+<td align="center"><code>10-install-firmware.png</code></td>
+<td align="center">选择 ESP32 · 4MB，尚未烧录 · ESP32 · 4MB selected before flashing</td>
+</tr>
+</tbody>
+</table>
 
 每个文件在 `zh-CN/` 与 `en/` 下各一份。采集使用经用户同意的独立后台浏览器，直接保存网页视口；不含应用边框或 ChatGPT 浮动输入框，未重绘界面、伪造板卡或替换图中机器人。网站自身尚未翻译的少量标签保留原样。
 

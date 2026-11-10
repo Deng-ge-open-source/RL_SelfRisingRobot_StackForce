@@ -4,14 +4,40 @@
 
 This release supplies **hardware designs, binary firmware, a hardware example and a local simulation runtime**. Studio controller source is not distributed. The hardware example uses the website-adapted original-author recovery policy.
 
-| Download | Purpose |
-|---|---|
-| [ESP32 binary firmware](../SelfRising-ESP32-Firmware.zip) | Original ESP32 / 4 MB; four flash images, addresses, checksums and licence notices |
-| [Sim2Real example](../SelfRising-ESP32.sim) | Import into the website, calibrate and upload; A0→GPIO25, A1→GPIO26 |
-| [Local MuJoCo runtime](../SelfRising-MuJoCo.zip) | Run the same policy on a computer; model, Python runner and Windows/Linux launchers included |
-| [STL print pack](../SelfRising-90S-STL.zip) | Four individual parts and assembled reference STL |
-| [STEP CAD pack](../SelfRising-90S-STEP.zip) | Four solid parts and complete assembly |
-| [SHA-256 checksums](../SHA256SUMS) | Verify the downloads |
+<table align="center">
+<thead>
+<tr>
+<th align="center">Download</th>
+<th align="center">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="../SelfRising-ESP32-Firmware.zip">ESP32 binary firmware</a></td>
+<td align="center">Original ESP32 / 4 MB; four flash images, addresses, checksums and licence notices</td>
+</tr>
+<tr>
+<td align="center"><a href="../SelfRising-ESP32.sim">Sim2Real example</a></td>
+<td align="center">Import into the website, calibrate and upload; A0→GPIO25, A1→GPIO26</td>
+</tr>
+<tr>
+<td align="center"><a href="../SelfRising-MuJoCo.zip">Local MuJoCo runtime</a></td>
+<td align="center">Run the same policy on a computer; model, Python runner and Windows/Linux launchers included</td>
+</tr>
+<tr>
+<td align="center"><a href="../SelfRising-90S-STL.zip">STL print pack</a></td>
+<td align="center">Four individual parts and assembled reference STL</td>
+</tr>
+<tr>
+<td align="center"><a href="../SelfRising-90S-STEP.zip">STEP CAD pack</a></td>
+<td align="center">Four solid parts and complete assembly</td>
+</tr>
+<tr>
+<td align="center"><a href="../SHA256SUMS">SHA-256 checksums</a></td>
+<td align="center">Verify the downloads</td>
+</tr>
+</tbody>
+</table>
 
 ## Test the hardware
 

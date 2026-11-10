@@ -22,13 +22,36 @@
 
 ![原版 ESP32、BNO055、两只 MG90S 与独立 5 V 电源的完整中文接线图](images/esp32-lolin32-lite.zh-CN.svg)
 
-| 部分 | 接线与安装 |
-|---|---|
-| BNO055 | 固定在红色底座；SDA → GPIO19，SCL → GPIO22，3.3 V 兼容供电端 → 3V，GND → 共地 |
-| A0 下方 MG90S | 信号 → GPIO25，电源正极 → 独立 5 V，地线 → 共地 |
-| A1 上方 MG90S | 信号 → GPIO26，电源正极 → 独立 5 V，地线 → 共地 |
-| 独立 5 V 电源 | 负极与 ESP32、BNO055 和两只舵机共地 |
-| ESP32 USB | 用 USB 数据线接电脑，供网页安装固件、上传和调试 |
+<table align="center">
+<thead>
+<tr>
+<th align="center">部分</th>
+<th align="center">接线与安装</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">BNO055</td>
+<td align="center">固定在红色底座；SDA → GPIO19，SCL → GPIO22，3.3 V 兼容供电端 → 3V，GND → 共地</td>
+</tr>
+<tr>
+<td align="center">A0 下方 MG90S</td>
+<td align="center">信号 → GPIO25，电源正极 → 独立 5 V，地线 → 共地</td>
+</tr>
+<tr>
+<td align="center">A1 上方 MG90S</td>
+<td align="center">信号 → GPIO26，电源正极 → 独立 5 V，地线 → 共地</td>
+</tr>
+<tr>
+<td align="center">独立 5 V 电源</td>
+<td align="center">负极与 ESP32、BNO055 和两只舵机共地</td>
+</tr>
+<tr>
+<td align="center">ESP32 USB</td>
+<td align="center">用 USB 数据线接电脑，供网页安装固件、上传和调试</td>
+</tr>
+</tbody>
+</table>
 
 ## 3. 给新板卡安装固件并连接
 
@@ -74,10 +97,33 @@
 
 保存舵机和 IMU 校准后，再用网页「保存工程」下载 `.sim`。下次打开工程，连接板卡，核对设备回报的策略、映射和校准，再运行。若需要上电自启，按当前固件提供的自启设置配置，并实际断电重上电验证一次。
 
-| 现象 | 对照检查 |
-|---|---|
-| 运行但舵机未动 | 查看板卡状态、两路输出映射、独立 5 V 电源和共地，再核对策略的动作输入输出 |
-| 舵机反向或中位偏移 | 在设备映射中检查该轴的方向、零位和实际行程 |
-| 轻微倾斜就报故障 | 读取故障原因，核对 BNO055 供电、接头和实时数据，再处理具体错误 |
-| 运行时抖动 | 同时记录 IMU、策略目标与估算角度，检查机械装配和供电后定位抖动来源 |
-| 换了训练策略后无法上传 | 按[训练教程第 6 步](training.zh-CN.md#6-接着部署到实物)检查新策略的全部输入输出与运行端支持 |
+<table align="center">
+<thead>
+<tr>
+<th align="center">现象</th>
+<th align="center">对照检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">运行但舵机未动</td>
+<td align="center">查看板卡状态、两路输出映射、独立 5 V 电源和共地，再核对策略的动作输入输出</td>
+</tr>
+<tr>
+<td align="center">舵机反向或中位偏移</td>
+<td align="center">在设备映射中检查该轴的方向、零位和实际行程</td>
+</tr>
+<tr>
+<td align="center">轻微倾斜就报故障</td>
+<td align="center">读取故障原因，核对 BNO055 供电、接头和实时数据，再处理具体错误</td>
+</tr>
+<tr>
+<td align="center">运行时抖动</td>
+<td align="center">同时记录 IMU、策略目标与估算角度，检查机械装配和供电后定位抖动来源</td>
+</tr>
+<tr>
+<td align="center">换了训练策略后无法上传</td>
+<td align="center">按<a href="training.zh-CN.md#6-%E6%8E%A5%E7%9D%80%E9%83%A8%E7%BD%B2%E5%88%B0%E5%AE%9E%E7%89%A9">训练教程第 6 步</a>检查新策略的全部输入输出与运行端支持</td>
+</tr>
+</tbody>
+</table>

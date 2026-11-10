@@ -13,12 +13,32 @@
 
 ## 文件与写入地址
 
-| 地址 | 文件 |
-|---|---|
-| `0x1000` | `1000-bootloader.bin` |
-| `0x8000` | `8000-partition-table.bin` |
-| `0xF000` | `f000-ota_data_initial.bin` |
-| `0x20000` | `20000-stackforce_robot_controller.bin` |
+<table align="center">
+<thead>
+<tr>
+<th align="center">地址</th>
+<th align="center">文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><code>0x1000</code></td>
+<td align="center"><code>1000-bootloader.bin</code></td>
+</tr>
+<tr>
+<td align="center"><code>0x8000</code></td>
+<td align="center"><code>8000-partition-table.bin</code></td>
+</tr>
+<tr>
+<td align="center"><code>0xF000</code></td>
+<td align="center"><code>f000-ota_data_initial.bin</code></td>
+</tr>
+<tr>
+<td align="center"><code>0x20000</code></td>
+<td align="center"><code>20000-stackforce_robot_controller.bin</code></td>
+</tr>
+</tbody>
+</table>
 
 Flash：DIO / 40 MHz / 4 MB。`manifest.json` 提供板型、文件大小与 SHA-256；`SHA256SUMS` 可校验此下载。不要把任一分区文件当作从地址 0 写入的整片 Flash 镜像。
 
