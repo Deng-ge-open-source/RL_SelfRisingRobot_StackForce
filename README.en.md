@@ -1,123 +1,224 @@
-# StackForce SelfRising
+# Open-Source Reinforcement Learning Self-Righting Robot
 
 [简体中文](README.md) · English
 
-Print five parts, connect an ESP32, an orientation sensor and two servos, then deploy a get-up policy to the robot on your workbench.
+**Community: Dengge Open-Source Reinforcement Learning QQ Group 8 · 1056677085**
 
-<p align="center">
-  <a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4"><img src="docs/images/selfrising-get-up.gif" width="360" alt="The red-base, white-link SelfRising robot getting back up after a fall"></a>
-</p>
+This electronic self-righting robot uses a reinforcement learning policy to stand up after being pushed over. Build one with an ESP32, a BNO055 and two MG90S servos, with a DIY materials budget <img src="docs/images/budget-en.svg" width="120" height="24" alt="under £12" align="middle">.
 
-**v0.1.0-rc.1 review release. Open hardware designs, supplied binary firmware and reproduction materials. Studio controller source is not distributed.** [Release assets](https://github.com/Deng-ge-open-source/RL_SelfRisingRobot_StackForce/releases/tag/v0.1.0-rc.1) · [Downloads and versions](docs/downloads.en.md) · [Licence scope](LICENSE.md)
+Start with the motion policy ([ONNX file](policy/selfrising-get-up.onnx)) provided here and follow the [tutorial](#step-1) to try it on hardware. Then follow the [tutorial](#step-1) to train your own policy with reinforcement learning or imitation learning.
 
-| Download | Contents |
-|---|---|
-| [ESP32 binary firmware](SelfRising-ESP32-Firmware.zip) | Original ESP32 · 4MB, flash images, addresses and checksums |
-| [Sim2Real example](SelfRising-ESP32.sim) | Original-author recovery policy, GPIO servo and BNO055 mappings |
-| [Local MuJoCo runtime](SelfRising-MuJoCo.zip) | The same policy, model, Python runtime and Windows/Linux launchers |
-| [STL print pack](SelfRising-90S-STL.zip) · [STEP CAD pack](SelfRising-90S-STEP.zip) | Five parts and assembled reference; [verify downloads](SHA256SUMS) |
+This small robot covers simulation setup, reinforcement learning policy training, evaluation and hardware deployment: a hands-on introduction to learning-based robot control.
 
-| Follow this sequence | Open the guide |
-|---|---|
-| ① Train SelfRising in SimReady | [Select the example, pair the Runner and train](docs/training.en.md) |
-| ② Verify this model in Sim2Sim | [Replay and transfer the result](docs/training.en.md#5-open-sim2sim) |
-| ③ Deploy to ESP32 in Sim2Real | [Wire, map, calibrate, upload and run](docs/running.en.md) |
+**Want to try it in simulation first? Push it over and watch it stand back up.**
 
-The hardware steps currently use the author's original policy supplied with the website. Training, playback and export of the new nine-input reference policy were tested; automatic handoff currently reports a compatibility issue. See [training step 5](docs/training.en.md#5-open-sim2sim).
+**[Try the online simulation](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=mujoco&panel=simulation)**
 
+## Build Tutorial
 
+These seven steps take you through assembly, wiring and calibration, then run the open, pre-trained policy on the real robot. Once it works, try training your own get-up policy.
 
-<p align="center">
-  <a href="#1-identify-the-board-and-gather-the-parts">Start the build</a> ·
-  <a href="SelfRising-90S-STL.zip">Download the print pack</a> ·
-  <a href="SelfRising-90S-STEP.zip">Download STEP CAD</a> ·
-  <a href="https://sim2real.stackforce.cc/?example=selfrising-2axis&amp;autoplay=0&amp;step=mujoco&amp;panel=simulation">Try the simulation</a> ·
-  <a href="https://sim2real.stackforce.cc/example-media/selfrising/red-base-preview-10s.mp4">Watch the full demo clip</a>
-</p>
+1. [Get the parts: full DIY or kit](#step-1)
+2. [Print four parts and assemble](#step-2)
+3. [Install ESP32 firmware through the website](#step-3)
+4. [Wire and power the robot](#step-4)
+5. [Calibrate the servos and mount the BNO055](#step-5)
+6. [Upload and run the policy](#step-6)
+7. [Train your own policy with SimReady](#step-7)
 
-## 1. Identify the board and gather the parts
+<p align="center"><img src="docs/images/kit-get-up.gif" width="300" alt="Actual recovery demonstration of the kit version"></p>
 
-The hardware example uses a **LOLIN32 Lite with the original ESP32** and a CH340 USB serial interface. Hold the USB port at the bottom and locate `19`, `22`, `25`, `26`, `3V` and `G` on the board. Some versions label the power and ground pins `3V3` and `GND`.
+<a id="step-1"></a>
 
-See the wiring diagram in step 3. Match the printed labels on your own board before wiring. [Full board photograph](https://circuitpython.org/assets/images/boards/large/wemos_lolin32_lite.jpg) · [CircuitPython board page](https://circuitpython.org/board/wemos_lolin32_lite/) · [Board schematic](https://done.land/assets/files/lolin32_lite.pdf)
+### 1. Get the parts: full DIY or kit
 
-| Gather | Purpose |
-|---|---|
-| One LOLIN32 Lite and a USB data cable | Install firmware, connect to the website and run the policy |
-| One BNO055 module with a 3.3 V compatible input | Read the body orientation |
-| Two MG90S servos with matching horns and fasteners | Lower joint A0 and upper joint A1 |
-| A **separate regulated 5 V supply** and wiring | Power both MG90S servos and share ground with the ESP32 |
-| Five printed parts | Base, bottom cover, middle link, upper link and spacer ring |
+Build everything yourself or choose the matching kit, <img src="docs/images/kit-price-en.svg" width="128" height="24" alt="about £7.70" align="middle">.
 
-To save time sourcing parts, buy a kit and follow the same assembly and deployment steps. The listing shows what is included. [View the kit on Taobao](https://e.tb.cn/h.jSReBRMxBI9FNul?tk=dqhs6cdMf8N)
+GBP figures are approximate conversions of the prices in China, excluding shipping. [Exchange-rate reference, 9 November 2026](https://www.oenb.at/isawebstat/stabfrage/createReport?lang=EN&report=2.14.9).
 
-## 2. Print and test the fit
+#### Full DIY, from sourcing to testing
 
-1. Download the print pack and import the five numbered parts at **100% scale in millimetres**. Print the base and bottom cover in red and the links and spacer ring in white. [Download the STL pack](SelfRising-90S-STL.zip) · [Parts and dimensions](hardware/stl/README.md)
-2. Check the fit of the base, both links and the spacer ring against the assembled robot in the lower-right panel. Position the servo horns loosely and secure them after aligning neutral in step 5. [Assembly STL](hardware/stl/SelfRising-90S-assembled.stl) · [Three-view assembly preview](docs/images/selfrising-assembled.png)
+Print the structure, source the electronics, then assemble, install firmware, wire and calibrate using the steps below. Printable models, a matching project and the motion policy are provided in this repository.
 
-![Five red and white printed parts with the assembled robot in the lower-right panel](docs/images/print-parts.png)
+| Part | Quantity / purpose |
+| --- | --- |
+| Original ESP32 development board | 1; LOLIN32 Lite is shown in the wiring diagram |
+| BNO055 orientation sensor | 1 |
+| MG90S servo | 2, for the lower and upper joints |
+| Separate regulated 5 V supply | For servos, with common ground to ESP32 |
+| USB data cable, wires, screws and horns | One set |
+| Four printed parts | Print from the supplied files |
 
-## 3. Wire the robot
+#### Kit: compact, battery-powered, with wireless control and power-on operation
 
-Disconnect power before wiring. Connect the computer to the ESP32 with the USB data cable. Connect both servo power leads to a separate regulated 5 V supply. Join the ESP32, BNO055, both servos and the negative terminal of the 5 V supply at common ground. Use the input on the BNO055 module rated for 3.3 V.
+The integrated base keeps components together, supports battery power and wireless control, and can run the deployed policy automatically at power-on. **Ask the seller for the kit assembly guide.**
 
-Mount the BNO055 on the fixed red base so it moves with the base. The diagram marks the mounting area. Match the labels on your module when wiring it.
+<p align="center"><img src="docs/images/kit-en.svg" width="860" alt="Compact kit, about £7.70, battery powered and wireless"></p>
 
-<p align="center"><a href="docs/images/esp32-lolin32-lite.svg"><img src="docs/images/esp32-lolin32-lite.svg" width="820" alt="Complete wiring for LOLIN32 Lite, BNO055 and two MG90S servos"></a></p>
+**[Click here to buy the kit on Taobao](https://e.tb.cn/h.jSReBRMxBI9FNul?tk=dqhs6cdMf8N)**
 
-| From | To |
-|---|---|
-| ESP32 `GPIO19` | BNO055 `SDA` |
-| ESP32 `GPIO22` | BNO055 `SCL` |
-| ESP32 `3V3` | BNO055 3.3 V compatible power input |
-| ESP32 `GPIO25` | Lower servo A0 signal |
-| ESP32 `GPIO26` | Upper servo A1 signal |
-| External regulated `+5 V` | Power input on both servos |
-| Common `GND` | ESP32, BNO055, both servos and the supply’s negative terminal |
+<a id="step-2"></a>
 
-These pins match the ESP32 hardware template on the site. [Firmware, wiring and installation](firmware/esp32/README.md)
+### 2. Print four parts and assemble
 
-## 4. Open the site and connect the board
+[Download the STL package](SelfRising-90S-STL.zip) and print in millimetres at 100% scale. [STEP models](SelfRising-90S-STEP.zip) are available for modifications.
 
-1. Open the [SelfRising hardware example](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=sim2real&connection=usb&panel=devices) in desktop Chrome or Edge. You can also import the downloaded [SelfRising-ESP32.sim](SelfRising-ESP32.sim).
-2. Connect the board with a USB data cable. On a fresh board, open **Install firmware** in **Devices & Mapping**, select **Choose board and install**, then select the board’s CH340 port. Wait for the site to confirm that it wrote and verified the firmware.
-3. In **Devices & Mapping**, select **Connect USB** and choose the board’s port. Continue once the BNO055 readings and both GPIO servo channels appear. [Browser serial permissions](https://developer.chrome.com/docs/capabilities/serial)
+<p align="center"><img src="docs/images/print-parts-en.svg" width="860" alt="Four numbered printable parts"></p>
 
-## 5. Calibrate both axes
+Print **1 Base, 2 Bottom cover, 3 Middle link and 4 Upper link**. Use the assembled model as a placement reference.
 
-1. In **Devices & Mapping**, check **A0 → GPIO25** and **A1 → GPIO26**. Set the robot upright and check the displayed orientation against the BNO055 mounting direction.
-2. Calibrate one servo at a time. Centre it, align the link to the model’s mechanical zero, then secure the horn. Jog each axis through a small movement to check its direction and travel. Save the calibration.
-3. After checking neutral, direction and travel for both axes, select **Upload policy** and wait for confirmation.
+<p align="center"><img src="docs/images/assembly-en.svg" width="860" alt="Four assembly stages rendered from the actual CAD"></p>
 
-## 6. Try one recovery
+1. Fix the lower servo to the base.
+2. Seat the included MG90S horn in the middle link's slot, then fit it to the lower servo shaft.
+3. Fit the upper servo and use the horn in the upper link's slot to connect that link to the shaft.
+4. Route the wires. Leave the horns temporarily fitted until neutral calibration and link alignment in step five, then tighten their centre screws.
 
-Set the robot on a stable, level surface with space for both links to move. Select **Run** in **Remote Control** and check the controller’s status. Try stopping and restarting once. Then begin from one controlled fall and observe the robot get up and return to neutral. You can also stop it from **Devices & Mapping**.
+<p align="center"><img src="docs/images/horn-fit-en.svg" width="860" alt="MG90S horn and the printed link slots"></p>
 
-| If you see this | Check this first |
-|---|---|
-| No serial port appears | Use a USB data cable and select the correct CH340 port in the browser |
-| No BNO055 readings | Verify SDA and SCL, power and common ground |
-| A servo moves backwards or binds | Select Stop, then check that axis’s direction, mechanical zero and travel |
-| The page asks you to upload a policy | Go back to Devices & Mapping, upload the current project’s policy and wait for confirmation |
+#### Servo action labels
 
-Follow the [web simulation and ESP32 running guide](docs/running.en.md) for firmware installation, both servo calibrations, BNO055 mounting orientation and tests after a power cycle.
+| Servo location | Policy action | DIY signal pin |
+| --- | --- | --- |
+| Lower servo on the base | **A0** | **GPIO25** |
+| Upper servo on the middle link | **A1** | **GPIO26** |
 
-## 7. Train your own recovery policy
+A0 and A1 are policy action labels, not pin labels printed on the ESP32. Wiring, mapping and calibration use A0 for the lower servo and A1 for the upper servo.
 
-1. Open the [SelfRising training entry in SimReady](https://sim.stackforce.cc/?example=23). Check the `robo1` model and its two servo joints.
-2. In **Training**, download and pair the local Runner. The website provides configuration and visualisation while your computer runs training.
-3. Review the four reference motions. Choose **Demonstration learning (BC)** or **Imitate then refine (BC → PPO)**, check the settings, then select **Start Training**.
-4. Replay each direction, save the full `.simready` and the task's deployment bundle, then check input/output support on the target runtime.
+<a id="step-3"></a>
 
-![SelfRising loaded in SimReady with both servo joints](docs/images/tutorial/en/01-selfrising.png)
+### 3. Install ESP32 firmware through the website
 
-After Training → Replay training results, use Export Training Project → Simulation Validation and Hardware Deployment to hand off the model. The guides document the compatibility status observed in testing. See the [training guide](docs/training.en.md) and [hardware running guide](docs/running.en.md).
+I built **[StackForce Sim2Real](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=sim2real&connection=usb&panel=devices)** to make hardware deployment easier. Use the website to install ESP32 firmware, connect devices and upload the policy.
 
-## Credits and licence
+#### 1. Open the website and load SelfRising
 
-The StackForce SelfRising hardware designer modified this 90S print set. The five printable designs and their STEP models are licensed under GNU GPL v3.0 (`GPL-3.0-only`). [Print files and provenance](hardware/stl/README.md) · [STEP CAD](hardware/step/README.md) · [GPL text](hardware/stl/COPYING)
+In desktop Chrome or Edge, open **[sim2real.stackforce.cc](https://sim2real.stackforce.cc/?example=selfrising-2axis&autoplay=0&step=sim2real&connection=usb&panel=devices)** and load the **SelfRising hardware example**. Alternatively, select Open Project at the right and load the [matching hardware project](https://github.com/Deng-ge-open-source/RL_SelfRisingRobot_StackForce/releases/download/v0.1.0-rc.1/SelfRising-ESP32.sim).
 
-Binary firmware has a separate [binary-use permission](licenses/firmware-binary.txt); controller source remains undisclosed. Runtime scripts, models, policies and documentation have separate terms. See [LICENSE.md](LICENSE.md) and [third-party notices](THIRD-PARTY-NOTICES.md).
+<p align="center"><img src="docs/images/website-start-en.svg" width="860" alt="Sim2Real website showing the SelfRising example"></p>
 
-The recovery policy comes from HomeMadeGarbage’s two-axis robot *poco*. StackForce integrates it into the general Sim2Sim and Sim2Real workflows and provides a hardware profile for the LOLIN32 Lite, BNO055 and GPIO servos. [Original project](https://github.com/homemadegarbage/SelfRisingRobot/tree/c344c2a4a1a51562247528d8aadcc0a527b6b103)
+#### 2. Connect ESP32 over USB and install firmware
+
+The DIY guide uses the pictured **LOLIN32 Lite / original ESP32**. Connect it with a USB data cable, enter Hardware Deployment → Devices & Mapping and select **Install Firmware** on the left.
+
+<p align="center"><img src="docs/images/firmware-en.svg" width="860" alt="Whole LOLIN32 Lite, Install Firmware button and installer controls"></p>
+
+In the installer, select **ESP32 · 4MB**, then **Choose board and install** and choose the board's serial port. Wait for writing and verification, then select **USB Connect**. A board with the matching firmware already installed can connect directly.
+
+<a id="step-4"></a>
+
+### 4. Wire and power the robot
+
+Disconnect power while wiring. Connect the BNO055 to ESP32, power the servos from a separate regulated 5 V supply and join the grounds.
+
+<p align="center"><img src="docs/images/esp32-lolin32-lite.svg" width="860" alt="Complete DIY wiring diagram"></p>
+
+| Connection | Destination |
+| --- | --- |
+| GPIO19 / GPIO22 | BNO055 SDA / SCL |
+| ESP32 3V3 / GND | BNO055 3.3 V-compatible power input / GND |
+| GPIO25 | Lower servo A0 signal |
+| GPIO26 | Upper servo A1 signal |
+| External +5 V | Both servo positive power leads |
+| Common GND | ESP32, BNO055, servos and supply negative |
+
+Power up, select USB Connect and check for BNO055 data and two GPIO servo outputs. Kit users can follow the wiring instructions supplied by the seller.
+
+<a id="step-5"></a>
+
+### 5. Calibrate the servos and mount the BNO055
+
+#### Centre first, then check direction
+
+In Sim2Real Devices & Mapping, start with lower **A0**, then repeat for upper **A1**.
+
+<p align="center"><img src="docs/images/calibration-en.svg" width="860" alt="16:9 guide with the real inspector cropped without stretching"></p>
+
+1. Open Calibration, enable that servo and select Return to Centre.
+2. Align the link, seat the horn in its printed slot, secure it and save the neutral position.
+3. In Joint Test, use small target changes to check direction and usable travel. Change the direction there if needed.
+4. Save to the device and repeat for the other servo.
+
+#### Fix the BNO055 to the base
+
+<p align="center"><img src="docs/images/bno-mount-en.svg" width="860" alt="Kit connection and BNO055 position on the DIY CAD base, side by side"></p>
+
+| Matching kit | Full DIY |
+| --- | --- |
+| Plug the BNO055 into the dedicated connector and fix it as shown in the kit guide. | Fix the BNO055 at the base location shown in the 3D view. Wire 3.3 V, GND, SDA and SCL as in step 4. |
+| Secure the module and connector so the sensor moves with the base. | Keep the sensor on the base, rather than the moving upper link. |
+
+Select **BNO055** in the device tree and compare the 3D pose with the real robot. If its mounting orientation differs, adjust and save it there.
+
+<a id="step-6"></a>
+
+### 6. Upload and run the policy
+
+The hardware project includes the policy and default mappings: **A0 → GPIO25 → lower servo; A1 → GPIO26 → upper servo**. Use the full project for reproduction; the separate [ONNX policy](policy/selfrising-get-up.onnx) is also available for inspection.
+
+<p align="center"><img src="docs/images/upload-run-en.svg" width="860" alt="Upload, run, check the reported state and try a recovery"></p>
+
+1. In Hardware Deployment → Devices & Mapping, select the **yellow Upload Policy button at the top right**, then wait for confirmation.
+2. Open Remote Control, select Run and check the Running state reported by the board.
+3. Leave room for the links and try a controlled fall. Select Stop when finished.
+
+<p align="center"><img src="docs/images/kit-get-up.gif" width="380" alt="Actual hardware recovery after policy deployment"></p>
+
+**[Watch the complete hardware get-up video](https://sim2real.stackforce.cc/example-media/selfrising/black-base-preview-10s.mp4)**
+
+<a id="step-7"></a>
+
+### 7. Train your own policy with SimReady
+
+Once the supplied policy works on your robot, use **[StackForce SimReady](https://sim.stackforce.cc/?example=23)** to train your own. Configure the model, reference motions and training settings in the website, then run training on your computer.
+
+Start with the **[SimReady introductory video on Bilibili](https://www.bilibili.com/video/BV1kVRzBEE2g/)** (Chinese).
+
+#### 1. Load the SelfRising example
+
+Select the SelfRising example to load the robot model and its two servo joints.
+
+<p align="center"><img src="docs/images/tutorial/en/01-selfrising.svg" width="860" alt="Actual SelfRising interface"></p>
+
+#### 2. Inspect and edit reference motions
+
+Open Policy Mapping → Reference Motions. Preview front, rear, left and right recoveries. Select Edit Reference to adjust poses and timing using the timeline at the bottom.
+
+<p align="center"><img src="docs/images/tutorial/en/03-ppo-mode.svg" width="860" alt="Actual SelfRising interface"></p>
+
+Keep the supplied motions for a first attempt, then modify keyframes, preview and save your own changes.
+
+#### 3. Connect the runner and train
+
+Open Training, start and connect the local runner, review the settings and select Start Training. Choose behaviour cloning or imitation followed by reinforcement learning. The connected computer performs the training.
+
+<p align="center"><img src="docs/images/tutorial/en/03-training-ready.svg" width="860" alt="Actual SelfRising interface"></p>
+
+#### 4. Replay the result
+
+Select Play Training Result on the training page and choose this job's model. Check recovery from all four directions.
+
+<p align="center"><img src="docs/images/tutorial/en/06-replay.svg" width="860" alt="Actual SelfRising interface"></p>
+
+#### 5. Export the policy, training code and deployment project
+
+Open Export Training Project and save the outputs you need.
+
+| Output | Purpose |
+| --- | --- |
+| Trained ONNX policy | Control model for validation and deployment |
+| Complete SimReady project | Model, reference motions and configuration for further editing |
+| Local training project | Generated training code, environment and launch instructions |
+| Local deployment package | Policy, model and runtime configuration for Sim2Sim / Sim2Real |
+
+<p align="center"><img src="docs/images/tutorial/en/07-handoff.svg" width="860" alt="Actual SelfRising interface"></p>
+
+Simulation Validation and Hardware Deployment provides a one-click handoff: select the result and open it in **Sim2Sim for simulation validation**, then proceed to **Sim2Real for hardware setup**. Use the calibration, upload and run steps above on the hardware page.
+
+> The current reference-training template has completed training, replay and export, but automatic handoff still has a compatibility issue to resolve. Use the supplied policy for hardware reproduction while retaining new training results for separate validation.
+
+## Credits and Licence
+
+The get-up policy originates from [HomeMadeGarbage's SelfRisingRobot](https://github.com/homemadegarbage/SelfRisingRobot). This project provides modified 90S designs, matching projects and reproduction instructions.
+
+The modified printable designs use **GPL-3.0-only**. See [LICENSE.md](https://github.com/Deng-ge-open-source/RL_SelfRisingRobot_StackForce/blob/main/LICENSE.md) and [THIRD-PARTY-NOTICES.md](https://github.com/Deng-ge-open-source/RL_SelfRisingRobot_StackForce/blob/main/THIRD-PARTY-NOTICES.md) for other materials and upstream credits.

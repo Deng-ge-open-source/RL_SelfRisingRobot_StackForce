@@ -9,13 +9,13 @@ This release supplies **hardware designs, binary firmware, a hardware example an
 | [ESP32 binary firmware](../SelfRising-ESP32-Firmware.zip) | Original ESP32 / 4 MB; four flash images, addresses, checksums and licence notices |
 | [Sim2Real example](../SelfRising-ESP32.sim) | Import into the website, calibrate and upload; A0→GPIO25, A1→GPIO26 |
 | [Local MuJoCo runtime](../SelfRising-MuJoCo.zip) | Run the same policy on a computer; model, Python runner and Windows/Linux launchers included |
-| [STL print pack](../SelfRising-90S-STL.zip) | Five individual parts and assembled reference STL |
-| [STEP CAD pack](../SelfRising-90S-STEP.zip) | Five solid parts and complete assembly |
+| [STL print pack](../SelfRising-90S-STL.zip) | Four individual parts and assembled reference STL |
+| [STEP CAD pack](../SelfRising-90S-STEP.zip) | Four solid parts and complete assembly |
 | [SHA-256 checksums](../SHA256SUMS) | Verify the downloads |
 
 ## Test the hardware
 
-1. Assemble and wire the robot using the [homepage diagram](../README.en.md#3-wire-the-robot). Power both MG90S servos from a separate 5 V supply and join all grounds.
+1. Assemble and wire the robot using the [homepage diagram](../README.en.md#step-4). Power both MG90S servos from a separate 5 V supply and join all grounds.
 2. Install firmware with the website installer, connect USB and open the downloaded `.sim`. Follow the [running guide](running.en.md).
 3. Save your own servo neutral, direction, travel and IMU mounting calibration, upload the policy, then select **Run**.
 

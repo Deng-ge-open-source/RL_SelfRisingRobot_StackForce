@@ -34,6 +34,6 @@ MuJoCo, NumPy, ONNX Runtime and Pillow are installed separately by the runtime l
 
 ## 图片与结构件 · Images and hardware
 
-LOLIN32 Lite 的板卡辨识参考来源为 [CircuitPython 板卡页](https://circuitpython.org/board/wemos_lolin32_lite/)。接线图为本项目整理；网站截图为实际 SelfRising 页面。用户修改的五个打印件采用 GPL-3.0-only；整机中的外购舵机参考几何保留独立来源。第三方商标与品牌属于各自权利人。
+LOLIN32 Lite 的板卡辨识参考来源为 [CircuitPython 板卡页](https://circuitpython.org/board/wemos_lolin32_lite/)。接线图为本项目整理；网站截图为实际 SelfRising 页面。用户修改的四个打印件采用 GPL-3.0-only；整机中的外购舵机参考几何保留独立来源。第三方商标与品牌属于各自权利人。
 
-The board identification reference is the linked CircuitPython board page. Wiring diagrams were prepared for this project and website captures show the actual SelfRising example. The user's five modified printable designs use GPL-3.0-only; purchased servo reference geometry has separate provenance. Third-party trademarks belong to their respective owners.
+The board identification reference is the linked CircuitPython board page. Wiring diagrams were prepared for this project and website captures show the actual SelfRising example. The user's four modified printable designs use GPL-3.0-only; purchased servo reference geometry has separate provenance. Third-party trademarks belong to their respective owners.

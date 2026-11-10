@@ -90,13 +90,13 @@
     },
     {
       "path": "SelfRising-90S-STL.zip",
-      "bytes": 431423,
-      "sha256": "6673c7dc1519e0f0bc38486ab25fab72e95d03caad89b22ed81ec3e4937aecc6"
+      "bytes": 519241,
+      "sha256": "61b5c688e0e1a872f846908039ada0739f1d247bc5953333b4bae92c293677ac"
     },
     {
       "path": "SelfRising-90S-STEP.zip",
-      "bytes": 329523,
-      "sha256": "c0692e46c0fff1ccd9b11dea3d45be6b851e05fcf4f4651ee0ea720412476cea"
+      "bytes": 519486,
+      "sha256": "a7d4ffada5e6406045a34c142546a8a64052a4d7a9b2f03fd47769d7a0cb2a4f"
     }
   ],
   "licensing": {
@@ -105,5 +105,7 @@
     "printDesigns": "GPL-3.0-only",
     "runtimeScripts": "licenses/runtime-MIT.txt",
     "upstreamResources": "THIRD-PARTY-NOTICES.md"
-  }
+  },
+  "documentationUpdated": "2026-11-10",
+  "printableParts": 4
 }

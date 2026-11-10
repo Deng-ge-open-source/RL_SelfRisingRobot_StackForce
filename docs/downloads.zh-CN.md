@@ -9,13 +9,13 @@
 | [ESP32 成品固件](../SelfRising-ESP32-Firmware.zip) | 原版 ESP32 / 4 MB，包含四个烧录文件、地址、校验与许可说明 |
 | [Sim2Real 示例工程](../SelfRising-ESP32.sim) | 在网站导入，校准后上传策略；A0→GPIO25、A1→GPIO26 |
 | [MuJoCo 本地运行包](../SelfRising-MuJoCo.zip) | 在电脑上运行同一份策略，含模型、Python 运行器和 Windows/Linux 启动脚本 |
-| [STL 打印包](../SelfRising-90S-STL.zip) | 五个分件与整机参考 STL |
-| [STEP 图纸包](../SelfRising-90S-STEP.zip) | 五个可编辑实体与整机装配 STEP |
+| [STL 打印包](../SelfRising-90S-STL.zip) | 四个分件与整机参考 STL |
+| [STEP 图纸包](../SelfRising-90S-STEP.zip) | 四个可编辑实体与整机装配 STEP |
 | [SHA-256 校验值](../SHA256SUMS) | 核对上述下载 |
 
 ## 先测试实物
 
-1. 按[首页接线图](../README.md#3-接线)完成装配。两只 MG90S 由独立 5 V 供电，与 ESP32、BNO055 共地。
+1. 按[首页接线图](../README.md#step-4)完成装配。两只 MG90S 由独立 5 V 供电，与 ESP32、BNO055 共地。
 2. 用网页安装器安装固件，再连接 USB，打开下载的 `.sim`。详细步骤见[运行教程](running.zh-CN.md)。
 3. 保存自己的两轴零位、方向、行程和 BNO055 安装方向，上传策略，再点「运行」。
 

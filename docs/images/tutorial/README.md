@@ -26,3 +26,10 @@ Each filename has a capture under both `zh-CN/` and `en/`. An independent headle
 训练、回放与导出的策略哈希一致。原版作者示例单独标明。实物截图本轮没有烧录、使能或驱动舵机。参数、软件版本和验证范围见[实测记录](../../training-evidence.json)。
 
 The trained, replayed and exported policy hashes match. The supplied original-author example is identified separately. No controller was flashed and no motors were enabled or driven for these hardware screenshots. See the [test record](../../training-evidence.json) for parameters, versions and scope.
+
+
+## English-label revision · 英文标注修订
+
+English tutorial figures now use `.svg` versions where the website had untranslated labels. Only the example name, AI API label, motion-fit label and package-download message were translated. Robot poses, numerical settings, recorded results and failure messages are unchanged. The original unedited PNG captures are retained in the `v0.1.0-rc.1` tag. The English calibration figure is a labelled vector illustration of the controls with example values, not a claim of a new live hardware connection. The English import figure crops out an unrelated utility dock. All tutorial canvases remain 16:9.
+
+英文教程对网页残留中文的图使用了 SVG 英文标注版，仅翻译文字，模型姿态、参数、测试结果与错误状态不变。未经修改的原始 PNG 仍保存在 `v0.1.0-rc.1`。英文校准图为控件与示例值的矢量说明图，不代表新连接的实机状态；英文导入图裁去无关的悬浮工具。教程画布继续使用 16:9。
