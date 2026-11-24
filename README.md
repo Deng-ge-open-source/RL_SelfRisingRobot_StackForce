@@ -18,6 +18,44 @@
 
 下面共七步：先完成组装、接线和校准，用本仓库已经训练好的开源策略让实物不倒翁跑起来；熟悉之后，再试着训练自己的起立策略。
 
+我也提供了详细的视频课程，从机械装配与接线、仿真模型制作，到模仿学习与强化学习训练，再到实物部署，带你一步一步把这个不倒翁做出来。可以先看 P1 了解整个流程，再跟着后面的课程动手操作。
+
+**配套视频课程 · 共 5 讲**　[在 B 站从头观看](https://www.bilibili.com/video/BV1QQsg6yEwg/?p=1)
+
+<table align="center">
+<tbody>
+<tr>
+<td align="center" valign="top" width="20%">
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=1"><img src="docs/images/courses/p01-overview.jpg" width="180" alt="百元内＋强化学习，我做了一个强化学习不倒翁！【开源+教程】"></a><br>
+<strong>P1&nbsp;·&nbsp;19:09</strong><br>
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=1"><strong>百元内＋强化学习，<br>我做了一个强化学习不倒翁！<br>【开源+教程】</strong></a>
+</td>
+<td align="center" valign="top" width="20%">
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=2"><img src="docs/images/courses/p02-assembly-wiring.jpg" width="180" alt="机械装配与接线"></a><br>
+<strong>P2&nbsp;·&nbsp;07:56</strong><br>
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=2"><strong>机械装配与接线</strong></a>
+</td>
+<td align="center" valign="top" width="20%">
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=3"><img src="docs/images/courses/p03-simulation-model.jpg" width="180" alt="从机械结构到仿真模型"></a><br>
+<strong>P3&nbsp;·&nbsp;05:50</strong><br>
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=3"><strong>从机械结构到仿真模型</strong></a>
+</td>
+<td align="center" valign="top" width="20%">
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=4"><img src="docs/images/courses/p04-imitation-reinforcement.jpg" width="180" alt="模仿学习＋强化学习训练"></a><br>
+<strong>P4&nbsp;·&nbsp;19:31</strong><br>
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=4"><strong>模仿学习＋<br>强化学习训练</strong></a>
+</td>
+<td align="center" valign="top" width="20%">
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=5"><img src="docs/images/courses/p05-sim2real.jpg" width="180" alt="实物部署（Sim2Real）"></a><br>
+<strong>P5&nbsp;·&nbsp;10:06</strong><br>
+<a href="https://www.bilibili.com/video/BV1QQsg6yEwg/?p=5"><strong>实物部署（Sim2Real）</strong></a>
+</td>
+</tr>
+</tbody>
+</table>
+
+<p align="center">点击封面或标题，直接进入对应课程。</p>
+
 1. [准备零件：自行 DIY 或购买套件](#step-1)
 2. [打印四个零件，组装不倒翁](#step-2)
 3. [在网页上给 ESP32 烧录固件](#step-3)
